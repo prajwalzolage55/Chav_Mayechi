@@ -53,7 +53,7 @@
 <body class="bg-surface text-on-surface antialiased hidden" id="body-content">
 
 <!-- SideNavBar Component -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-highest flex flex-col py-8 z-40">
+<aside id="admin-sidebar" class="h-screen w-64 fixed left-0 top-0 bg-surface-container-highest flex flex-col py-8 z-40 transition-transform duration-300 -translate-x-full lg:translate-x-0 border-r border-outline-variant/20 shadow-2xl lg:shadow-none">
     <div class="px-8 mb-12">
         <h1 class="font-headline text-xl font-black text-on-surface leading-tight">Admin Atelier</h1>
         <p class="font-label text-[10px] uppercase tracking-[0.2em] text-primary mt-1">Master Curator</p>
@@ -80,13 +80,18 @@
 </aside>
 
 <!-- Main Content Canvas -->
-<main class="ml-64 p-12 bg-surface min-h-screen">
+<main id="admin-main" class="ml-0 lg:ml-64 p-6 md:p-12 bg-surface min-h-screen transition-all duration-300">
     
     <!-- Header Section -->
     <header class="mb-12 flex justify-between items-end">
-        <div>
-            <span class="text-secondary font-label text-xs uppercase tracking-[0.3em] font-bold" id="header-subtitle">Dashboard Overview</span>
-            <h2 class="text-4xl font-headline font-extrabold text-primary mt-2" id="header-title">Atelier Insights</h2>
+        <div class="flex items-center gap-4">
+            <button id="admin-mobile-toggle" class="lg:hidden text-on-surface bg-surface border border-outline-variant/50 p-2 rounded flex items-center justify-center hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div>
+                <span class="text-secondary font-label text-xs uppercase tracking-[0.3em] font-bold" id="header-subtitle">Dashboard Overview</span>
+                <h2 class="text-3xl md:text-4xl font-headline font-extrabold text-primary mt-2" id="header-title">Atelier Insights</h2>
+            </div>
         </div>
         <div class="flex items-center gap-4">
             <div class="text-right">
@@ -102,8 +107,8 @@
     <!-- OVERVIEW VIEW -->
     <div id="view-overview" class="view-section">
         <!-- Analytics Bento Grid -->
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            <div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between border border-outline-variant/30">
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="sm:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between border border-outline-variant/30">
                 <div class="flex justify-between items-start">
                     <span class="material-symbols-outlined text-secondary text-3xl">local_mall</span>
                     <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Lifetime</span>
@@ -144,11 +149,11 @@
                     <table class="w-full text-left border-collapse">
                         <thead class="bg-surface-container-low sticky top-0 z-10 shadow-sm border-b border-outline-variant/30">
                         <tr>
-                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Order ID & Date</th>
-                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Customer</th>
-                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Product</th>
-                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Status</th>
-                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold text-right">Action</th>
+                            <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Order ID & Date</th>
+                            <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Customer</th>
+                            <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Product</th>
+                            <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Status</th>
+                            <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-surface-container" id="orders-tbody">
@@ -172,9 +177,15 @@
                                 <input type="text" id="new-product-name" required class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors hover:border-white/40">
                             </div>
                             <div class="grid grid-cols-2 gap-4">
-                                <div class="space-y-1">
-                                    <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Asset Link</label>
-                                    <input type="url" id="new-product-image" required placeholder="https://..." class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                                <div class="space-y-1 col-span-2 sm:col-span-1">
+                                    <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Asset Link / Upload</label>
+                                    <div class="flex flex-col gap-2">
+                                        <input type="url" id="new-product-image-url" placeholder="https://..." class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                                        <div class="relative w-full">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-white/30 text-[10px] uppercase tracking-widest font-bold">OR FILE:</div>
+                                            <input type="file" id="new-product-file" accept="image/*" class="w-full pl-20 pr-2 py-1.5 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors file:mr-2 file:py-1 file:px-2 file:rounded-sm file:border-0 file:text-[10px] file:uppercase file:tracking-widest file:font-semibold file:bg-surface file:text-primary hover:file:bg-surface/90 cursor-pointer">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Value</label>
@@ -260,10 +271,10 @@
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-surface-container-low sticky top-0 z-10 shadow-sm border-b border-outline-variant/30">
                     <tr>
-                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Patron ID & Creation</th>
-                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Profile</th>
-                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Contact Node</th>
-                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Clearance Level</th>
+                        <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Patron ID & Creation</th>
+                        <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Profile</th>
+                        <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Contact Node</th>
+                        <th class="px-4 md:px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Clearance Level</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-surface-container" id="users-tbody">
@@ -288,6 +299,8 @@
     import { onAuthChange, getUserData, logoutUser, getAllUsers } from './js/auth-service.js';
     import { getAllOrders, updateOrderStatus, deleteOrder } from './js/orders-service.js';
     import { showToast } from './js/ui.js';
+    import { storage } from './js/firebase-config.js';
+    import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js';
 
     let allOrders = [];
     let chartsInstance = [];
@@ -298,6 +311,12 @@
         document.getElementById('view-analytics').classList.add('hidden', 'opacity-0');
         document.getElementById('view-users').classList.add('hidden', 'opacity-0');
         
+        // Hide sidebar on mobile after navigating
+        const adminSidebar = document.getElementById('admin-sidebar');
+        if (adminSidebar && window.innerWidth < 1024) {
+            adminSidebar.classList.add('-translate-x-full');
+        }
+
         document.getElementById('nav-overview').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
         document.getElementById('nav-analytics').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
         document.getElementById('nav-users').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
@@ -328,23 +347,55 @@
     };
 
     // Add Product Form Handler
-    document.getElementById('add-product-form').addEventListener('submit', (e) => {
+    document.getElementById('add-product-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const newProduct = {
-            name: document.getElementById('new-product-name').value,
-            price: '₹' + document.getElementById('new-product-price').value,
-            unit: document.getElementById('new-product-unit').value,
-            description: document.getElementById('new-product-desc').value,
-            image: document.getElementById('new-product-image').value,
-            badge: 'New',
-            badgeColor: 'bg-primary text-on-primary'
-        };
-        let addedProducts = [];
-        try { addedProducts = JSON.parse(localStorage.getItem('addedProducts')) || []; } catch(err) {}
-        addedProducts.push(newProduct);
-        localStorage.setItem('addedProducts', JSON.stringify(addedProducts));
-        showToast('Creation successfully injected into the public interface.');
-        e.target.reset();
+        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Synergizing... <span class="material-symbols-outlined text-[14px] animate-spin">sync</span>';
+
+        try {
+            let finalImageUrl = '';
+            const urlInput = document.getElementById('new-product-image-url').value;
+            const fileInput = document.getElementById('new-product-file').files[0];
+
+            if (fileInput) {
+                // Upload to Firebase Storage
+                const fileRef = ref(storage, `products/${Date.now()}_${fileInput.name}`);
+                await uploadBytes(fileRef, fileInput);
+                finalImageUrl = await getDownloadURL(fileRef);
+            } else if (urlInput) {
+                finalImageUrl = urlInput;
+            } else {
+                showToast('Please provide an image link or upload a file.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                return;
+            }
+
+            const newProduct = {
+                name: document.getElementById('new-product-name').value,
+                price: '₹' + document.getElementById('new-product-price').value,
+                unit: document.getElementById('new-product-unit').value,
+                description: document.getElementById('new-product-desc').value,
+                image: finalImageUrl,
+                badge: 'New',
+                badgeColor: 'bg-primary text-on-primary'
+            };
+            let addedProducts = [];
+            try { addedProducts = JSON.parse(localStorage.getItem('addedProducts')) || []; } catch(err) {}
+            addedProducts.push(newProduct);
+            localStorage.setItem('addedProducts', JSON.stringify(addedProducts));
+            showToast('Creation successfully injected into the public interface.');
+            e.target.reset();
+        } catch (error) {
+            console.error("Error creating product:", error);
+            showToast('Failed to inject creation due to a network error.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
 
     // Route Protection
@@ -362,6 +413,13 @@
     document.getElementById('admin-logout').addEventListener('click', async () => {
         const res = await logoutUser();
         if (res.success) window.location.href = 'login.html';
+    });
+
+    // Mobile Sidebar Toggle
+    const adminToggle = document.getElementById('admin-mobile-toggle');
+    const adminSidebar = document.getElementById('admin-sidebar');
+    adminToggle?.addEventListener('click', () => {
+        adminSidebar.classList.toggle('-translate-x-full');
     });
 
     async function loadOrders() {
@@ -394,26 +452,26 @@
             // Allow initial fade cascade up to 30 items
             if(idx < 30) row.style.animationDelay = `${idx * 0.05}s`; 
             row.innerHTML = `
-                <td class="px-6 py-5">
+                <td class="px-4 md:px-6 py-5">
                     <div class="font-label text-sm font-bold text-on-surface">#${order.id.slice(0, 8).toUpperCase()}</div>
                     <div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">${dateStr}</div>
                 </td>
-                <td class="px-6 py-5">
+                <td class="px-4 md:px-6 py-5">
                     <div class="font-label text-sm font-bold text-on-surface">${order.name}</div>
                     <div class="font-label text-xs text-on-surface-variant">${order.phone}</div>
                 </td>
-                <td class="px-6 py-5">
+                <td class="px-4 md:px-6 py-5">
                     <div class="font-headline text-md font-bold text-on-surface">${order.product}</div>
                     <div class="font-label text-xs text-on-surface-variant border border-outline-variant/30 w-fit px-2 py-0.5 rounded-sm mt-1">x${order.quantity} units</div>
                 </td>
-                <td class="px-6 py-5 whitespace-nowrap">
+                <td class="px-4 md:px-6 py-5 whitespace-nowrap">
                     <select class="text-[10px] font-black uppercase tracking-widest rounded-sm px-3 py-1 cursor-pointer outline-none border transition-colors ${getStatusColor(order.status)}" data-id="${order.id}">
                         <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
                         <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
                         <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Delivered</option>
                     </select>
                 </td>
-                <td class="px-6 py-5 text-right">
+                <td class="px-4 md:px-6 py-5 text-right">
                     <button class="delete-btn text-on-surface-variant hover:text-[red] transition-all bg-surface hover:bg-red-50 border border-transparent hover:border-red-200 p-2 rounded-full" data-id="${order.id}">
                         <span class="material-symbols-outlined text-[16px]">delete</span>
                     </button>
@@ -640,20 +698,20 @@
             if(idx < 30) row.style.animationDelay = `${idx * 0.05}s`; 
             
             row.innerHTML = `
-                <td class="px-6 py-5">
+                <td class="px-4 md:px-6 py-5">
                     <div class="font-label text-sm font-bold text-on-surface">#${u.id.slice(0, 8).toUpperCase()}</div>
                     <div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">${dateStr}</div>
                 </td>
-                <td class="px-6 py-5">
+                <td class="px-4 md:px-6 py-5">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[10px] font-bold text-primary border border-outline-variant/30">${initial}</div>
                         <div class="font-label text-sm font-bold text-on-surface">${u.name || 'Anonymous User'}</div>
                     </div>
                 </td>
-                <td class="px-6 py-5">
+                <td class="px-4 md:px-6 py-5">
                     <div class="font-label text-sm text-on-surface">${u.email || 'N/A'}</div>
                 </td>
-                <td class="px-6 py-5 whitespace-nowrap">
+                <td class="px-4 md:px-6 py-5 whitespace-nowrap">
                     <span class="text-[10px] font-black uppercase tracking-widest rounded-sm px-3 py-1 border transition-colors ${u.role === 'admin' ? 'text-purple-700 bg-purple-100 border-purple-200' : 'text-blue-700 bg-blue-100 border-blue-200'}">
                         ${u.role || 'user'}
                     </span>

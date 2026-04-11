@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Chav Mayechi — Premium homemade Maharashtrian laddus made with traditional recipes, pure ingredients and lots of love.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Chav Mayechi — Premium homemade Maharashtrian laddus made with traditional recipes, pure ingredients and lots of love.">
     <title>Chav Mayechi — Homemade Laddus with Love ❤️</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -21,10 +26,10 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#98462f", 
+                        "primary": "#98462f",
                         "on-primary": "#ffffff",
-                        "surface": "#fbf9f4", 
-                        "on-surface": "#1c1b1b", 
+                        "surface": "#fbf9f4",
+                        "on-surface": "#1c1b1b",
                         "secondary": "#4a4a4a",
                         "outline": "#d1cfc9",
                         "surface-container-low": "#f4f1ea",
@@ -51,16 +56,24 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
         }
+
         .editorial-shadow {
             box-shadow: 0 32px 64px -16px rgba(28, 27, 27, 0.08);
         }
-        .letter-spacing-tight { letter-spacing: -0.02em; }
-        .letter-spacing-wide { letter-spacing: 0.05em; }
+
+        .letter-spacing-tight {
+            letter-spacing: -0.02em;
+        }
+
+        .letter-spacing-wide {
+            letter-spacing: 0.05em;
+        }
     </style>
 
     <!-- Lucide Icons (in case some components still use them via ui.js) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body class="bg-surface text-on-surface font-body selection:bg-primary/20 selection:text-primary overflow-x-hidden">
 
 
@@ -70,52 +83,74 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="relative pt-48 pb-32 px-12 max-w-screen-2xl mx-auto overflow-hidden">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
-                <div class="md:col-span-6 z-10 opacity-0 translate-y-10 transition-all duration-1000 ease-out" id="hero-content">
-                    <span class="font-label uppercase tracking-[0.2em] text-primary font-bold text-xs mb-6 block">Established Heritage</span>
-                    <h1 class="font-headline text-6xl md:text-8xl text-on-surface leading-[1.05] letter-spacing-tight mb-12">
-                        The Taste of <br/><span class="italic font-normal">Mother's Love</span>
+        <section id="home"
+            class="relative pt-32 md:pt-48 pb-16 md:pb-32 px-6 md:px-12 max-w-screen-2xl mx-auto overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+                <div class="md:col-span-6 z-10 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+                    id="hero-content">
+                    <span
+                        class="font-label uppercase tracking-[0.2em] text-primary font-bold text-xs mb-6 block">Established
+                        Heritage</span>
+                    <h1
+                        class="font-headline text-5xl md:text-6xl lg:text-8xl text-on-surface leading-[1.05] letter-spacing-tight mb-8 md:mb-12">
+                        The Taste of <br /><span class="italic font-normal">Mother's Love</span>
                     </h1>
                     <div class="flex flex-wrap gap-8 items-center">
-                        <a href="order.html" class="bg-primary text-on-primary px-10 py-5 font-semibold text-sm uppercase tracking-widest hover:bg-on-surface transition-all duration-500">
+                        <a href="order.html"
+                            class="bg-primary text-on-primary px-10 py-5 font-semibold text-sm uppercase tracking-widest hover:bg-on-surface transition-all duration-500">
                             Order For Today
                         </a>
-                        <a href="#products" class="group text-on-surface font-semibold text-sm uppercase tracking-widest flex items-center gap-3">
+                        <a href="#products"
+                            class="group text-on-surface font-semibold text-sm uppercase tracking-widest flex items-center gap-3">
                             Explore Menu
-                            <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">arrow_right_alt</span>
+                            <span
+                                class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">arrow_right_alt</span>
                         </a>
                     </div>
                 </div>
-                <div class="md:col-span-6 relative opacity-0 translate-x-10 transition-all duration-1000 ease-out" id="hero-img">
-                    <div class="aspect-[1/1.2] overflow-hidden relative grayscale-[0.2] hover:grayscale-0 transition-all duration-1000">
-                        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKO4pJ1lexnWJQQ1lN4VOI9jLh4W_kMGLKFzzy_C8WEmHygDdl8WYDyyUFYwvgG-u9ppGcn0hC10xyW0P55YRKsAU5jnPRp-uSTrurTey46KDQivrReXG9VhfDs4Q3oOzM3G_1Pq3bd8vFhMzXWfHpECXJnE-23F36G6J41OQCmw9rWLAR_jQfmUNEy3juQSCwp988K8GeFpUkVcEl1sZaRur0Q4Zb1Ponl48rlcadeh1J-Gxc2GOsztSUK7-0q2YGDCkgv5yALlpq" alt="Close-up of a steaming hot traditional Indian thali with vibrant curries" />
+                <div class="md:col-span-6 relative opacity-0 translate-x-10 transition-all duration-1000 ease-out"
+                    id="hero-img">
+                    <div
+                        class="aspect-[1/1.2] overflow-hidden relative grayscale-[0.2] hover:grayscale-0 transition-all duration-1000">
+                        <img class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKO4pJ1lexnWJQQ1lN4VOI9jLh4W_kMGLKFzzy_C8WEmHygDdl8WYDyyUFYwvgG-u9ppGcn0hC10xyW0P55YRKsAU5jnPRp-uSTrurTey46KDQivrReXG9VhfDs4Q3oOzM3G_1Pq3bd8vFhMzXWfHpECXJnE-23F36G6J41OQCmw9rWLAR_jQfmUNEy3juQSCwp988K8GeFpUkVcEl1sZaRur0Q4Zb1Ponl48rlcadeh1J-Gxc2GOsztSUK7-0q2YGDCkgv5yALlpq"
+                            alt="Close-up of a steaming hot traditional Indian thali with vibrant curries" />
                     </div>
                     <!-- Decorative Floater -->
-                    <div class="absolute -bottom-10 -left-12 bg-white p-12 editorial-shadow max-w-[320px] hidden xl:block border border-outline/20">
+                    <div
+                        class="absolute -bottom-10 -left-12 bg-white p-12 editorial-shadow max-w-[320px] hidden xl:block border border-outline/20">
                         <p class="font-headline italic text-2xl text-primary mb-4">Handcrafted Daily</p>
-                        <p class="text-secondary text-sm leading-relaxed font-light">Fresh spices ground every morning to preserve the authentic soul of our kitchen, exactly as tradition demands.</p>
+                        <p class="text-secondary text-sm leading-relaxed font-light">Fresh spices ground every morning
+                            to preserve the authentic soul of our kitchen, exactly as tradition demands.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Brand Story -->
-        <section id="about" class="py-40 bg-surface-container-low">
-            <div class="max-w-screen-2xl mx-auto px-12">
-                <div class="flex flex-col md:flex-row items-center gap-24">
+        <section id="about" class="py-24 md:py-40 bg-surface-container-low">
+            <div class="max-w-screen-2xl mx-auto px-6 md:px-12">
+                <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
                     <div class="w-full md:w-5/12 scroll-reveal opacity-0 -translate-x-10 transition-all duration-1000">
                         <div class="relative group">
-                            <img class="w-full aspect-[3/4] object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-iP0F6VIEedkkC-hhVLTi4GC19ChI9ScxZMxhr4Rglj3QzQZhk30XcDAh7zmeD2wJQunlfqOlt20hZ_n5t6Jf_UkLX9fjwNFcWXiSQ88-_cgjhMfNoqIv2CTltiOL-71ut0CESSWszRgwEtBu3za_X0Se6g_9R60U1jnaJTOk8BF5gEgD2ewUYgveocqIYzmYW2qRfXiR6ZVaJXIEfflLW_mZrgnNrJnz9wQDXDTWTQ_QFhDu4t-fGfEn3UxLbmGqiLa7DKZ0tCPn" alt="Artisan hand making dough"/>
+                            <img class="w-full aspect-[3/4] object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-1000"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-iP0F6VIEedkkC-hhVLTi4GC19ChI9ScxZMxhr4Rglj3QzQZhk30XcDAh7zmeD2wJQunlfqOlt20hZ_n5t6Jf_UkLX9fjwNFcWXiSQ88-_cgjhMfNoqIv2CTltiOL-71ut0CESSWszRgwEtBu3za_X0Se6g_9R60U1jnaJTOk8BF5gEgD2ewUYgveocqIYzmYW2qRfXiR6ZVaJXIEfflLW_mZrgnNrJnz9wQDXDTWTQ_QFhDu4t-fGfEn3UxLbmGqiLa7DKZ0tCPn"
+                                alt="Artisan hand making dough" />
                             <div class="absolute -bottom-6 -right-6 w-full h-full border border-primary/20 -z-10"></div>
                         </div>
                     </div>
-                    <div class="w-full md:w-7/12 space-y-10 scroll-reveal opacity-0 translate-x-10 transition-all duration-1000">
-                        <span class="font-label uppercase tracking-[0.3em] text-primary font-bold text-xs">Our Heritage</span>
-                        <h2 class="font-headline text-5xl md:text-7xl text-on-surface leading-tight">Recipes passed down through <span class="italic font-normal">three generations</span>.</h2>
+                    <div
+                        class="w-full md:w-7/12 space-y-8 md:space-y-10 scroll-reveal opacity-0 translate-x-10 transition-all duration-1000">
+                        <span class="font-label uppercase tracking-[0.3em] text-primary font-bold text-xs">Our
+                            Heritage</span>
+                        <h2 class="font-headline text-4xl md:text-5xl lg:text-7xl text-on-surface leading-tight">Recipes
+                            passed down through <span class="italic font-normal">three generations</span>.</h2>
                         <div class="w-24 h-px bg-primary"></div>
                         <p class="text-secondary text-xl leading-relaxed max-w-xl font-light">
-                            At Chav Mayechi, we believe food is the ultimate language of care. What started in a small village kitchen has evolved into a digital atelier, bringing the same warmth, purity, and uncompromising taste of a mother's cooking to your doorstep. Every dish is a tribute to tradition.
+                            At Chav Mayechi, we believe food is the ultimate language of care. What started in a small
+                            village kitchen has evolved into a digital atelier, bringing the same warmth, purity, and
+                            uncompromising taste of a mother's cooking to your doorstep. Every dish is a tribute to
+                            tradition.
                         </p>
                     </div>
                 </div>
@@ -123,45 +158,57 @@
         </section>
 
         <!-- Featured Dishes (Dynamic Products) -->
-        <section id="products" class="py-40 px-12 max-w-screen-2xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-baseline mb-24 border-b border-outline/30 pb-12 scroll-reveal transition-all duration-700 opacity-0 translate-y-10">
+        <section id="products" class="py-24 md:py-40 px-6 md:px-12 max-w-screen-2xl mx-auto">
+            <div
+                class="flex flex-col md:flex-row justify-between items-baseline mb-16 md:mb-24 border-b border-outline/30 pb-8 md:pb-12 scroll-reveal transition-all duration-700 opacity-0 translate-y-10">
                 <div>
-                    <h2 class="font-headline text-5xl text-on-surface mb-4">Signature Creations</h2>
+                    <h2 class="font-headline text-4xl md:text-5xl text-on-surface mb-4">Signature Creations</h2>
                     <p class="text-secondary font-light text-lg italic">Selected favorites from our seasonal menu.</p>
                 </div>
-                <a href="products.html" class="group text-primary font-semibold text-xs uppercase tracking-[0.2em] flex items-center gap-3 mt-8 md:mt-0">
+                <a href="products.html"
+                    class="group text-primary font-semibold text-xs uppercase tracking-[0.2em] flex items-center gap-3 mt-8 md:mt-0">
                     View Full Menu
-                    <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">east</span>
+                    <span
+                        class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">east</span>
                 </a>
             </div>
-            
+
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-16">
                 <!-- Products will be injected here via JS -->
             </div>
         </section>
 
         <!-- Editorial Promo (Contact / Action) -->
-        <section id="contact" class="mb-40 px-12 max-w-screen-2xl mx-auto scroll-reveal transition-all duration-1000 opacity-0 translate-y-10">
+        <section id="contact"
+            class="mb-24 md:mb-40 px-6 md:px-12 max-w-screen-2xl mx-auto scroll-reveal transition-all duration-1000 opacity-0 translate-y-10">
             <div class="bg-on-surface flex flex-col lg:flex-row items-stretch">
-                <div class="w-full lg:w-1/2 p-16 lg:p-32 flex flex-col justify-center">
-                    <h2 class="font-headline text-4xl md:text-6xl text-surface mb-10 leading-tight">Host an unforgettable <span class="italic font-normal">evening</span>.</h2>
-                    <p class="text-surface/70 text-lg mb-12 font-light leading-relaxed">Our 'At-Home Feast' packages bring the entire Chav Mayechi experience to your dining room, complete with artisan pairing suggestions and handcrafted serving ware.</p>
-                    <a href="https://wa.me/918208519403?text=I%20want%20to%20inquire%20about%20bulk%20catering%20from%20Chav%20Mayechi!" target="_blank" class="bg-primary text-on-primary w-fit px-12 py-5 font-semibold text-sm uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all duration-500">
+                <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-32 flex flex-col justify-center">
+                    <h2 class="font-headline text-4xl md:text-6xl text-surface mb-6 md:mb-10 leading-tight">Host an
+                        unforgettable <span class="italic font-normal">evening</span>.</h2>
+                    <p class="text-surface/70 text-lg mb-12 font-light leading-relaxed">Our 'At-Home Feast' packages
+                        bring the entire Chav Mayechi experience to your dining room, complete with artisan pairing
+                        suggestions and handcrafted serving ware.</p>
+                    <a href="https://wa.me/918208519403?text=I%20want%20to%20inquire%20about%20bulk%20catering%20from%20Chav%20Mayechi!"
+                        target="_blank"
+                        class="bg-primary text-on-primary w-fit px-12 py-5 font-semibold text-sm uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all duration-500">
                         Inquire for Catering
                     </a>
                 </div>
                 <div class="w-full lg:w-1/2 h-[500px] lg:h-auto overflow-hidden">
-                    <img class="w-full h-full object-cover brightness-75 hover:scale-110 transition-transform duration-[3s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC77laQMXyraMMwJq7HpZdBWIPuAek1jkSSZVCTI9vN37GrxphXssY5k1iAqRXxRmGmsIFchGBA0mRjBaVc2Lb0m4L4Fs840gVDCTSbf7IlMCUTI6gHd_YxDZ3rhb_3oMeo48Pw3RUBpDQ69Gk-fYZYO4VPey6YvaAdFRxttARjiUt8V1OfJCLpU9-gcL94mfqh3uMwacM3DsQ_iiZuzlnfcRFFhM2wm32qlepfuSJ7CLLcSmHE318yQ3IyvFScc_uj_To21OQUmPvH" alt="Elegant dining setup"/>
+                    <img class="w-full h-full object-cover brightness-75 hover:scale-110 transition-transform duration-[3s]"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC77laQMXyraMMwJq7HpZdBWIPuAek1jkSSZVCTI9vN37GrxphXssY5k1iAqRXxRmGmsIFchGBA0mRjBaVc2Lb0m4L4Fs840gVDCTSbf7IlMCUTI6gHd_YxDZ3rhb_3oMeo48Pw3RUBpDQ69Gk-fYZYO4VPey6YvaAdFRxttARjiUt8V1OfJCLpU9-gcL94mfqh3uMwacM3DsQ_iiZuzlnfcRFFhM2wm32qlepfuSJ7CLLcSmHE318yQ3IyvFScc_uj_To21OQUmPvH"
+                        alt="Elegant dining setup" />
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="w-full pt-24 pb-12 bg-on-surface">
-        <div class="flex flex-col items-center text-center px-8 w-full max-w-screen-2xl mx-auto">
+    <footer class="w-full pt-16 md:pt-24 pb-8 md:pb-12 bg-on-surface">
+        <div class="flex flex-col items-center text-center px-6 md:px-8 w-full max-w-screen-2xl mx-auto">
             <span class="text-3xl text-surface mb-8 block font-headline">Chav Mayechi</span>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 w-full mb-20 text-left border-t border-white/10 pt-16">
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full mb-12 md:mb-20 text-left border-t border-white/10 pt-12 md:pt-16">
                 <div class="space-y-6">
                     <h4 class="text-surface font-bold text-xs uppercase tracking-[0.2em]">Contact</h4>
                     <ul class="space-y-4 font-body text-sm tracking-wide uppercase text-surface/60">
@@ -198,13 +245,13 @@
     </footer>
 
     <!-- Floating Actions -->
-    <a href="https://wa.me/918208519403" 
-       target="_blank" rel="noopener noreferrer" 
-       class="fixed bottom-7 right-7 z-[999] w-[60px] h-[60px] rounded-full bg-primary flex items-center justify-center text-on-primary shadow-xl shadow-primary/20 hover:bg-on-surface hover:text-surface transition-all duration-300 overflow-hidden group">
+    <a href="https://wa.me/918208519403" target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-7 right-7 z-[999] w-[60px] h-[60px] rounded-full bg-primary flex items-center justify-center text-on-primary shadow-xl shadow-primary/20 hover:bg-on-surface hover:text-surface transition-all duration-300 overflow-hidden group">
         <span class="material-symbols-outlined relative z-10 group-hover:scale-110 transition-transform">sms</span>
     </a>
 
-    <button id="back-to-top" class="fixed bottom-28 right-7 z-[998] w-12 h-12 rounded-full border border-outline bg-surface text-on-surface flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 hover:bg-on-surface hover:text-surface">
+    <button id="back-to-top"
+        class="fixed bottom-28 right-7 z-[998] w-12 h-12 rounded-full border border-outline bg-surface text-on-surface flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 hover:bg-on-surface hover:text-surface">
         <span class="material-symbols-outlined">expand_less</span>
     </button>
 
@@ -212,7 +259,7 @@
         import { onAuthChange } from './js/auth-service.js';
         import { productsData } from './js/products-data.js';
         import { initNavbar } from './js/ui.js';
-        
+
         // Initialize Navbar
         initNavbar('navbar-placeholder');
 
@@ -229,10 +276,10 @@
         productsData.slice(0, 4).forEach((product) => {
             const card = document.createElement('div');
             card.className = "group scroll-reveal opacity-0 translate-y-10 transition-all duration-700";
-            
+
             // Clean up old badge logic or use it if customized
             const badgeLabel = product.badge || 'Artisan';
-            
+
             card.innerHTML = `
                 <div class="aspect-[4/5] overflow-hidden mb-10 relative bg-surface-container-low">
                     <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale-[0.1] group-hover:grayscale-0" src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/400x500/f4f1ea/4a4a4a?text=Chav+Mayechi'">
@@ -282,4 +329,5 @@
         });
     </script>
 </body>
+
 </html>

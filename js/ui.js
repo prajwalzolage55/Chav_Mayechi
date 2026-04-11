@@ -57,8 +57,8 @@ function renderNavbar(container, user, userData) {
                 </div>
 
                 <!-- Mobile Toggle -->
-                <button id="mobile-toggle" class="lg:hidden text-on-surface flex items-center justify-center">
-                    <span class="material-symbols-outlined text-3xl font-light">menu</span>
+                <button id="mobile-toggle" class="lg:hidden text-on-surface flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+                    <span id="mobile-toggle-icon" class="material-symbols-outlined text-3xl font-light">menu</span>
                 </button>
             </div>
 
@@ -103,9 +103,22 @@ function renderNavbar(container, user, userData) {
 
     // Mobile Toggle Logic
     const toggle = document.getElementById('mobile-toggle');
+    const toggleIcon = document.getElementById('mobile-toggle-icon');
     const menu = document.getElementById('mobile-menu');
+    
     toggle?.addEventListener('click', () => {
         menu.classList.toggle('hidden');
+        if (toggleIcon) {
+            toggleIcon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+        }
+    });
+
+    // Close mobile menu on link click
+    menu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            if (toggleIcon) toggleIcon.textContent = 'menu';
+        });
     });
 
     // Logout Logic
@@ -124,7 +137,7 @@ function renderNavbar(container, user, userData) {
  */
 export function showToast(message, type = 'success') {
     const toast = document.createElement('div');
-    toast.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[10001] px-6 py-3 rounded-none shadow-2xl transition-all duration-300 opacity-0 translate-y-[-20px] flex items-center gap-3 font-semibold text-sm tracking-wide ${
+    toast.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[10001] w-[90vw] max-w-sm px-6 py-4 rounded-none shadow-2xl transition-all duration-300 opacity-0 translate-y-[-20px] flex items-center gap-3 font-semibold text-sm tracking-wide ${
         type === 'success' ? 'bg-on-surface text-surface' : 'bg-primary text-white'
     }`;
     
