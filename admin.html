@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Atelier — Chav Mayechi</title>
+    <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+                "primary": "#98462f",
+                "on-primary": "#ffffff",
+                "primary-container": "#1c1b1b",
+                "surface": "#fbf9f4",
+                "on-surface": "#1c1b1b",
+                "secondary": "#4a4a4a",
+                "on-secondary": "#ffffff",
+                "outline": "#747878",
+                "outline-variant": "#c4c7c7",
+                "surface-container-highest": "#e4e2dd",
+                "surface-container-high": "#eae8e3",
+                "surface-container-low": "#f5f3ee",
+                "surface-container-lowest": "#ffffff",
+                "surface-container": "#f0eee9",
+                "on-surface-variant": "#444748"
+            },
+            fontFamily: {
+                "headline": ["Noto Serif", "serif"],
+                "body": ["Inter", "sans-serif"],
+                "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .serif-font { font-family: 'Noto Serif', serif; }
+        .view-section { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased hidden" id="body-content">
+
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-highest flex flex-col py-8 z-40">
+    <div class="px-8 mb-12">
+        <h1 class="font-headline text-xl font-black text-on-surface leading-tight">Admin Atelier</h1>
+        <p class="font-label text-[10px] uppercase tracking-[0.2em] text-primary mt-1">Master Curator</p>
+    </div>
+    <nav class="flex-1 space-y-2" id="sidebar-nav">
+        <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center px-4 py-3 text-on-surface font-bold border-l-4 border-primary bg-surface-container/30 pl-4 transition-all duration-200">
+            <span class="material-symbols-outlined mr-3 text-lg">dashboard</span> Overview
+        </button>
+        <button onclick="switchTab('users')" id="nav-users" class="w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide">
+            <span class="material-symbols-outlined mr-3 text-lg">groups</span> Collector Network
+        </button>
+        <button onclick="switchTab('analytics')" id="nav-analytics" class="w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide">
+            <span class="material-symbols-outlined mr-3 text-lg">insights</span> Analytics
+        </button>
+        <a href="dashboard.html" class="flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface transition-all duration-200 font-label text-sm tracking-wide border-l-4 border-transparent">
+            <span class="material-symbols-outlined mr-3 text-lg">person</span> User Profile
+        </a>
+    </nav>
+    <div class="mt-auto border-t border-outline-variant/20 pt-6">
+        <button id="admin-logout" class="w-full flex items-center px-4 py-2 text-on-surface/40 hover:text-primary font-label text-xs uppercase tracking-widest pl-8 transition-colors">
+            <span class="material-symbols-outlined mr-3 text-sm">logout</span> Terminate
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="ml-64 p-12 bg-surface min-h-screen">
+    
+    <!-- Header Section -->
+    <header class="mb-12 flex justify-between items-end">
+        <div>
+            <span class="text-secondary font-label text-xs uppercase tracking-[0.3em] font-bold" id="header-subtitle">Dashboard Overview</span>
+            <h2 class="text-4xl font-headline font-extrabold text-primary mt-2" id="header-title">Atelier Insights</h2>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="text-right">
+                <p class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Master Admin</p>
+                <p class="text-sm font-bold text-secondary" id="admin-name">Loading...</p>
+            </div>
+            <div class="w-12 h-12 bg-surface-container-highest overflow-hidden rounded-full border-2 border-primary/20">
+                <img src="/images/logo.png" class="w-full h-full object-cover grayscale-[0.5]">
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERVIEW VIEW -->
+    <div id="view-overview" class="view-section">
+        <!-- Analytics Bento Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between border border-outline-variant/30">
+                <div class="flex justify-between items-start">
+                    <span class="material-symbols-outlined text-secondary text-3xl">local_mall</span>
+                    <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Lifetime</span>
+                </div>
+                <div>
+                    <h3 class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-6">Total Orders</h3>
+                    <p class="text-5xl font-headline font-black text-primary mt-2" id="stat-total">0</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-8 rounded-xl flex flex-col justify-between border border-outline-variant/30">
+                <span class="material-symbols-outlined text-on-surface-variant text-2xl">today</span>
+                <div>
+                    <h3 class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-6">Orders Today</h3>
+                    <p class="text-4xl font-headline font-bold text-primary mt-1" id="stat-today">0</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-8 rounded-xl flex flex-col justify-between border border-outline-variant/30">
+                <span class="material-symbols-outlined text-on-surface-variant text-2xl">pending_actions</span>
+                <div>
+                    <h3 class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-6">Pending Operations</h3>
+                    <p class="text-4xl font-headline font-bold text-primary mt-1" id="stat-pending">0</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Order Management Table (Wide) -->
+            <section class="lg:col-span-2 space-y-6" id="orders-section">
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                    <h3 class="text-2xl font-headline font-bold text-on-surface">Acquisitions Database</h3>
+                    <div class="relative w-full sm:w-72">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+                        <input type="text" id="search-input" placeholder="Search orders..." class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none transition-all">
+                    </div>
+                </div>
+
+                <div class="bg-surface-container-lowest overflow-x-auto rounded-xl border border-outline-variant/30 max-h-[600px] overflow-y-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-surface-container-low sticky top-0 z-10 shadow-sm border-b border-outline-variant/30">
+                        <tr>
+                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Order ID & Date</th>
+                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Customer</th>
+                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Product</th>
+                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Status</th>
+                            <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold text-right">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-surface-container" id="orders-tbody">
+                            <tr><td colspan="5" class="py-12 text-center text-sm font-label uppercase text-on-surface-variant tracking-widest animate-pulse">Booting Databanks...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Sidebar / Add Product Form -->
+            <aside class="space-y-8">
+                <section class="bg-primary-container text-surface p-8 rounded-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 opacity-5 w-48 h-48 bg-white rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-headline font-bold mb-6 text-surface">Expansion Protocol</h3>
+                        <p class="text-xs text-outline-variant mb-6 leading-relaxed font-light tracking-wide">Synthesize a new product to be injected directly into the live consumer portal.</p>
+                        
+                        <form id="add-product-form" class="space-y-5">
+                            <div class="space-y-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Heritage Item</label>
+                                <input type="text" id="new-product-name" required class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors hover:border-white/40">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Asset Link</label>
+                                    <input type="url" id="new-product-image" required placeholder="https://..." class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Value</label>
+                                    <input type="number" id="new-product-price" required min="1" placeholder="₹" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Metric Form</label>
+                                <input type="text" id="new-product-unit" required placeholder="/plate, /kg" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Lore</label>
+                                <textarea id="new-product-desc" required rows="2" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white resize-none transition-colors"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full py-3 bg-surface text-primary font-bold text-xs uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                                Inject Creation <span class="material-symbols-outlined text-[14px]">science</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <!-- ANALYTICS VIEW -->
+    <div id="view-analytics" class="view-section hidden space-y-8">
+        
+        <div class="bg-primary-container text-surface p-8 rounded-xl shadow-lg border border-primary/20 relative overflow-hidden">
+            <div class="absolute -left-20 -top-20 bg-primary/20 w-64 h-64 blur-3xl rounded-full"></div>
+            <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <h3 class="font-headline text-3xl font-bold mb-2">Automated Insights</h3>
+                    <p class="text-sm font-label text-outline-variant font-light tracking-wide max-w-xl">Our analytical protocol continuously analyzes the data from your ledgers to highlight immediate operational points and market trends.</p>
+                </div>
+                <div class="bg-white/5 p-4 rounded border border-white/10 w-full md:w-auto min-w-[250px]">
+                    <ul id="insights-list" class="space-y-3 font-label text-[11px] uppercase tracking-[0.15em] text-surface">
+                        <li class="flex items-center gap-2 animate-pulse text-white/50"><span class="w-1.5 h-1.5 rounded-full bg-white/50"></span> Generating Report...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Line Chart: Weekly Volume -->
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 lg:col-span-2 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-headline text-xl text-on-surface font-bold">Acquisition Trajectory</h3>
+                    <span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold border border-outline-variant/30 px-2 py-1 rounded-sm">Last 7 Days</span>
+                </div>
+                <div class="relative h-[300px] w-full">
+                    <canvas id="chart-trends"></canvas>
+                </div>
+            </div>
+            
+            <!-- Doughnut Chart: Order Status -->
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col">
+                <h3 class="font-headline text-xl text-on-surface font-bold mb-6 text-center">Fulfillment Distribution</h3>
+                <div class="relative flex-1 w-full flex items-center justify-center">
+                    <canvas id="chart-status"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bar Chart: Products -->
+         <section class="grid grid-cols-1">
+             <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+                <h3 class="font-headline text-xl text-on-surface font-bold mb-6">Product Dominance Array</h3>
+                <div class="relative h-[350px] w-full">
+                    <canvas id="chart-products"></canvas>
+                </div>
+             </div>
+         </section>
+    </div>
+
+    <!-- USERS VIEW -->
+    <div id="view-users" class="view-section hidden space-y-8">
+        <section class="space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <h3 class="text-2xl font-headline font-bold text-on-surface">Registered Patrons</h3>
+            </div>
+            <div class="bg-surface-container-lowest overflow-x-auto rounded-xl border border-outline-variant/30 max-h-[600px] overflow-y-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-surface-container-low sticky top-0 z-10 shadow-sm border-b border-outline-variant/30">
+                    <tr>
+                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Patron ID & Creation</th>
+                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Profile</th>
+                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Contact Node</th>
+                        <th class="px-6 py-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Clearance Level</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container" id="users-tbody">
+                        <tr><td colspan="4" class="py-12 text-center text-sm font-label uppercase text-on-surface-variant tracking-widest animate-pulse">Booting Databanks...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 py-8 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="font-headline text-lg text-primary">Chav Mayechi Admin Hub</div>
+        <p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant/60">
+            © 2026 Chav Mayechi.
+        </p>
+    </footer>
+</main>
+
+<!-- Scripts -->
+<script type="module">
+    import { onAuthChange, getUserData, logoutUser, getAllUsers } from './js/auth-service.js';
+    import { getAllOrders, updateOrderStatus, deleteOrder } from './js/orders-service.js';
+    import { showToast } from './js/ui.js';
+
+    let allOrders = [];
+    let chartsInstance = [];
+
+    // Tab Switching Logic globally attached
+    window.switchTab = function(tabName) {
+        document.getElementById('view-overview').classList.add('hidden', 'opacity-0');
+        document.getElementById('view-analytics').classList.add('hidden', 'opacity-0');
+        document.getElementById('view-users').classList.add('hidden', 'opacity-0');
+        
+        document.getElementById('nav-overview').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
+        document.getElementById('nav-analytics').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
+        document.getElementById('nav-users').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
+
+        const selectedNav = document.getElementById(`nav-${tabName}`);
+        if(selectedNav) {
+            selectedNav.className = "w-full flex items-center px-4 py-3 text-on-surface font-bold border-l-4 border-primary bg-surface-container/30 pl-4 transition-all duration-200";
+        }
+
+        const targetView = document.getElementById(`view-${tabName}`);
+        targetView.classList.remove('hidden');
+        // Trigger reflow for fade in
+        void targetView.offsetWidth;
+        targetView.classList.remove('opacity-0');
+
+        if(tabName === 'overview') {
+            document.getElementById('header-subtitle').textContent = "Dashboard Overview";
+            document.getElementById('header-title').textContent = "Atelier Insights";
+        } else if (tabName === 'users') {
+            document.getElementById('header-subtitle').textContent = "Network";
+            document.getElementById('header-title').textContent = "Collector Database";
+            loadUsers();
+        } else {
+            document.getElementById('header-subtitle').textContent = "Data Sciences";
+            document.getElementById('header-title').textContent = "Market Analytics";
+            if (allOrders.length > 0) renderAnalytics(allOrders);
+        }
+    };
+
+    // Add Product Form Handler
+    document.getElementById('add-product-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newProduct = {
+            name: document.getElementById('new-product-name').value,
+            price: '₹' + document.getElementById('new-product-price').value,
+            unit: document.getElementById('new-product-unit').value,
+            description: document.getElementById('new-product-desc').value,
+            image: document.getElementById('new-product-image').value,
+            badge: 'New',
+            badgeColor: 'bg-primary text-on-primary'
+        };
+        let addedProducts = [];
+        try { addedProducts = JSON.parse(localStorage.getItem('addedProducts')) || []; } catch(err) {}
+        addedProducts.push(newProduct);
+        localStorage.setItem('addedProducts', JSON.stringify(addedProducts));
+        showToast('Creation successfully injected into the public interface.');
+        e.target.reset();
+    });
+
+    // Route Protection
+    onAuthChange(async (user) => {
+        if (!user) { window.location.href = 'login.html'; return; }
+        const userData = await getUserData(user.uid);
+        if (userData?.role !== 'admin') { window.location.href = 'index.html'; return; }
+
+        document.getElementById('body-content').classList.remove('hidden');
+        document.getElementById('admin-name').textContent = userData.name || user.email.split('@')[0];
+
+        loadOrders();
+    });
+
+    document.getElementById('admin-logout').addEventListener('click', async () => {
+        const res = await logoutUser();
+        if (res.success) window.location.href = 'login.html';
+    });
+
+    async function loadOrders() {
+        const tableBody = document.getElementById('orders-tbody');
+        try {
+            allOrders = await getAllOrders();
+            renderOrders(allOrders);
+            updateStats(allOrders);
+        } catch (err) {
+            console.error(err);
+            tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-10 text-[red]">Data retrieval failure.</td></tr>`;
+        }
+    }
+
+    function renderOrders(orders) {
+        const tableBody = document.getElementById('orders-tbody');
+        tableBody.innerHTML = '';
+
+        if (orders.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-10 text-on-surface-variant font-label text-sm uppercase tracking-widest">No archives found.</td></tr>`;
+            return;
+        }
+
+        orders.forEach((order, idx) => {
+            const date = order.timestamp?.toDate ? order.timestamp.toDate() : new Date();
+            const dateStr = date.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+
+            const row = document.createElement('tr');
+            row.className = "hover:bg-surface-container-low/50 transition-colors animate-fade-in";
+            // Allow initial fade cascade up to 30 items
+            if(idx < 30) row.style.animationDelay = `${idx * 0.05}s`; 
+            row.innerHTML = `
+                <td class="px-6 py-5">
+                    <div class="font-label text-sm font-bold text-on-surface">#${order.id.slice(0, 8).toUpperCase()}</div>
+                    <div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">${dateStr}</div>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="font-label text-sm font-bold text-on-surface">${order.name}</div>
+                    <div class="font-label text-xs text-on-surface-variant">${order.phone}</div>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="font-headline text-md font-bold text-on-surface">${order.product}</div>
+                    <div class="font-label text-xs text-on-surface-variant border border-outline-variant/30 w-fit px-2 py-0.5 rounded-sm mt-1">x${order.quantity} units</div>
+                </td>
+                <td class="px-6 py-5 whitespace-nowrap">
+                    <select class="text-[10px] font-black uppercase tracking-widest rounded-sm px-3 py-1 cursor-pointer outline-none border transition-colors ${getStatusColor(order.status)}" data-id="${order.id}">
+                        <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
+                        <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                        <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+                    </select>
+                </td>
+                <td class="px-6 py-5 text-right">
+                    <button class="delete-btn text-on-surface-variant hover:text-[red] transition-all bg-surface hover:bg-red-50 border border-transparent hover:border-red-200 p-2 rounded-full" data-id="${order.id}">
+                        <span class="material-symbols-outlined text-[16px]">delete</span>
+                    </button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        attachEventHandlers();
+    }
+
+    function attachEventHandlers() {
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const id = e.currentTarget.dataset.id;
+                if (!confirm('Obliterate this record?')) return;
+                
+                const success = await deleteOrder(id);
+                if (success) {
+                    showToast('Record destroyed.');
+                    allOrders = allOrders.filter(o => o.id !== id);
+                    renderOrders(allOrders);
+                    updateStats(allOrders);
+                    // Rerender analytics cleanly if visible
+                    if(!document.getElementById('view-analytics').classList.contains('hidden')) {
+                        renderAnalytics(allOrders);
+                    }
+                } else {
+                    showToast('Failed to destroy record.', 'error');
+                }
+            });
+        });
+
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', async (e) => {
+                const id = e.target.dataset.id;
+                const newStatus = e.target.value;
+                e.target.disabled = true;
+                
+                const success = await updateOrderStatus(id, newStatus);
+                if (success) {
+                    showToast(`Status shifted to ${newStatus}`);
+                    e.target.className = `text-[10px] font-black uppercase tracking-widest rounded-sm px-3 py-1 cursor-pointer outline-none border transition-colors ${getStatusColor(newStatus)}`;
+                } else {
+                    showToast('Protocol failed.', 'error');
+                }
+                e.target.disabled = false;
+                
+                const order = allOrders.find(o => o.id === id);
+                if (order) order.status = newStatus;
+                updateStats(allOrders);
+                if(!document.getElementById('view-analytics').classList.contains('hidden')) {
+                    renderAnalytics(allOrders);
+                }
+            });
+        });
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = allOrders.filter(o => 
+                o.name?.toLowerCase().includes(term) || 
+                o.id?.toLowerCase().includes(term) ||
+                o.product?.toLowerCase().includes(term)
+            );
+            renderOrders(filtered);
+        });
+    }
+
+    function updateStats(orders) {
+        const today = new Date().toLocaleDateString('en-US'); // standardized matching
+        const stats = {
+            total: orders.length,
+            pending: orders.filter(o => o.status === 'pending').length,
+            today: orders.filter(o => {
+                const d = o.timestamp?.toDate ? o.timestamp.toDate() : new Date();
+                return d.toLocaleDateString('en-US') === today;
+            }).length
+        };
+
+        document.getElementById('stat-total').textContent = stats.total;
+        document.getElementById('stat-pending').textContent = stats.pending;
+        document.getElementById('stat-today').textContent = stats.today;
+    }
+
+    function getStatusColor(status) {
+        switch(status) {
+            case 'confirmed': return 'text-[#1e40af] bg-[#dbeafe] border-[#bfdbfe]';
+            case 'delivered': return 'text-[#166534] bg-[#dcfce7] border-[#bbf7d0]';
+            case 'pending':
+            default: return 'text-[#854d0e] bg-[#fef08a] border-[#fde047]';
+        }
+    }
+
+    // ANALYTICS GENERATOR
+    function renderAnalytics(orders) {
+        // Destroy old charts to prevent overlapping
+        chartsInstance.forEach(c => c.destroy());
+        chartsInstance = [];
+
+        // 1. Process Trend Dates (Last 7 Days)
+        const countsByDate = {};
+        const datesLabel = [];
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            datesLabel.push(dateStr);
+            countsByDate[dateStr] = 0;
+        }
+        
+        orders.forEach(o => {
+            const d = o.timestamp?.toDate ? o.timestamp.toDate() : new Date();
+            const str = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            if (countsByDate[str] !== undefined) countsByDate[str] += 1;
+        });
+
+        const trendsCtx = document.getElementById('chart-trends').getContext('2d');
+        chartsInstance.push(new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: datesLabel,
+                datasets: [{
+                    label: 'Volume',
+                    data: datesLabel.map(date => countsByDate[date]),
+                    borderColor: '#98462f',
+                    backgroundColor: 'rgba(152, 70, 47, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#1c1b1b',
+                    pointBorderColor: '#ffffff'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: {display: false} } }
+        }));
+
+        // 2. Process Status Distribution
+        let pending = 0, confirmed = 0, delivered = 0;
+        orders.forEach(o => {
+            if (o.status === 'delivered') delivered++;
+            else if (o.status === 'confirmed') confirmed++;
+            else pending++;
+        });
+
+        const statusCtx = document.getElementById('chart-status').getContext('2d');
+        chartsInstance.push(new Chart(statusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pending', 'Confirmed', 'Delivered'],
+                datasets: [{
+                    data: [pending, confirmed, delivered],
+                    backgroundColor: ['#facc15', '#60a5fa', '#4ade80'],
+                    borderWidth: 0,
+                    hoverOffset: 8
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: {font: {family: 'Inter'} } } } }
+        }));
+
+        // 3. Product Performance
+        const prodCounts = {};
+        orders.forEach(o => {
+            if(!o.product) return;
+            const q = parseInt(o.quantity) || 1;
+            if(!prodCounts[o.product]) prodCounts[o.product] = 0;
+            prodCounts[o.product] += q;
+        });
+        const prodsArray = Object.keys(prodCounts).map(k => ({ name: k, count: prodCounts[k] })).sort((a,b)=> b.count - a.count);
+        // Top 5 products
+        const topProds = prodsArray.slice(0, 5);
+
+        const prodCtx = document.getElementById('chart-products').getContext('2d');
+        chartsInstance.push(new Chart(prodCtx, {
+            type: 'bar',
+            data: {
+                labels: topProds.map(p => p.name),
+                datasets: [{
+                    label: 'Units Sold',
+                    data: topProds.map(p => p.count),
+                    backgroundColor: '#1c1b1b',
+                    borderRadius: 4
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: {display: false} } }
+        }));
+
+        // Insert Insights Text
+        const insightsList = document.getElementById('insights-list');
+        const bestSeller = topProds.length > 0 ? topProds[0].name : "N/A";
+        
+        insightsList.innerHTML = `
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> You currently have ${pending} operations waiting for attention.</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> ${delivered} lifetime requests have been successfully completed.</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-white"></span> Your top performing creation is <span class="font-bold border-b border-white border-dashed">${bestSeller}</span>.</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-white"></span> System detects ${orders.length} total recorded entries in the ledger.</li>
+        `;
+    }
+
+    async function loadUsers() {
+        const tableBody = document.getElementById('users-tbody');
+        try {
+            const users = await getAllUsers();
+            renderUsers(users);
+        } catch (err) {
+            console.error(err);
+            tableBody.innerHTML = `<tr><td colspan="4" class="text-center py-10 text-[red]">Data retrieval failure.</td></tr>`;
+        }
+    }
+
+    function renderUsers(users) {
+        const tableBody = document.getElementById('users-tbody');
+        tableBody.innerHTML = '';
+        if (users.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="4" class="text-center py-10 text-on-surface-variant font-label text-sm uppercase tracking-widest">No patrons found.</td></tr>`;
+            return;
+        }
+
+        users.forEach((u, idx) => {
+            const dateStr = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : 'Unknown';
+            const initial = u.name ? u.name.charAt(0).toUpperCase() : '?';
+            
+            const row = document.createElement('tr');
+            row.className = "hover:bg-surface-container-low/50 transition-colors animate-fade-in";
+            if(idx < 30) row.style.animationDelay = `${idx * 0.05}s`; 
+            
+            row.innerHTML = `
+                <td class="px-6 py-5">
+                    <div class="font-label text-sm font-bold text-on-surface">#${u.id.slice(0, 8).toUpperCase()}</div>
+                    <div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">${dateStr}</div>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[10px] font-bold text-primary border border-outline-variant/30">${initial}</div>
+                        <div class="font-label text-sm font-bold text-on-surface">${u.name || 'Anonymous User'}</div>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="font-label text-sm text-on-surface">${u.email || 'N/A'}</div>
+                </td>
+                <td class="px-6 py-5 whitespace-nowrap">
+                    <span class="text-[10px] font-black uppercase tracking-widest rounded-sm px-3 py-1 border transition-colors ${u.role === 'admin' ? 'text-purple-700 bg-purple-100 border-purple-200' : 'text-blue-700 bg-blue-100 border-blue-200'}">
+                        ${u.role || 'user'}
+                    </span>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+<style>
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
+</style>
+</body>
+</html>

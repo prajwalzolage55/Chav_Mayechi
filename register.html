@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — Chav Mayechi</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS (Play CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        saffron: { DEFAULT: '#E8872E', light: '#FFB347', dark: '#D37215' },
+                        'deep-brown': '#2E2017',
+                        'warm-brown': '#4A3728',
+                        'warm-brown-light': '#6B5646',
+                        cream: '#FDFBF7',
+                        'soft-green': '#4CAF50',
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-cream text-warm-brown">
+
+    <div id="navbar-placeholder"></div>
+
+    <section class="min-h-screen pt-24 pb-12 flex items-center justify-center relative overflow-hidden">
+        <!-- Decorative -->
+        <div class="absolute top-0 left-0 w-1/2 h-full bg-saffron/5 blur-3xl rounded-full -translate-x-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-soft-green/5 blur-3xl rounded-full translate-x-1/2"></div>
+
+        <div class="w-[90%] max-w-md relative z-10 opacity-0 translate-y-10 transition-all duration-700" id="register-card">
+            <div class="bg-white/70 backdrop-blur-xl p-8 sm:p-10 rounded-3xl shadow-xl shadow-warm-brown/5 border border-white/50">
+                <div class="text-center mb-8">
+                    <h1 class="font-heading text-3xl font-bold text-warm-brown mb-2">Create Account</h1>
+                    <p class="text-warm-brown-light text-sm">Join us for the authentic taste of home</p>
+                </div>
+
+                <form id="register-form" class="space-y-5">
+                    <div>
+                        <label class="text-sm font-semibold text-warm-brown mb-1.5 block pl-1">Full Name</label>
+                        <div class="relative">
+                            <input type="text" id="name" required class="w-full pl-11 pr-4 py-3.5 bg-white rounded-xl border-2 border-transparent focus:border-saffron focus:ring-4 focus:ring-saffron/10 outline-none transition-all text-warm-brown placeholder:text-warm-brown-light/50" placeholder="John Doe">
+                            <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 text-warm-brown-light/70 w-5 h-5"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-sm font-semibold text-warm-brown mb-1.5 block pl-1">Email Address</label>
+                        <div class="relative">
+                            <input type="email" id="email" required class="w-full pl-11 pr-4 py-3.5 bg-white rounded-xl border-2 border-transparent focus:border-saffron focus:ring-4 focus:ring-saffron/10 outline-none transition-all text-warm-brown placeholder:text-warm-brown-light/50" placeholder="you@example.com">
+                            <i data-lucide="mail" class="absolute left-4 top-1/2 -translate-y-1/2 text-warm-brown-light/70 w-5 h-5"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-sm font-semibold text-warm-brown mb-1.5 block pl-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="password" required class="w-full pl-11 pr-4 py-3.5 bg-white rounded-xl border-2 border-transparent focus:border-saffron focus:ring-4 focus:ring-saffron/10 outline-none transition-all text-warm-brown placeholder:text-warm-brown-light/50" placeholder="••••••••">
+                            <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 text-warm-brown-light/70 w-5 h-5"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full mt-2 py-4 rounded-xl font-semibold text-white flex items-center justify-center gap-2 bg-gradient-to-r from-saffron to-saffron-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-saffron/30 transition-all duration-300">
+                        <span id="btn-text" class="flex items-center gap-2">Register <i data-lucide="arrow-right" class="w-5 h-5"></i></span>
+                        <span id="loader" class="hidden animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>
+                    </button>
+                </form>
+
+                <p class="text-center text-sm text-warm-brown-light mt-8">
+                    Already have an account? 
+                    <a href="login.html" class="text-saffron font-semibold hover:text-saffron-dark transition-colors">Sign In</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { registerUser, onAuthChange } from './js/auth-service.js';
+        import { initNavbar, showToast } from './js/ui.js';
+
+        // Redirect if already logged in
+        onAuthChange((user) => {
+            if (user) window.location.href = 'dashboard.html';
+        });
+
+        // Initialize UI
+        initNavbar('navbar-placeholder');
+        lucide.createIcons();
+
+        // Animate in
+        const card = document.getElementById('register-card');
+        setTimeout(() => {
+            card.classList.remove('opacity-0', 'translate-y-10');
+            card.classList.add('opacity-100', 'translate-y-0');
+        }, 100);
+
+        // Handle Registration
+        const form = document.getElementById('register-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const loader = document.getElementById('loader');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value;
+
+            // Loading state
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            const res = await registerUser(email, password, name);
+
+            if (res.success) {
+                showToast('Account created successfully!');
+                setTimeout(() => window.location.href = 'dashboard.html', 1000);
+            } else {
+                showToast(res.error || 'Failed to register', 'error');
+                submitBtn.disabled = false;
+                btnText.classList.remove('hidden');
+                loader.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

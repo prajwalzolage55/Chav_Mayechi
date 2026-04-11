@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chav-mayechi.web.app/sitemap.xml

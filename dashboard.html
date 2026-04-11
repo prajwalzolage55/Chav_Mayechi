@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>My Dashboard — Chav Mayechi</title>
+    <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#98462f", 
+                        "on-primary": "#ffffff",
+                        "primary-container": "#782e19",
+                        "on-primary-container": "#ffffff",
+                        "surface": "#fbf9f4", 
+                        "on-surface": "#1c1b1b", 
+                        "surface-bright": "#ffffff",
+                        "secondary": "#4a4a4a",
+                        "on-secondary": "#ffffff",
+                        "outline": "#d1cfc9",
+                        "outline-variant": "#c4c7c7",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-high": "#eae8e3",
+                        "surface-container-low": "#f5f3ee",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0eee9",
+                        "on-surface-variant": "#444748"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 30px 60px -12px rgba(27, 28, 25, 0.05);
+        }
+        .copper-glow {
+            background: radial-gradient(circle at center, #98462f 0%, #792f1a 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20 hidden" id="body-content">
+
+    <!-- Unified Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="pt-32 pb-20 px-8 max-w-screen-2xl mx-auto">
+        <!-- Hero Welcome -->
+        <header class="mb-16">
+            <span class="font-label text-xs uppercase tracking-widest text-primary mb-4 block">Welcome Back, Patron</span>
+            <h1 class="font-headline text-5xl md:text-7xl font-black text-on-surface leading-none tracking-tighter mb-4">
+                The Curated <br/> Table of <span id="user-display-name" class="italic font-normal">Guest</span>
+            </h1>
+            <p class="text-on-surface-variant max-w-xl text-lg font-light">Your artisan journey continues here. Explore your latest acquisitions and manage your profile.</p>
+        </header>
+
+        <!-- Bento Dashboard Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <!-- Loyalty & Points - Large Featured Card -->
+            <div class="md:col-span-8 bg-surface-container-lowest editorial-shadow p-10 rounded-lg flex flex-col justify-between relative overflow-hidden group border border-outline-variant/30">
+                <div class="relative z-10">
+                    <h3 class="font-headline text-3xl font-bold mb-2 text-primary">Heritage Tier</h3>
+                    <p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-8">Unlocking Grand Cru</p>
+                    
+                    <div class="w-full bg-surface-container-high h-1 rounded-full mb-4">
+                        <div class="h-full bg-primary w-[15%] rounded-full relative">
+                            <div class="absolute right-0 -top-1 w-3 h-3 copper-glow rounded-full shadow-lg"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between text-xs font-medium text-on-surface-variant">
+                        <span><span id="total-orders-count">0</span> ORDERS</span>
+                        <span>10 ORDERS TARGET</span>
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex gap-4">
+                    <button class="bg-primary text-on-primary px-6 py-3 font-label text-xs uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity duration-200">
+                        View Benefits <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                    <a href="order.html" class="bg-surface-container-highest text-on-surface px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-surface-container-high transition-colors">
+                        Order Again
+                    </a>
+                </div>
+                
+                <!-- Decorative element -->
+                <div class="absolute -right-16 -bottom-16 w-64 h-64 border-primary/5 border-[32px] rounded-full group-hover:scale-110 transition-transform duration-700"></div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="md:col-span-4 space-y-6">
+                <div class="bg-on-surface p-8 rounded-lg text-surface h-full flex flex-col justify-center shadow-xl">
+                    <h4 class="font-headline text-xl mb-6 text-surface">Quick Protocol</h4>
+                    <div class="space-y-4">
+                        <a href="order.html" class="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer border border-transparent hover:border-white/10">
+                            <span class="font-label text-sm uppercase tracking-widest">Order Feast</span>
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">restaurant</span>
+                        </a>
+                        <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20recent%20order." target="_blank" class="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer border border-transparent hover:border-white/10">
+                            <span class="font-label text-sm uppercase tracking-widest">Contact Artisan</span>
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chat_bubble</span>
+                        </a>
+                        <a href="admin.html" id="admin-link" class="hidden w-full flex items-center justify-between p-4 bg-primary/20 hover:bg-primary/40 transition-colors group cursor-pointer border border-primary/30">
+                            <span class="font-label text-sm uppercase tracking-widest text-[#ffceb8]">Admin Vault</span>
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[#ffceb8]">admin_panel_settings</span>
+                        </a>
+                        <button id="dashboard-logout" class="w-full flex items-center justify-between p-4 bg-red-900/40 hover:bg-red-900/60 transition-colors group cursor-pointer border border-transparent">
+                            <span class="font-label text-sm uppercase tracking-widest text-[red]">Terminate Session</span>
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[red]">logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders Section -->
+            <div class="md:col-span-12 py-12">
+                <div class="flex justify-between items-end mb-8">
+                    <h2 class="font-headline text-4xl font-bold">Recent Acquisitions</h2>
+                </div>
+                
+                <div class="bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/30">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-surface-container-high/50 border-b border-outline-variant/20">
+                                <tr>
+                                    <th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Order Ref</th>
+                                    <th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Heritage Item</th>
+                                    <th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Date</th>
+                                    <th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Status</th>
+                                    <th class="px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant text-right">Delivery Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-outline-variant/10" id="orders-list">
+                                <!-- Loader State -->
+                                <tr id="orders-loader">
+                                    <td colspan="5" class="px-8 py-12 text-center text-on-surface-variant font-label text-sm uppercase tracking-widest animate-pulse">
+                                        Loading Archives...
+                                    </td>
+                                </tr>
+                                <!-- Empty State -->
+                                <tr id="no-orders" class="hidden">
+                                    <td colspan="5" class="px-8 py-16 text-center">
+                                        <span class="material-symbols-outlined text-4xl text-on-surface-variant opacity-50 mb-4 block">receipt_long</span>
+                                        <p class="font-headline text-xl text-on-surface mb-2">No Acquisitions Yet</p>
+                                        <p class="text-secondary font-label text-sm mb-6">Begin your culinary journey today.</p>
+                                        <a href="order.html" class="inline-block bg-primary text-on-primary px-8 py-3 font-label text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
+                                            Curate Your Feast
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skipped Favorite Dishes Section as per instructions -->
+        </div>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-placeholder" class="bg-on-surface">
+        <footer class="w-full pt-24 pb-12 bg-on-surface">
+            <div class="flex flex-col items-center text-center px-8 w-full max-w-screen-2xl mx-auto">
+                <span class="text-3xl text-surface mb-8 block font-headline">Chav Mayechi</span>
+                <div class="font-body text-[10px] tracking-[0.3em] uppercase text-surface/40 mt-8">
+                    © 2026 Chav Mayechi. The Digital Atelier of Homemade Heritage.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { onAuthChange, logoutUser, getUserData } from './js/auth-service.js';
+        import { getUserOrders } from './js/orders-service.js';
+        import { initNavbar, showToast } from './js/ui.js';
+
+        // Init UI
+        initNavbar('navbar-placeholder');
+
+        // Route Protection
+        onAuthChange(async (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Show page content
+            document.getElementById('body-content').classList.remove('hidden');
+
+            // Set profile data
+            const userData = await getUserData(user.uid);
+            const name = userData?.name || user.displayName || 'Guest';
+            document.getElementById('user-display-name').textContent = name.split(' ')[0];
+
+            // Admin access
+            if (userData?.role === 'admin') {
+                document.getElementById('admin-link').classList.remove('hidden');
+                document.getElementById('admin-link').classList.add('flex');
+            }
+
+            // Load Orders
+            loadOrders(user.uid);
+        });
+
+        async function loadOrders(uid) {
+            const ordersList = document.getElementById('orders-list');
+            const loader = document.getElementById('orders-loader');
+            const noOrders = document.getElementById('no-orders');
+            const totalCount = document.getElementById('total-orders-count');
+
+            try {
+                const orders = await getUserOrders(uid);
+                loader.classList.add('hidden');
+                totalCount.textContent = orders.length;
+
+                if (orders.length === 0) {
+                    noOrders.classList.remove('hidden');
+                } else {
+                    orders.forEach((order, i) => {
+                        const date = order.timestamp?.toDate ? order.timestamp.toDate() : new Date();
+                        const dateStr = date.toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' });
+                        const statusBadge = getStatusBadge(order.status);
+                        
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-surface-container-highest/20 transition-colors opacity-0 translate-y-4";
+                        
+                        tr.innerHTML = `
+                            <td class="px-8 py-6 font-mono text-xs opacity-60 uppercase tracking-widest text-primary font-bold">#${order.id.slice(0, 8)}</td>
+                            <td class="px-8 py-6 font-headline font-bold text-on-surface text-lg">${order.product} <span class="font-body text-xs text-secondary ml-2 font-normal">x${order.quantity}</span></td>
+                            <td class="px-8 py-6 text-sm text-on-surface-variant font-label">${dateStr}</td>
+                            <td class="px-8 py-6">${statusBadge}</td>
+                            <td class="px-8 py-6 text-right text-xs text-on-surface-variant max-w-[200px] truncate leading-relaxed">
+                                <span class="material-symbols-outlined text-[10px] mr-1">location_on</span>
+                                ${order.address}
+                            </td>
+                        `;
+                        ordersList.appendChild(tr);
+                        
+                        // Staggered reveal
+                        setTimeout(() => {
+                            tr.classList.remove('opacity-0', 'translate-y-4');
+                            tr.classList.add('opacity-100', 'translate-y-0');
+                        }, i * 100);
+                    });
+                }
+            } catch (err) {
+                loader.innerHTML = `<td colspan="5" class="px-8 py-12 text-center text-[red] font-label text-sm uppercase tracking-widest">Failed to retrieve archives.</td>`;
+            }
+        }
+
+        function getStatusBadge(status) {
+            const commonClasses = "inline-flex items-center px-3 py-1.5 rounded-sm text-[10px] font-bold uppercase tracking-widest";
+            switch(status) {
+                case 'confirmed': return `<span class="${commonClasses} bg-[#dbeafe] text-[#1e40af]"><span class="material-symbols-outlined text-xs mr-2 border-r border-[#1e40af]/30 pr-2">done_all</span> Confirmed</span>`
+                case 'delivered': return `<span class="${commonClasses} bg-[#dcfce7] text-[#166534]"><span class="material-symbols-outlined text-xs mr-2 border-r border-[#166534]/30 pr-2">local_shipping</span> Delivered</span>`
+                case 'pending':
+                default: return `<span class="${commonClasses} bg-[#fef08a] text-[#854d0e]"><span class="material-symbols-outlined text-xs mr-2 border-r border-[#854d0e]/30 pr-2">schedule</span> Pending</span>`
+            }
+        }
+
+        // Logout
+        document.getElementById('dashboard-logout').addEventListener('click', async () => {
+            const res = await logoutUser();
+            if (res.success) {
+                showToast('Session terminated successfully');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
