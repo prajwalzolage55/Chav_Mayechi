@@ -9,7 +9,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
     <!-- Tailwind CSS (Play CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +28,9 @@
                     },
                     fontFamily: {
                         heading: ['Playfair Display', 'serif'],
+                        headline: ['Noto Serif', 'Playfair Display', 'serif'],
                         body: ['Inter', 'sans-serif'],
+                        label: ['Inter', 'sans-serif'],
                     },
                 }
             }
@@ -95,10 +98,13 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
     <!-- Scripts -->
     <script type="module">
         import { registerUser, onAuthChange } from './js/auth-service.js';
-        import { initNavbar, showToast } from './js/ui.js';
+        import { initNavbar, initFooter, showToast } from './js/ui.js';
 
         // Redirect if already logged in
         onAuthChange((user) => {
@@ -107,6 +113,7 @@
 
         // Initialize UI
         initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
         lucide.createIcons();
 
         // Animate in

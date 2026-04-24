@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upgrade to Admin</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+    <h1>Admin Upgrade Tool</h1>
+    <p id="status">Checking authentication...</p>
+    
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { doc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        const statusEl = document.getElementById('status');
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                statusEl.innerHTML = `Found user: <b>${user.email}</b><br>Upgrading to admin...`;
+                try {
+                    const userRef = doc(db, 'users', user.uid);
+                    await updateDoc(userRef, {
+                        role: 'admin'
+                    });
+                    statusEl.innerHTML = `<span style="color: green;">Success! <b>${user.email}</b> is now an admin.</span><br><br><a href="admin.html">Go to Admin Dashboard</a>`;
+                } catch (error) {
+                    statusEl.innerHTML = `<span style="color: red;">Error updating role: ${error.message}</span><br>Check if your Firestore rules allow writing.`;
+                }
+            } else {
+                statusEl.innerHTML = `<span style="color: red;">No user is logged in!</span><br><br><a href="login.html">Please Login First</a><br>Then come back to this page.`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -70,6 +70,9 @@
         }
     </style>
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
     <!-- Lucide Icons (in case some components still use them via ui.js) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -84,24 +87,24 @@
     <main>
         <!-- Hero Section -->
         <section id="home"
-            class="relative pt-32 md:pt-48 pb-16 md:pb-32 px-6 md:px-12 max-w-screen-2xl mx-auto overflow-hidden">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+            class="relative pt-24 sm:pt-32 md:pt-48 pb-12 sm:pb-16 md:pb-32 px-4 sm:px-6 md:px-12 max-w-screen-2xl mx-auto overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 md:gap-16 items-center">
                 <div class="md:col-span-6 z-10 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
                     id="hero-content">
                     <span
-                        class="font-label uppercase tracking-[0.2em] text-primary font-bold text-xs mb-6 block">Established
+                        class="font-label uppercase tracking-[0.2em] text-primary font-bold text-[10px] sm:text-xs mb-4 sm:mb-6 block">Established
                         Heritage</span>
                     <h1
-                        class="font-headline text-5xl md:text-6xl lg:text-8xl text-on-surface leading-[1.05] letter-spacing-tight mb-8 md:mb-12">
+                        class="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-on-surface leading-[1.05] letter-spacing-tight mb-6 sm:mb-8 md:mb-12">
                         The Taste of <br /><span class="italic font-normal">Mother's Love</span>
                     </h1>
-                    <div class="flex flex-wrap gap-8 items-center">
+                    <div class="flex flex-wrap gap-4 sm:gap-8 items-center">
                         <a href="order.html"
-                            class="bg-primary text-on-primary px-10 py-5 font-semibold text-sm uppercase tracking-widest hover:bg-on-surface transition-all duration-500">
+                            class="bg-primary text-on-primary px-6 sm:px-10 py-3.5 sm:py-5 font-semibold text-xs sm:text-sm uppercase tracking-widest hover:bg-on-surface transition-all duration-500">
                             Order For Today
                         </a>
                         <a href="#products"
-                            class="group text-on-surface font-semibold text-sm uppercase tracking-widest flex items-center gap-3">
+                            class="group text-on-surface font-semibold text-xs sm:text-sm uppercase tracking-widest flex items-center gap-2 sm:gap-3">
                             Explore Menu
                             <span
                                 class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">arrow_right_alt</span>
@@ -111,7 +114,7 @@
                 <div class="md:col-span-6 relative opacity-0 translate-x-10 transition-all duration-1000 ease-out"
                     id="hero-img">
                     <div
-                        class="aspect-[1/1.2] overflow-hidden relative grayscale-[0.2] hover:grayscale-0 transition-all duration-1000">
+                        class="aspect-square sm:aspect-[1/1.2] overflow-hidden relative grayscale-[0.2] hover:grayscale-0 transition-all duration-1000">
                         <img class="w-full h-full object-cover"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKO4pJ1lexnWJQQ1lN4VOI9jLh4W_kMGLKFzzy_C8WEmHygDdl8WYDyyUFYwvgG-u9ppGcn0hC10xyW0P55YRKsAU5jnPRp-uSTrurTey46KDQivrReXG9VhfDs4Q3oOzM3G_1Pq3bd8vFhMzXWfHpECXJnE-23F36G6J41OQCmw9rWLAR_jQfmUNEy3juQSCwp988K8GeFpUkVcEl1sZaRur0Q4Zb1Ponl48rlcadeh1J-Gxc2GOsztSUK7-0q2YGDCkgv5yALlpq"
                             alt="Close-up of a steaming hot traditional Indian thali with vibrant curries" />
@@ -128,25 +131,25 @@
         </section>
 
         <!-- Brand Story -->
-        <section id="about" class="py-24 md:py-40 bg-surface-container-low">
-            <div class="max-w-screen-2xl mx-auto px-6 md:px-12">
-                <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
+        <section id="about" class="py-16 sm:py-24 md:py-40 bg-surface-container-low">
+            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-12">
+                <div class="flex flex-col md:flex-row items-center gap-10 sm:gap-16 md:gap-24">
                     <div class="w-full md:w-5/12 scroll-reveal opacity-0 -translate-x-10 transition-all duration-1000">
                         <div class="relative group">
-                            <img class="w-full aspect-[3/4] object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-1000"
+                            <img class="w-full aspect-[4/3] sm:aspect-[3/4] object-cover grayscale brightness-90 group-hover:grayscale-0 transition-all duration-1000"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-iP0F6VIEedkkC-hhVLTi4GC19ChI9ScxZMxhr4Rglj3QzQZhk30XcDAh7zmeD2wJQunlfqOlt20hZ_n5t6Jf_UkLX9fjwNFcWXiSQ88-_cgjhMfNoqIv2CTltiOL-71ut0CESSWszRgwEtBu3za_X0Se6g_9R60U1jnaJTOk8BF5gEgD2ewUYgveocqIYzmYW2qRfXiR6ZVaJXIEfflLW_mZrgnNrJnz9wQDXDTWTQ_QFhDu4t-fGfEn3UxLbmGqiLa7DKZ0tCPn"
                                 alt="Artisan hand making dough" />
-                            <div class="absolute -bottom-6 -right-6 w-full h-full border border-primary/20 -z-10"></div>
+                            <div class="absolute -bottom-6 -right-6 w-full h-full border border-primary/20 -z-10 hidden sm:block"></div>
                         </div>
                     </div>
                     <div
-                        class="w-full md:w-7/12 space-y-8 md:space-y-10 scroll-reveal opacity-0 translate-x-10 transition-all duration-1000">
-                        <span class="font-label uppercase tracking-[0.3em] text-primary font-bold text-xs">Our
+                        class="w-full md:w-7/12 space-y-5 sm:space-y-8 md:space-y-10 scroll-reveal opacity-0 translate-x-10 transition-all duration-1000">
+                        <span class="font-label uppercase tracking-[0.3em] text-primary font-bold text-[10px] sm:text-xs">Our
                             Heritage</span>
-                        <h2 class="font-headline text-4xl md:text-5xl lg:text-7xl text-on-surface leading-tight">Recipes
+                        <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-on-surface leading-tight">Recipes
                             passed down through <span class="italic font-normal">three generations</span>.</h2>
-                        <div class="w-24 h-px bg-primary"></div>
-                        <p class="text-secondary text-xl leading-relaxed max-w-xl font-light">
+                        <div class="w-16 sm:w-24 h-px bg-primary"></div>
+                        <p class="text-secondary text-base sm:text-xl leading-relaxed max-w-xl font-light">
                             At Chav Mayechi, we believe food is the ultimate language of care. What started in a small
                             village kitchen has evolved into a digital atelier, bringing the same warmth, purity, and
                             uncompromising taste of a mother's cooking to your doorstep. Every dish is a tribute to
@@ -158,43 +161,43 @@
         </section>
 
         <!-- Featured Dishes (Dynamic Products) -->
-        <section id="products" class="py-24 md:py-40 px-6 md:px-12 max-w-screen-2xl mx-auto">
+        <section id="products" class="py-16 sm:py-24 md:py-40 px-4 sm:px-6 md:px-12 max-w-screen-2xl mx-auto">
             <div
-                class="flex flex-col md:flex-row justify-between items-baseline mb-16 md:mb-24 border-b border-outline/30 pb-8 md:pb-12 scroll-reveal transition-all duration-700 opacity-0 translate-y-10">
+                class="flex flex-col md:flex-row justify-between items-baseline mb-10 sm:mb-16 md:mb-24 border-b border-outline/30 pb-6 sm:pb-8 md:pb-12 scroll-reveal transition-all duration-700 opacity-0 translate-y-10">
                 <div>
-                    <h2 class="font-headline text-4xl md:text-5xl text-on-surface mb-4">Signature Creations</h2>
-                    <p class="text-secondary font-light text-lg italic">Selected favorites from our seasonal menu.</p>
+                    <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface mb-3 sm:mb-4">Signature Creations</h2>
+                    <p class="text-secondary font-light text-base sm:text-lg italic">Selected favorites from our seasonal menu.</p>
                 </div>
                 <a href="products.html"
-                    class="group text-primary font-semibold text-xs uppercase tracking-[0.2em] flex items-center gap-3 mt-8 md:mt-0">
+                    class="group text-primary font-semibold text-[10px] sm:text-xs uppercase tracking-[0.2em] flex items-center gap-2 sm:gap-3 mt-6 sm:mt-8 md:mt-0">
                     View Full Menu
                     <span
                         class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">east</span>
                 </a>
             </div>
 
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-16">
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-10 md:gap-16">
                 <!-- Products will be injected here via JS -->
             </div>
         </section>
 
         <!-- Editorial Promo (Contact / Action) -->
         <section id="contact"
-            class="mb-24 md:mb-40 px-6 md:px-12 max-w-screen-2xl mx-auto scroll-reveal transition-all duration-1000 opacity-0 translate-y-10">
+            class="mb-12 sm:mb-24 md:mb-40 px-4 sm:px-6 md:px-12 max-w-screen-2xl mx-auto scroll-reveal transition-all duration-1000 opacity-0 translate-y-10">
             <div class="bg-on-surface flex flex-col lg:flex-row items-stretch">
-                <div class="w-full lg:w-1/2 p-10 md:p-16 lg:p-32 flex flex-col justify-center">
-                    <h2 class="font-headline text-4xl md:text-6xl text-surface mb-6 md:mb-10 leading-tight">Host an
+                <div class="w-full lg:w-1/2 p-6 sm:p-10 md:p-16 lg:p-32 flex flex-col justify-center">
+                    <h2 class="font-headline text-3xl sm:text-4xl md:text-6xl text-surface mb-4 sm:mb-6 md:mb-10 leading-tight">Host an
                         unforgettable <span class="italic font-normal">evening</span>.</h2>
-                    <p class="text-surface/70 text-lg mb-12 font-light leading-relaxed">Our 'At-Home Feast' packages
+                    <p class="text-surface/70 text-base sm:text-lg mb-8 sm:mb-12 font-light leading-relaxed">Our 'At-Home Feast' packages
                         bring the entire Chav Mayechi experience to your dining room, complete with artisan pairing
                         suggestions and handcrafted serving ware.</p>
                     <a href="https://wa.me/918208519403?text=I%20want%20to%20inquire%20about%20bulk%20catering%20from%20Chav%20Mayechi!"
                         target="_blank"
-                        class="bg-primary text-on-primary w-fit px-12 py-5 font-semibold text-sm uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all duration-500">
+                        class="bg-primary text-on-primary w-fit px-8 sm:px-12 py-4 sm:py-5 font-semibold text-xs sm:text-sm uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all duration-500">
                         Inquire for Catering
                     </a>
                 </div>
-                <div class="w-full lg:w-1/2 h-[500px] lg:h-auto overflow-hidden">
+                <div class="w-full lg:w-1/2 h-[300px] sm:h-[500px] lg:h-auto overflow-hidden">
                     <img class="w-full h-full object-cover brightness-75 hover:scale-110 transition-transform duration-[3s]"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuC77laQMXyraMMwJq7HpZdBWIPuAek1jkSSZVCTI9vN37GrxphXssY5k1iAqRXxRmGmsIFchGBA0mRjBaVc2Lb0m4L4Fs840gVDCTSbf7IlMCUTI6gHd_YxDZ3rhb_3oMeo48Pw3RUBpDQ69Gk-fYZYO4VPey6YvaAdFRxttARjiUt8V1OfJCLpU9-gcL94mfqh3uMwacM3DsQ_iiZuzlnfcRFFhM2wm32qlepfuSJ7CLLcSmHE318yQ3IyvFScc_uj_To21OQUmPvH"
                         alt="Elegant dining setup" />
@@ -204,49 +207,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="w-full pt-16 md:pt-24 pb-8 md:pb-12 bg-on-surface">
-        <div class="flex flex-col items-center text-center px-6 md:px-8 w-full max-w-screen-2xl mx-auto">
-            <span class="text-3xl text-surface mb-8 block font-headline">Chav Mayechi</span>
-            <div
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full mb-12 md:mb-20 text-left border-t border-white/10 pt-12 md:pt-16">
-                <div class="space-y-6">
-                    <h4 class="text-surface font-bold text-xs uppercase tracking-[0.2em]">Contact</h4>
-                    <ul class="space-y-4 font-body text-sm tracking-wide uppercase text-surface/60">
-                        <li class="hover:text-white transition-colors cursor-pointer">hello@chavmayechi.com</li>
-                        <li class="hover:text-white transition-colors cursor-pointer">+91 82085 19403</li>
-                    </ul>
-                </div>
-                <div class="space-y-6">
-                    <h4 class="text-surface font-bold text-xs uppercase tracking-[0.2em]">Follow</h4>
-                    <ul class="space-y-4 font-body text-sm tracking-wide uppercase text-surface/60">
-                        <li class="hover:translate-x-1 transition-transform duration-300 cursor-pointer">Instagram</li>
-                        <li class="hover:translate-x-1 transition-transform duration-300 cursor-pointer">Facebook</li>
-                    </ul>
-                </div>
-                <div class="space-y-6">
-                    <h4 class="text-surface font-bold text-xs uppercase tracking-[0.2em]">Legal</h4>
-                    <ul class="space-y-4 font-body text-sm tracking-wide uppercase text-surface/60">
-                        <li class="hover:text-white transition-colors cursor-pointer">Privacy Policy</li>
-                        <li class="hover:text-white transition-colors cursor-pointer">Shipping Terms</li>
-                    </ul>
-                </div>
-                <div class="space-y-6">
-                    <h4 class="text-surface font-bold text-xs uppercase tracking-[0.2em]">Craft</h4>
-                    <ul class="space-y-4 font-body text-sm tracking-wide uppercase text-surface/60">
-                        <li class="hover:text-white transition-colors cursor-pointer">Sustainability</li>
-                        <li class="hover:text-white transition-colors cursor-pointer">Our Story</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="font-body text-[10px] tracking-[0.3em] uppercase text-surface/40 mt-8">
-                © 2026 Chav Mayechi. The Digital Atelier of Homemade Heritage.
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <!-- Floating Actions -->
     <a href="https://wa.me/918208519403" target="_blank" rel="noopener noreferrer"
-        class="fixed bottom-7 right-7 z-[999] w-[60px] h-[60px] rounded-full bg-primary flex items-center justify-center text-on-primary shadow-xl shadow-primary/20 hover:bg-on-surface hover:text-surface transition-all duration-300 overflow-hidden group">
+        class="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-[999] w-[52px] h-[52px] sm:w-[60px] sm:h-[60px] rounded-full bg-primary flex items-center justify-center text-on-primary shadow-xl shadow-primary/20 hover:bg-on-surface hover:text-surface transition-all duration-300 overflow-hidden group">
         <span class="material-symbols-outlined relative z-10 group-hover:scale-110 transition-transform">sms</span>
     </a>
 
@@ -258,10 +223,11 @@
     <script type="module">
         import { onAuthChange } from './js/auth-service.js';
         import { productsData } from './js/products-data.js';
-        import { initNavbar } from './js/ui.js';
+        import { initNavbar, initFooter } from './js/ui.js';
 
-        // Initialize Navbar
+        // Initialize Navbar & Footer
         initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
 
         window.addEventListener('load', () => {
             document.getElementById('hero-content').style.opacity = '1';
@@ -281,18 +247,18 @@
             const badgeLabel = product.badge || 'Artisan';
 
             card.innerHTML = `
-                <div class="aspect-[4/5] overflow-hidden mb-10 relative bg-surface-container-low">
+                <div class="aspect-[4/5] overflow-hidden mb-4 sm:mb-10 relative bg-surface-container-low">
                     <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale-[0.1] group-hover:grayscale-0" src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/400x500/f4f1ea/4a4a4a?text=Chav+Mayechi'">
-                    <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-1.5 text-[10px] tracking-[0.2em] font-bold text-primary uppercase shadow-sm">
+                    <div class="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-1.5 text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] font-bold text-primary uppercase shadow-sm">
                         ${badgeLabel}
                     </div>
                 </div>
-                <h3 class="font-headline text-3xl text-on-surface mb-4">${product.name}</h3>
-                <p class="text-secondary text-sm mb-8 leading-relaxed font-light line-clamp-2 pr-4">${product.description}</p>
+                <h3 class="font-headline text-lg sm:text-2xl md:text-3xl text-on-surface mb-1 sm:mb-4">${product.name}</h3>
+                <p class="text-secondary text-xs sm:text-sm mb-3 sm:mb-8 leading-relaxed font-light line-clamp-2 pr-2 sm:pr-4 hidden sm:block">${product.description}</p>
                 <div class="flex justify-between items-center">
-                    <span class="text-2xl font-light text-on-surface font-headline">${product.price}<span class="text-sm ml-1 text-secondary font-body">${product.unit}</span></span>
-                    <a href="order.html" class="w-12 h-12 border border-outline flex items-center justify-center group-hover:bg-on-surface group-hover:text-surface transition-colors duration-500 cursor-pointer">
-                        <span class="material-symbols-outlined font-light">add</span>
+                    <span class="text-base sm:text-xl md:text-2xl font-light text-on-surface font-headline">${product.price}<span class="text-[10px] sm:text-sm ml-0.5 sm:ml-1 text-secondary font-body">${product.unit}</span></span>
+                    <a href="order.html" class="w-8 h-8 sm:w-12 sm:h-12 border border-outline flex items-center justify-center group-hover:bg-on-surface group-hover:text-surface transition-colors duration-500 cursor-pointer">
+                        <span class="material-symbols-outlined font-light text-base sm:text-2xl">add</span>
                     </a>
                 </div>
             `;

@@ -59,6 +59,8 @@
             background: radial-gradient(circle at center, #98462f 0%, #792f1a 100%);
         }
     </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary/20 hidden" id="body-content">
 
@@ -179,26 +181,18 @@
         </div>
     </main>
 
-    <!-- Footer Container -->
-    <div id="footer-placeholder" class="bg-on-surface">
-        <footer class="w-full pt-24 pb-12 bg-on-surface">
-            <div class="flex flex-col items-center text-center px-8 w-full max-w-screen-2xl mx-auto">
-                <span class="text-3xl text-surface mb-8 block font-headline">Chav Mayechi</span>
-                <div class="font-body text-[10px] tracking-[0.3em] uppercase text-surface/40 mt-8">
-                    © 2026 Chav Mayechi. The Digital Atelier of Homemade Heritage.
-                </div>
-            </div>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
     <script type="module">
         import { onAuthChange, logoutUser, getUserData } from './js/auth-service.js';
         import { getUserOrders } from './js/orders-service.js';
-        import { initNavbar, showToast } from './js/ui.js';
+        import { initNavbar, initFooter, showToast } from './js/ui.js';
 
         // Init UI
         initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
 
         // Route Protection
         onAuthChange(async (user) => {

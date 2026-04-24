@@ -10,7 +10,7 @@ const staticProductsData = [
   },
   {
     name: 'Nachani Laddu',
-    price: '₹600',
+    price: '₹550',
     unit: '/kg',
     description: 'नाचणीचे लाडू — Packed with iron and calcium. A nutritious traditional delight.',
     image: '/images/Nachani_laddu.png',
@@ -19,7 +19,7 @@ const staticProductsData = [
   },
   {
     name: 'Dryfruit Laddu',
-    price: '₹600',
+    price: '₹1150',
     unit: '/kg',
     description: 'ड्रायफ्रूट लाडू — Loaded with almonds, cashews, dates & pistachios. Pure indulgence.',
     image: '/images/Dryfruit.png',
@@ -28,7 +28,7 @@ const staticProductsData = [
   },
   {
     name: 'Khajur Laddu',
-    price: '₹600',
+    price: '₹350',
     unit: '/kg',
     description: 'खजूराचे लाडू — Naturally sweetened with dates. Healthy, sugar-free & delicious.',
     image: '/images/Khajur.png',
@@ -37,7 +37,7 @@ const staticProductsData = [
   },
   {
     name: 'Besan Laddu',
-    price: '₹600',
+    price: '₹500',
     unit: '/kg',
     description: 'बेसनाचे लाडू — The timeless classic made with roasted gram flour, ghee & cardamom.',
     image: '/images/Besan.png',
@@ -46,7 +46,7 @@ const staticProductsData = [
   },
   {
     name: 'Rava Laddu',
-    price: '₹600',
+    price: '₹500',
     unit: '/kg',
     description: 'रव्याचे लाडू — Crispy, melt-in-mouth treats made with semolina and coconut.',
     image: '/images/Rava.png',
@@ -55,8 +55,8 @@ const staticProductsData = [
   },
   {
     name: 'Udit Papad',
-    price: '₹600',
-    unit: '/pack',
+    price: '₹400',
+    unit: '/kg',
     description: 'उडदाचे पापड — Crispy, authentic urad dal papads made with traditional spices.',
     image: '/images/Udit.png',
     badge: 'Special',
@@ -64,8 +64,8 @@ const staticProductsData = [
   },
   {
     name: 'Masala Papad',
-    price: '₹200',
-    unit: '/pack',
+    price: '₹350',
+    unit: '/kg',
     description: 'मसाला पापड — Crunchy and spicy papads flavored with authentic homemade masala.',
     image: '/images/Masala.png',
     badge: 'New',
@@ -73,8 +73,8 @@ const staticProductsData = [
   },
   {
     name: 'Kothimbir Papad',
-    price: '₹300',
-    unit: '/pack',
+    price: '₹350',
+    unit: '/kg',
     description: 'कोथिंबीर पापड — Unique, crispy papads with the fresh flavor of coriander.',
     image: '/images/Kothimbir.png',
     badge: 'Snack',
@@ -82,12 +82,111 @@ const staticProductsData = [
   },
   {
     name: 'Palak Papad',
-    price: '₹250',
-    unit: '/pack',
+    price: '₹350',
+    unit: '/kg',
     description: 'पालक पापड — Healthy and crispy spinach flavored papads.',
     image: '/images/Palak.png',
     badge: 'Fresh',
     badgeColor: 'bg-gradient-to-r from-soft-green to-soft-green-light',
+  },
+  {
+    name: 'Gavran Mataki',
+    price: '₹240',
+    unit: '/kg',
+    description: 'गवरान मटकी — Native, unpolished, small-sized moth beans. A staple in traditional Maharashtrian cuisine for usal and misal.',
+    image: '/images/Mataki.png',
+    badge: 'Gavthi',
+    badgeColor: 'bg-gradient-to-r from-warm-brown to-warm-brown-light',
+  },
+  {
+    name: 'Kadve Vaal',
+    price: '₹220',
+    unit: '/kg',
+    description: 'कडवे वाल — Butter beans rich in protein, fiber, vitamins & minerals. A nutritious plant-based protein source for vegetarians.',
+    image: '/images/Vaal.png',
+    badge: 'Protein Rich',
+    badgeColor: 'bg-gradient-to-r from-soft-green to-soft-green-light',
+  },
+  {
+    name: 'Modak Pith',
+    price: '₹80',
+    unit: '/kg',
+    description: 'मोदक पीठ — Specially milled, fine rice flour for the soft, delicate shell of Ukadiche Modak, the traditional Maharashtrian steamed sweet dumpling.',
+    image: '/images/Modak_pith.png',
+    badge: 'Festival Special',
+    badgeColor: 'bg-gradient-to-r from-gold to-saffron',
+  },
+  {
+    name: 'Nachani Pith',
+    price: '₹120',
+    unit: '/kg',
+    description: 'नाचणी पीठ — Ragi (Finger Millet) flour with a distinct earthy brown colour. A gluten-free, calcium-rich nutritional powerhouse.',
+    image: '/images/Nachani_pith.png',
+    badge: 'Gluten Free',
+    badgeColor: 'bg-gradient-to-r from-soft-green to-soft-green-light',
+  },
+  {
+    name: 'White Poha',
+    price: '₹70',
+    unit: '/kg',
+    description: 'पांढरे पोहे — Classic flattened rice, light and fluffy. Perfect for batata poha, chivda, and quick breakfast preparations.',
+    image: '/images/Poha.png',
+    badge: 'Staple',
+    badgeColor: 'bg-gradient-to-r from-warm-brown to-warm-brown-light',
+  },
+  {
+    name: 'Red Poha',
+    price: '₹100',
+    unit: '/kg',
+    description: 'लाल पोहे — Traditional red rice flattened flakes with higher iron and fiber content. Authentic Konkan-style nutritious poha.',
+    image: '/images/red_poha.png',
+    badge: 'Healthy',
+    badgeColor: 'bg-gradient-to-r from-red-500 to-red-600',
+  },
+  {
+    name: 'Bhajka Poha',
+    price: '₹100',
+    unit: '/kg',
+    description: 'भाजका पोहा — Roasted flattened rice with a crispy, toasted texture. Great for chivda, trail mixes, and instant snacking.',
+    image: '/images/Bhajka_poha.png',
+    badge: 'Roasted',
+    badgeColor: 'bg-gradient-to-r from-saffron to-saffron-dark',
+  },
+  {
+    name: 'Nachani Kurmure',
+    price: '₹40',
+    unit: '/pack',
+    description: 'नाचणी कुरमुरे — Puffed ragi (finger millet) with a light, airy crunch. A calcium-rich, gluten-free snack alternative.',
+    image: '/images/Nachani_kurmura.png',
+    badge: 'Superfood',
+    badgeColor: 'bg-gradient-to-r from-soft-green to-soft-green-light',
+  },
+  {
+    name: 'Jowar Kurmura',
+    price: '₹40',
+    unit: '/pack',
+    description: 'ज्वारी कुरमुरा — Puffed sorghum (jowar) that is light, crunchy, and naturally gluten-free. A wholesome traditional snack.',
+    image: '/images/Jowar_kurmura.png',
+    badge: 'Crunchy',
+    badgeColor: 'bg-gradient-to-r from-gold to-saffron',
+  },
+  {
+    name: 'Roasted Jowar',
+    price: '₹50',
+    unit: '/pack',
+    description: 'भाजलेली ज्वारी — Slow-roasted sorghum grains with a deep, nutty flavor. High in fiber and perfect as a healthy snack.',
+    image: '/images/Roasted_jowar.png',
+    badge: 'Roasted',
+    badgeColor: 'bg-gradient-to-r from-warm-brown to-warm-brown-light',
+  },
+  {
+    name: 'Roasted Bajra',
+    price: '₹50',
+    unit: '/pack',
+    description: 'भाजलेले बाजरी — Dry-roasted pearl millet with an earthy, toasted taste. Rich in iron, magnesium, and dietary fiber.',
+    image: '/images/Roasted_bajra.png',
+    badge: 'Nutritious',
+    badgeColor: 'bg-gradient-to-r from-saffron to-saffron-dark',
   },
 ];
 
@@ -97,7 +196,7 @@ try {
   if (stored) {
     addedProducts = JSON.parse(stored);
   }
-} catch(e) {
+} catch (e) {
   console.error("Could not load products from localStorage", e);
 }
 

@@ -9,7 +9,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
     <!-- Tailwind CSS (Play CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +28,9 @@
                     },
                     fontFamily: {
                         heading: ['Playfair Display', 'serif'],
+                        headline: ['Noto Serif', 'Playfair Display', 'serif'],
                         body: ['Inter', 'sans-serif'],
+                        label: ['Inter', 'sans-serif'],
                     },
                 }
             }
@@ -68,8 +71,12 @@
                     <div>
                         <label class="text-sm font-semibold text-warm-brown mb-1.5 block pl-1">Password</label>
                         <div class="relative">
-                            <input type="password" id="password" required class="w-full pl-11 pr-4 py-3.5 bg-white rounded-xl border-2 border-transparent focus:border-saffron focus:ring-4 focus:ring-saffron/10 outline-none transition-all text-warm-brown placeholder:text-warm-brown-light/50" placeholder="••••••••">
+                            <input type="password" id="password" required class="w-full pl-11 pr-12 py-3.5 bg-white rounded-xl border-2 border-transparent focus:border-saffron focus:ring-4 focus:ring-saffron/10 outline-none transition-all text-warm-brown placeholder:text-warm-brown-light/50" placeholder="••••••••">
                             <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 text-warm-brown-light/70 w-5 h-5"></i>
+                            <button type="button" id="toggle-password" class="absolute right-4 top-1/2 -translate-y-1/2 text-warm-brown-light/70 hover:text-warm-brown transition-colors focus:outline-none">
+                                <i data-lucide="eye" id="eye-icon" class="w-5 h-5"></i>
+                                <i data-lucide="eye-off" id="eye-off-icon" class="w-5 h-5 hidden"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -87,10 +94,13 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
     <!-- Scripts -->
     <script type="module">
         import { loginUser, onAuthChange } from './js/auth-service.js';
-        import { initNavbar, showToast } from './js/ui.js';
+        import { initNavbar, initFooter, showToast } from './js/ui.js';
 
         // Redirect if already logged in
         onAuthChange((user) => {
@@ -99,6 +109,7 @@
 
         // Initialize UI
         initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
         lucide.createIcons();
 
         // Animate in
@@ -107,6 +118,25 @@
             card.classList.remove('opacity-0', 'translate-y-10');
             card.classList.add('opacity-100', 'translate-y-0');
         }, 100);
+
+        // Password Visibility Toggle
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+        const eyeOffIcon = document.getElementById('eye-off-icon');
+
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            if (type === 'text') {
+                eyeIcon.classList.add('hidden');
+                eyeOffIcon.classList.remove('hidden');
+            } else {
+                eyeIcon.classList.remove('hidden');
+                eyeOffIcon.classList.add('hidden');
+            }
+        });
 
         // Handle Login
         const form = document.getElementById('login-form');
