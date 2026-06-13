@@ -62,6 +62,9 @@
         <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center px-4 py-3 text-on-surface font-bold border-l-4 border-primary bg-surface-container/30 pl-4 transition-all duration-200">
             <span class="material-symbols-outlined mr-3 text-lg">dashboard</span> Overview
         </button>
+        <button onclick="switchTab('products')" id="nav-products" class="w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide">
+            <span class="material-symbols-outlined mr-3 text-lg">inventory_2</span> Active Products
+        </button>
         <button onclick="switchTab('users')" id="nav-users" class="w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide">
             <span class="material-symbols-outlined mr-3 text-lg">groups</span> Collector Network
         </button>
@@ -134,11 +137,10 @@
             </div>
         </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Order Management Table (Wide) -->
-            <section class="lg:col-span-2 space-y-6" id="orders-section">
+            <section class="lg:col-span-3 space-y-6" id="orders-section">
                 <div class="flex items-center justify-between flex-wrap gap-4">
-                    <h3 class="text-2xl font-headline font-bold text-on-surface">Acquisitions Database</h3>
+                    <h3 class="text-2xl font-headline font-bold text-on-surface">Acquisition Ledger</h3>
                     <div class="relative w-full sm:w-72">
                         <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
                         <input type="text" id="search-input" placeholder="Search orders..." class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none transition-all">
@@ -162,52 +164,62 @@
                     </table>
                 </div>
             </section>
+        </div>
+    </div>
 
-            <!-- Sidebar / Add Product Form -->
-            <aside class="space-y-8">
-                <section class="bg-primary-container text-surface p-8 rounded-xl relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 opacity-5 w-48 h-48 bg-white rounded-full blur-3xl pointer-events-none"></div>
-                    <div class="relative z-10">
-                        <h3 class="text-xl font-headline font-bold mb-6 text-surface">Expansion Protocol</h3>
-                        <p class="text-xs text-outline-variant mb-6 leading-relaxed font-light tracking-wide">Synthesize a new product to be injected directly into the live consumer portal.</p>
-                        
-                        <form id="add-product-form" class="space-y-5">
-                            <div class="space-y-1">
-                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Heritage Item</label>
-                                <input type="text" id="new-product-name" required class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors hover:border-white/40">
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="space-y-1 col-span-2 sm:col-span-1">
-                                    <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Asset Link / Upload</label>
-                                    <div class="flex flex-col gap-2">
-                                        <input type="url" id="new-product-image-url" placeholder="https://..." class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
-                                        <div class="relative w-full">
-                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-white/30 text-[10px] uppercase tracking-widest font-bold">OR FILE:</div>
-                                            <input type="file" id="new-product-file" accept="image/*" class="w-full pl-20 pr-2 py-1.5 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors file:mr-2 file:py-1 file:px-2 file:rounded-sm file:border-0 file:text-[10px] file:uppercase file:tracking-widest file:font-semibold file:bg-surface file:text-primary hover:file:bg-surface/90 cursor-pointer">
-                                        </div>
+    <!-- PRODUCTS VIEW -->
+    <div id="view-products" class="view-section hidden space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section class="bg-primary-container text-surface p-8 rounded-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-5 w-48 h-48 bg-white rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h3 class="text-xl font-headline font-bold mb-6 text-surface">Expansion Protocol</h3>
+                    <p class="text-xs text-outline-variant mb-6 leading-relaxed font-light tracking-wide">Synthesize a new product to be injected directly into the live consumer portal.</p>
+                    
+                    <form id="add-product-form" class="space-y-5">
+                        <div class="space-y-1">
+                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Heritage Item</label>
+                            <input type="text" id="new-product-name" required class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors hover:border-white/40">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1 col-span-2 sm:col-span-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Asset Link / Upload</label>
+                                <div class="flex flex-col gap-2">
+                                    <input type="url" id="new-product-image-url" placeholder="https://..." class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                                    <div class="relative w-full">
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-white/30 text-[10px] uppercase tracking-widest font-bold">OR FILE:</div>
+                                        <input type="file" id="new-product-file" accept="image/*" class="w-full pl-20 pr-2 py-1.5 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors file:mr-2 file:py-1 file:px-2 file:rounded-sm file:border-0 file:text-[10px] file:uppercase file:tracking-widest file:font-semibold file:bg-surface file:text-primary hover:file:bg-surface/90 cursor-pointer">
                                     </div>
                                 </div>
-                                <div class="space-y-1">
-                                    <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Value</label>
-                                    <input type="number" id="new-product-price" required min="1" placeholder="₹" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
-                                </div>
                             </div>
                             <div class="space-y-1">
-                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Metric Form</label>
-                                <input type="text" id="new-product-unit" required placeholder="/plate, /kg" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Value</label>
+                                <input type="number" id="new-product-price" required min="1" placeholder="₹" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
                             </div>
-                            <div class="space-y-1">
-                                <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Lore</label>
-                                <textarea id="new-product-desc" required rows="2" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white resize-none transition-colors"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full py-3 bg-surface text-primary font-bold text-xs uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                                Inject Creation <span class="material-symbols-outlined text-[14px]">science</span>
-                            </button>
-                        </form>
-                    </div>
-                </section>
-            </aside>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Metric Form</label>
+                            <input type="text" id="new-product-unit" required placeholder="/plate, /kg" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Lore</label>
+                            <textarea id="new-product-desc" required rows="2" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white resize-none transition-colors"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-3 bg-surface text-primary font-bold text-xs uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                            Inject Creation <span class="material-symbols-outlined text-[14px]">science</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+                <h3 class="text-xl font-headline font-bold mb-4 text-on-surface">Active Products</h3>
+                <div id="active-products-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
+                    <!-- Loaded dynamically -->
+                    <div class="text-center py-4 text-on-surface-variant font-label text-sm animate-pulse">Loading Catalog...</div>
+                </div>
+            </section>
         </div>
     </div>
 
@@ -296,9 +308,10 @@
 
 <!-- Scripts -->
 <script type="module">
-    import { onAuthChange, getUserData, logoutUser, getAllUsers } from './js/auth-service.js';
     import { getAllOrders, updateOrderStatus, deleteOrder } from './js/orders-service.js';
-    import { showToast } from './js/ui.js';
+    import { getAllProducts, addProduct, deleteProduct } from './js/products-service.js';
+    import { onAuthChange, getUserData, logoutUser, getAllUsers } from './js/auth-service.js';
+    import { initNavbar, showToast } from './js/ui.js';
     import { storage } from './js/firebase-config.js';
     import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js';
 
@@ -308,6 +321,7 @@
     // Tab Switching Logic globally attached
     window.switchTab = function(tabName) {
         document.getElementById('view-overview').classList.add('hidden', 'opacity-0');
+        document.getElementById('view-products').classList.add('hidden', 'opacity-0');
         document.getElementById('view-analytics').classList.add('hidden', 'opacity-0');
         document.getElementById('view-users').classList.add('hidden', 'opacity-0');
         
@@ -318,6 +332,7 @@
         }
 
         document.getElementById('nav-overview').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
+        document.getElementById('nav-products').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
         document.getElementById('nav-analytics').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
         document.getElementById('nav-users').className = "w-full flex items-center px-4 py-3 text-on-surface/50 hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-all duration-200 font-label text-sm tracking-wide";
 
@@ -343,6 +358,29 @@
             document.getElementById('header-subtitle').textContent = "Data Sciences";
             document.getElementById('header-title').textContent = "Market Analytics";
             if (allOrders.length > 0) renderAnalytics(allOrders);
+        }
+    };
+
+    // Global Actions
+    window.deleteOrderGlobal = async (orderId) => {
+        if(!confirm('Are you absolutely sure you want to delete this acquisition record?')) return;
+        const res = await deleteOrder(orderId);
+        if(res) {
+            showToast('Record eradicated.');
+            loadOrders();
+        } else {
+            showToast('Eradication failed.', 'error');
+        }
+    };
+
+    window.deleteProductGlobal = async (productId) => {
+        if(!confirm('Are you absolutely sure you want to remove this product? It will instantly disappear for all customers!')) return;
+        const res = await deleteProduct(productId);
+        if(res) {
+            showToast('Product successfully deleted.');
+            loadProducts();
+        } else {
+            showToast('Deletion failed.', 'error');
         }
     };
 
@@ -383,12 +421,11 @@
                 badge: 'New',
                 badgeColor: 'bg-primary text-on-primary'
             };
-            let addedProducts = [];
-            try { addedProducts = JSON.parse(localStorage.getItem('addedProducts')) || []; } catch(err) {}
-            addedProducts.push(newProduct);
-            localStorage.setItem('addedProducts', JSON.stringify(addedProducts));
+            const res = await addProduct(newProduct);
+            if (!res.success) throw new Error(res.error);
             showToast('Creation successfully injected into the public interface.');
             e.target.reset();
+            loadProducts();
         } catch (error) {
             console.error("Error creating product:", error);
             showToast('Failed to inject creation due to a network error.', 'error');
@@ -408,6 +445,7 @@
         document.getElementById('admin-name').textContent = userData.name || user.email.split('@')[0];
 
         loadOrders();
+        loadProducts();
     });
 
     document.getElementById('admin-logout').addEventListener('click', async () => {
@@ -451,6 +489,11 @@
             row.className = "hover:bg-surface-container-low/50 transition-colors animate-fade-in";
             // Allow initial fade cascade up to 30 items
             if(idx < 30) row.style.animationDelay = `${idx * 0.05}s`; 
+            const itemsHtml = order.items 
+                ? order.items.map(i => `<div class="mb-1">${i.product} <span class="font-label text-xs text-on-surface-variant border border-outline-variant/30 px-1 py-0.5 rounded-sm ml-1">x${i.quantity}</span></div>`).join('')
+                : `<div>${order.product} <span class="font-label text-xs text-on-surface-variant border border-outline-variant/30 px-1 py-0.5 rounded-sm ml-1">x${order.quantity}</span></div>`;
+            const totalHtml = order.totalAmount ? `<div class="text-xs text-primary mt-1 font-bold">₹${order.totalAmount}</div>` : '';
+
             row.innerHTML = `
                 <td class="px-4 md:px-6 py-5">
                     <div class="font-label text-sm font-bold text-on-surface">#${order.id.slice(0, 8).toUpperCase()}</div>
@@ -461,8 +504,8 @@
                     <div class="font-label text-xs text-on-surface-variant">${order.phone}</div>
                 </td>
                 <td class="px-4 md:px-6 py-5">
-                    <div class="font-headline text-md font-bold text-on-surface">${order.product}</div>
-                    <div class="font-label text-xs text-on-surface-variant border border-outline-variant/30 w-fit px-2 py-0.5 rounded-sm mt-1">x${order.quantity} units</div>
+                    <div class="font-headline text-md font-bold text-on-surface">${itemsHtml}</div>
+                    ${totalHtml}
                 </td>
                 <td class="px-4 md:px-6 py-5 whitespace-nowrap">
                     <select class="text-[10px] font-black uppercase tracking-widest rounded-sm px-3 py-1 cursor-pointer outline-none border transition-colors ${getStatusColor(order.status)}" data-id="${order.id}">
@@ -472,7 +515,7 @@
                     </select>
                 </td>
                 <td class="px-4 md:px-6 py-5 text-right">
-                    <button class="delete-btn text-on-surface-variant hover:text-[red] transition-all bg-surface hover:bg-red-50 border border-transparent hover:border-red-200 p-2 rounded-full" data-id="${order.id}">
+                    <button class="delete-btn text-on-surface-variant hover:text-[red] transition-all bg-surface hover:bg-red-50 border border-transparent hover:border-red-200 p-2 rounded-full" onclick="deleteOrderGlobal('${order.id}')">
                         <span class="material-symbols-outlined text-[16px]">delete</span>
                     </button>
                 </td>
@@ -484,26 +527,6 @@
     }
 
     function attachEventHandlers() {
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                const id = e.currentTarget.dataset.id;
-                if (!confirm('Obliterate this record?')) return;
-                
-                const success = await deleteOrder(id);
-                if (success) {
-                    showToast('Record destroyed.');
-                    allOrders = allOrders.filter(o => o.id !== id);
-                    renderOrders(allOrders);
-                    updateStats(allOrders);
-                    // Rerender analytics cleanly if visible
-                    if(!document.getElementById('view-analytics').classList.contains('hidden')) {
-                        renderAnalytics(allOrders);
-                    }
-                } else {
-                    showToast('Failed to destroy record.', 'error');
-                }
-            });
-        });
 
         document.querySelectorAll('select').forEach(select => {
             select.addEventListener('change', async (e) => {
@@ -563,6 +586,34 @@
             case 'pending':
             default: return 'text-[#854d0e] bg-[#fef08a] border-[#fde047]';
         }
+    }
+
+    // PRODUCTS CATALOG GENERATOR
+    async function loadProducts() {
+        const list = document.getElementById('active-products-list');
+        list.innerHTML = '<div class="text-center py-4 text-on-surface-variant text-sm">Loading...</div>';
+        const products = await getAllProducts();
+        if (products.length === 0) {
+            list.innerHTML = '<div class="text-center py-4 text-on-surface-variant text-sm">No products active.</div>';
+            return;
+        }
+        list.innerHTML = '';
+        products.forEach(p => {
+            list.innerHTML += `
+                <div class="flex items-center justify-between p-3 bg-surface border border-outline-variant/30 rounded-sm hover:border-outline-variant transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <img src="${p.image}" class="w-10 h-10 object-cover rounded-sm border border-outline-variant/20">
+                        <div>
+                            <div class="font-headline text-sm font-bold">${p.name}</div>
+                            <div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">${p.price} ${p.unit}</div>
+                        </div>
+                    </div>
+                    <button onclick="deleteProductGlobal('${p.id}')" class="text-red-500 hover:text-red-700 p-2 opacity-0 group-hover:opacity-100 transition-opacity" title="Delete Product">
+                        <span class="material-symbols-outlined text-[18px]">delete</span>
+                    </button>
+                </div>
+            `;
+        });
     }
 
     // ANALYTICS GENERATOR
@@ -634,10 +685,16 @@
         // 3. Product Performance
         const prodCounts = {};
         orders.forEach(o => {
-            if(!o.product) return;
-            const q = parseInt(o.quantity) || 1;
-            if(!prodCounts[o.product]) prodCounts[o.product] = 0;
-            prodCounts[o.product] += q;
+            if (o.items) {
+                o.items.forEach(item => {
+                    if (!prodCounts[item.product]) prodCounts[item.product] = 0;
+                    prodCounts[item.product] += (parseInt(item.quantity) || 1);
+                });
+            } else if (o.product) {
+                const q = parseInt(o.quantity) || 1;
+                if(!prodCounts[o.product]) prodCounts[o.product] = 0;
+                prodCounts[o.product] += q;
+            }
         });
         const prodsArray = Object.keys(prodCounts).map(k => ({ name: k, count: prodCounts[k] })).sort((a,b)=> b.count - a.count);
         // Top 5 products
@@ -721,9 +778,5 @@
         });
     }
 </script>
-<style>
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
-</style>
 </body>
 </html>

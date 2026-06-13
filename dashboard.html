@@ -86,7 +86,7 @@
                     <p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-8">Unlocking Grand Cru</p>
                     
                     <div class="w-full bg-surface-container-high h-1 rounded-full mb-4">
-                        <div class="h-full bg-primary w-[15%] rounded-full relative">
+                        <div id="tier-progress-bar" class="h-full bg-primary w-[0%] rounded-full relative transition-all duration-1000">
                             <div class="absolute right-0 -top-1 w-3 h-3 copper-glow rounded-full shadow-lg"></div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                 </div>
                 
                 <div class="mt-12 flex gap-4">
-                    <button class="bg-primary text-on-primary px-6 py-3 font-label text-xs uppercase tracking-widest flex items-center gap-2 hover:opacity-90 transition-opacity duration-200">
+                    <button class="hidden bg-primary text-on-primary px-6 py-3 font-label text-xs uppercase tracking-widest items-center gap-2 hover:opacity-90 transition-opacity duration-200">
                         View Benefits <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </button>
                     <a href="order.html" class="bg-surface-container-highest text-on-surface px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-surface-container-high transition-colors">
@@ -230,6 +230,10 @@
                 loader.classList.add('hidden');
                 totalCount.textContent = orders.length;
 
+                // Update dynamic progress bar (max 10 orders for 100%)
+                const progressPercent = Math.min((orders.length / 10) * 100, 100);
+                document.getElementById('tier-progress-bar').style.width = `${progressPercent}%`;
+
                 if (orders.length === 0) {
                     noOrders.classList.remove('hidden');
                 } else {
@@ -238,12 +242,21 @@
                         const dateStr = date.toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' });
                         const statusBadge = getStatusBadge(order.status);
                         
+                        const itemsHtml = order.items 
+                            ? order.items.map(i => `${i.product} <span class="font-body text-xs text-secondary ml-1 mr-3 font-normal">x${i.quantity}</span>`).join('<br/>')
+                            : `${order.product} <span class="font-body text-xs text-secondary ml-1 mr-3 font-normal">x${order.quantity}</span>`;
+                        
+                        const totalHtml = order.totalAmount ? `<div class="text-xs text-primary mt-2 font-bold font-body">Total: ₹${order.totalAmount}</div>` : '';
+
                         const tr = document.createElement('tr');
                         tr.className = "hover:bg-surface-container-highest/20 transition-colors opacity-0 translate-y-4";
                         
                         tr.innerHTML = `
                             <td class="px-4 md:px-8 py-6 font-mono text-xs opacity-60 uppercase tracking-widest text-primary font-bold">#${order.id.slice(0, 8)}</td>
-                            <td class="px-4 md:px-8 py-6 font-headline font-bold text-on-surface text-lg">${order.product} <span class="font-body text-xs text-secondary ml-2 font-normal">x${order.quantity}</span></td>
+                            <td class="px-4 md:px-8 py-6 font-headline font-bold text-on-surface text-lg">
+                                ${itemsHtml}
+                                ${totalHtml}
+                            </td>
                             <td class="px-4 md:px-8 py-6 text-sm text-on-surface-variant font-label">${dateStr}</td>
                             <td class="px-4 md:px-8 py-6">${statusBadge}</td>
                             <td class="px-4 md:px-8 py-6 text-right text-xs text-on-surface-variant max-w-[200px] truncate leading-relaxed">

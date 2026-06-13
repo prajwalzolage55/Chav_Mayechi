@@ -71,18 +71,3 @@ export async function deleteOrder(orderId) {
   }
 }
 
-// Save inquiry
-export async function saveInquiry(formData) {
-  try {
-    const docRef = await addDoc(collection(db, 'inquiries'), {
-      ...formData,
-      timestamp: serverTimestamp(),
-      status: 'new',
-      source: 'website'
-    });
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error('❌ Inquiry error:', error);
-    return { success: false, error: error.message };
-  }
-}

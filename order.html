@@ -125,32 +125,18 @@
                             <h2 class="font-headline text-xl sm:text-2xl mb-5 sm:mb-8">Your Feast</h2>
                             
                             <div id="no-selection" class="text-secondary text-sm my-8 sm:my-12 text-center italic">
-                                Please select a dish from below to continue.
+                                Please select a dish from below to build your feast.
                             </div>
 
                             <div id="selection-summary" class="hidden min-h-[120px] sm:min-h-[150px]">
-                                <div class="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-                                    <div class="flex justify-between items-start gap-4">
-                                        <div class="flex-1">
-                                            <h4 class="font-medium text-base sm:text-lg text-primary" id="summary-title">Product Name</h4>
-                                            <p class="text-xs text-secondary mt-1" id="summary-badge">Signature</p>
-                                        </div>
-                                        <span class="font-semibold text-base sm:text-lg" id="summary-price">$0</span>
-                                    </div>
-                                    <div class="flex items-center justify-between border border-outline-variant/50 p-1 rounded-sm w-fit bg-surface">
-                                        <button id="qty-minus" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors">-</button>
-                                        <input type="number" id="quantity" value="1" min="1" max="50" class="w-12 text-center bg-transparent border-0 p-0 text-sm focus:ring-0 pointer-events-none font-semibold">
-                                        <button id="qty-plus" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors">+</button>
-                                    </div>
+                                <div id="cart-items-container" class="space-y-4 sm:space-y-6 mb-6 sm:mb-8 max-h-[40vh] overflow-y-auto pr-2">
+                                    <!-- Cart items will be injected here -->
                                 </div>
+                                
                                 <div class="border-t border-outline-variant/30 pt-5 space-y-3">
-                                    <div class="flex justify-between text-sm text-secondary">
-                                        <span>Unit Price</span>
-                                        <span id="summary-unit">$0</span>
-                                    </div>
                                     <div class="flex justify-between text-lg sm:text-xl font-bold pt-4 text-on-surface border-t border-outline-variant/30 border-dashed">
-                                        <span>Total</span>
-                                        <span id="summary-total">$0</span>
+                                        <span>Grand Total</span>
+                                        <span id="summary-total">₹0</span>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +175,7 @@
 
     <!-- Scripts -->
     <script type="module">
-        import { productsData } from './js/products-data.js';
+        import { getAllProducts } from './js/products-service.js';
         import { saveOrder } from './js/orders-service.js';
         import { onAuthChange, getUserData } from './js/auth-service.js';
         import { initNavbar, initFooter, showToast } from './js/ui.js';
@@ -206,8 +192,9 @@
         }, 100);
 
         // State
-        let selectedProduct = null;
-        let qty = 1;
+        let cart = [];
+        let productsData = [];
+
         
         const grid = document.getElementById('product-grid');
         const noSelection = document.getElementById('no-selection');
@@ -225,9 +212,10 @@
         // Render Cards
         function renderCards() {
             grid.innerHTML = '';
-            productsData.forEach((product, idx) => {
+            productsData.forEach((product) => {
                 const card = document.createElement('div');
-                const isSelected = selectedProduct && selectedProduct.name === product.name;
+                const cartItem = cart.find(i => i.product.name === product.name);
+                const isSelected = !!cartItem;
                 
                 card.className = `group cursor-pointer border-2 transition-all duration-300 rounded-sm overflow-hidden p-3 ${
                     isSelected ? 'border-primary bg-primary/5' : 'border-transparent hover:border-outline-variant bg-transparent'
@@ -242,13 +230,14 @@
                             <span class="font-bold text-primary">${product.price}</span>
                         </div>
                         ${product.badge ? `<div class="absolute bottom-4 left-4 bg-on-surface text-surface px-2 py-1 text-[10px] tracking-widest uppercase font-bold uppercase rounded-sm">${product.badge}</div>` : ''}
+                        ${isSelected ? `<div class="absolute top-4 left-4 bg-primary text-on-primary w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shadow-sm">${cartItem.quantity}</div>` : ''}
                     </div>
                     <h3 class="font-headline text-2xl mb-1 text-on-surface group-hover:text-primary transition-colors">${product.name}</h3>
                     <p class="text-secondary text-sm mb-4 line-clamp-2">${product.description}</p>
                     <button class="w-full py-3 border text-sm font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 ${
                         isSelected ? 'bg-primary text-on-primary border-primary' : 'border-outline text-secondary group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary'
                     }">
-                        ${isSelected ? 'Selected' : 'Select Dish'}
+                        ${isSelected ? 'Add More' : 'Add to Feast'}
                     </button>
                 `;
                 grid.appendChild(card);
@@ -257,9 +246,14 @@
 
         // Logic functions
         function selectProduct(product) {
-            selectedProduct = product;
-            qty = 1; // reset 
-            document.getElementById('quantity').value = qty;
+            const existingItem = cart.find(i => i.product.name === product.name);
+            if (existingItem) {
+                if (existingItem.quantity < 50) {
+                    existingItem.quantity++;
+                }
+            } else {
+                cart.push({ product, quantity: 1 });
+            }
             
             // Advance progress styling
             step2Circle.className = "w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold transition-all";
@@ -271,40 +265,93 @@
             // enable button
             submitBtn.disabled = false;
         }
+        
+        function updateCartQuantity(productName, delta) {
+            const index = cart.findIndex(i => i.product.name === productName);
+            if (index !== -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                } else if (cart[index].quantity > 50) {
+                    cart[index].quantity = 50;
+                }
+            }
+            
+            if (cart.length === 0) {
+                submitBtn.disabled = true;
+                step2Circle.className = "w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center font-bold text-sm sm:text-base transition-all";
+                step2Text.className = "text-[9px] sm:text-xs uppercase tracking-widest font-medium text-secondary transition-all";
+            }
+            
+            renderCards();
+            updateSidebar();
+        }
+
+        // Make it globally accessible for inline event handlers
+        window.updateCartQuantity = updateCartQuantity;
 
         function updateSidebar() {
-            if (!selectedProduct) return;
+            if (cart.length === 0) {
+                noSelection.classList.remove('hidden');
+                selectionSummary.classList.add('hidden');
+                return;
+            }
             
             noSelection.classList.add('hidden');
             selectionSummary.classList.remove('hidden');
-
-            const priceInt = getPriceInt(selectedProduct.price);
             
-            document.getElementById('summary-title').textContent = selectedProduct.name;
-            document.getElementById('summary-badge').textContent = selectedProduct.description.substring(0, 45) + '...';
-            document.getElementById('summary-price').textContent = selectedProduct.price;
-            document.getElementById('summary-unit').textContent = selectedProduct.price;
-            document.getElementById('summary-total').textContent = `₹${priceInt * qty}`;
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+            
+            let grandTotal = 0;
+
+            cart.forEach(item => {
+                const priceInt = getPriceInt(item.product.price);
+                const itemTotal = priceInt * item.quantity;
+                grandTotal += itemTotal;
+                
+                const itemEl = document.createElement('div');
+                itemEl.className = "border-b border-outline-variant/30 pb-4 last:border-0 last:pb-0";
+                itemEl.innerHTML = `
+                    <div class="flex justify-between items-start gap-4 mb-3">
+                        <div class="flex-1">
+                            <h4 class="font-medium text-base text-primary">${item.product.name}</h4>
+                            <p class="text-xs text-secondary mt-1">${item.product.price} each</p>
+                        </div>
+                        <span class="font-semibold text-base">₹${itemTotal}</span>
+                    </div>
+                    <div class="flex items-center justify-between border border-outline-variant/50 p-1 rounded-sm w-fit bg-surface">
+                        <button type="button" onclick="window.updateCartQuantity('${item.product.name.replace(/'/g, "\\'")}', -1)" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors">-</button>
+                        <input type="number" readonly value="${item.quantity}" class="w-12 text-center bg-transparent border-0 p-0 text-sm focus:ring-0 pointer-events-none font-semibold">
+                        <button type="button" onclick="window.updateCartQuantity('${item.product.name.replace(/'/g, "\\'")}', 1)" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors">+</button>
+                    </div>
+                `;
+                container.appendChild(itemEl);
+            });
+
+            document.getElementById('summary-total').textContent = `₹${grandTotal}`;
         }
 
         // Initialize view
-        renderCards();
+        async function initialize() {
+            grid.innerHTML = '<div class="col-span-full text-center py-10 opacity-50">Loading heritage selection...</div>';
+            productsData = await getAllProducts();
+            renderCards();
 
-        // Check if preselected via URL 
-        const params = new URLSearchParams(window.location.search);
-        const preselect = params.get('product');
-        if (preselect) {
-            const prod = productsData.find(p => p.name === preselect);
-            if (prod) selectProduct(prod);
+            // Check if preselected via URL 
+            const params = new URLSearchParams(window.location.search);
+            const preselect = params.get('product');
+            if (preselect) {
+                const productToSelect = productsData.find(p => p.name === preselect);
+                if (productToSelect) {
+                    selectProduct(productToSelect);
+                    // scroll to grid
+                    document.getElementById('anim-header').scrollIntoView({behavior: 'smooth'});
+                }
+            }
         }
 
-        // Quantity controls
-        document.getElementById('qty-minus').addEventListener('click', () => {
-            if (qty > 1) { qty--; document.getElementById('quantity').value = qty; updateSidebar(); }
-        });
-        document.getElementById('qty-plus').addEventListener('click', () => {
-            if (qty < 50) { qty++; document.getElementById('quantity').value = qty; updateSidebar(); }
-        });
+        initialize();
 
         // Auto-fill user data
         let currentUid = null;
@@ -326,11 +373,17 @@
                 return;
             }
 
+            const grandTotal = cart.reduce((sum, item) => sum + (getPriceInt(item.product.price) * item.quantity), 0);
+
             const orderData = {
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
-                product: selectedProduct.name,
-                quantity: document.getElementById('quantity').value,
+                items: cart.map(item => ({
+                    product: item.product.name,
+                    quantity: item.quantity,
+                    price: item.product.price
+                })),
+                totalAmount: grandTotal,
                 address: document.getElementById('address').value,
                 message: document.getElementById('message').value
             };
@@ -354,7 +407,8 @@
                 document.getElementById('success-message').classList.remove('hidden');
                 
                 // WhatsApp
-                const msg = `Hi! I'd like to order:\n\n🧁 Product: ${orderData.product}\n📦 Quantity: ${orderData.quantity}\n👤 Name: ${orderData.name}\n📞 Phone: ${orderData.phone}\n📍 Address: ${orderData.address}${orderData.message ? '\n💬 Note: ' + orderData.message : ''}`;
+                let itemsList = cart.map(item => `🧁 *${item.product.name}* (x${item.quantity})`).join('\n');
+                const msg = `Hi! I'd like to place an order:\n\n${itemsList}\n\n💰 *Total:* ₹${grandTotal}\n👤 Name: ${orderData.name}\n📞 Phone: ${orderData.phone}\n📍 Address: ${orderData.address}${orderData.message ? '\n💬 Note: ' + orderData.message : ''}`;
                 const waUrl = `https://wa.me/918208519403?text=${encodeURIComponent(msg)}`;
                 setTimeout(() => window.open(waUrl, '_blank'), 1500);
                 

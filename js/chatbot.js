@@ -8,7 +8,12 @@
 const API_URL = '/.netlify/functions/chat';
 
 // ── Product Knowledge Base (auto-synced) ──────────────────────
-import { productsData } from './products-data.js';
+import { getAllProducts } from './products-service.js';
+
+let productsData = [];
+async function loadChatbotProducts() {
+    productsData = await getAllProducts();
+}
 
 function buildProductContext() {
     return productsData.map(p =>
@@ -16,7 +21,7 @@ function buildProductContext() {
     ).join('\n');
 }
 
-const SYSTEM_PROMPT = `You are "Chav", the friendly and helpful AI assistant for Chav Mayechi — a premium Maharashtrian homemade food brand.
+const getSystemPrompt = () => `You are "Chav", the friendly and helpful AI assistant for Chav Mayechi — a premium Maharashtrian homemade food brand.
 
 ## About Chav Mayechi
 - We sell handcrafted Maharashtrian laddus, papads, flours, poha, kurmure, and roasted grains
@@ -52,10 +57,10 @@ let isTyping = false;
 async function sendToGemini(userMessage) {
     chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
-    const requestBody = {
-        systemInstruction: {
-            parts: [{ text: SYSTEM_PROMPT }]
-        },
+        const requestBody = {
+            systemInstruction: {
+                parts: [{ text: getSystemPrompt() }]
+            },
         contents: chatHistory,
         generationConfig: {
             temperature: 0.7,
@@ -106,9 +111,11 @@ function formatMessage(text) {
 }
 
 // ── UI Injection ───────────────────────────────────────────────
-export function initChatbot() {
+export async function initChatbot() {
     // Don't init on admin page
     if (window.location.pathname.includes('admin.html')) return;
+
+    await loadChatbotProducts();
 
     const chatHTML = `
         <!-- Chat Toggle Button -->

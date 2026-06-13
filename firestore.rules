@@ -25,5 +25,10 @@ service cloud.firestore {
       allow create: if true;
       allow read, update, delete: if isAdmin();
     }
+
+    match /products/{productId} {
+      allow read: if true; // Customers need to read the menu
+      allow write, delete: if isAdmin(); // Only admins can add/edit/delete
+    }
   }
 }

@@ -222,7 +222,7 @@
 
     <script type="module">
         import { onAuthChange } from './js/auth-service.js';
-        import { productsData } from './js/products-data.js';
+        import { getAllProducts } from './js/products-service.js';
         import { initNavbar, initFooter } from './js/ui.js';
 
         // Initialize Navbar & Footer
@@ -238,32 +238,38 @@
         });
 
         // Render products
-        const productGrid = document.getElementById('product-grid');
-        productsData.slice(0, 4).forEach((product) => {
-            const card = document.createElement('div');
-            card.className = "group scroll-reveal opacity-0 translate-y-10 transition-all duration-700";
+        async function loadProducts() {
+            const productsData = await getAllProducts();
+            const productGrid = document.getElementById('product-grid');
+            productsData.slice(0, 4).forEach((product) => {
+                const card = document.createElement('div');
+                card.className = "group scroll-reveal opacity-0 translate-y-10 transition-all duration-700";
 
-            // Clean up old badge logic or use it if customized
-            const badgeLabel = product.badge || 'Artisan';
+                // Clean up old badge logic or use it if customized
+                const badgeLabel = product.badge || 'Artisan';
 
-            card.innerHTML = `
-                <div class="aspect-[4/5] overflow-hidden mb-4 sm:mb-10 relative bg-surface-container-low">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale-[0.1] group-hover:grayscale-0" src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/400x500/f4f1ea/4a4a4a?text=Chav+Mayechi'">
-                    <div class="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-1.5 text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] font-bold text-primary uppercase shadow-sm">
-                        ${badgeLabel}
+                card.innerHTML = `
+                    <div class="aspect-[4/5] overflow-hidden mb-4 sm:mb-10 relative bg-surface-container-low">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale-[0.1] group-hover:grayscale-0" src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/400x500/f4f1ea/4a4a4a?text=Chav+Mayechi'">
+                        <div class="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-1.5 text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] font-bold text-primary uppercase shadow-sm">
+                            ${badgeLabel}
+                        </div>
                     </div>
-                </div>
-                <h3 class="font-headline text-lg sm:text-2xl md:text-3xl text-on-surface mb-1 sm:mb-4">${product.name}</h3>
-                <p class="text-secondary text-xs sm:text-sm mb-3 sm:mb-8 leading-relaxed font-light line-clamp-2 pr-2 sm:pr-4 hidden sm:block">${product.description}</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-base sm:text-xl md:text-2xl font-light text-on-surface font-headline">${product.price}<span class="text-[10px] sm:text-sm ml-0.5 sm:ml-1 text-secondary font-body">${product.unit}</span></span>
-                    <a href="order.html" class="w-8 h-8 sm:w-12 sm:h-12 border border-outline flex items-center justify-center group-hover:bg-on-surface group-hover:text-surface transition-colors duration-500 cursor-pointer">
-                        <span class="material-symbols-outlined font-light text-base sm:text-2xl">add</span>
-                    </a>
-                </div>
-            `;
-            productGrid.appendChild(card);
-        });
+                    <h3 class="font-headline text-lg sm:text-2xl md:text-3xl text-on-surface mb-1 sm:mb-4">${product.name}</h3>
+                    <p class="text-secondary text-xs sm:text-sm mb-3 sm:mb-8 leading-relaxed font-light line-clamp-2 pr-2 sm:pr-4 hidden sm:block">${product.description}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-base sm:text-xl md:text-2xl font-light text-on-surface font-headline">${product.price}<span class="text-[10px] sm:text-sm ml-0.5 sm:ml-1 text-secondary font-body">${product.unit}</span></span>
+                        <a href="order.html" class="w-8 h-8 sm:w-12 sm:h-12 border border-outline flex items-center justify-center group-hover:bg-on-surface group-hover:text-surface transition-colors duration-500 cursor-pointer">
+                            <span class="material-symbols-outlined font-light text-base sm:text-2xl">add</span>
+                        </a>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+            handleScrollReveal();
+        }
+
+        loadProducts();
 
         // Scroll Reveal logic
         function handleScrollReveal() {
