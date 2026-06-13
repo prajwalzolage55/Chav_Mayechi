@@ -4,9 +4,8 @@
  */
 
 // ── Configuration ──────────────────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyCHrmSNFaCuAPrtUah2aJWrD7_oL6yd_Kw'; // Replace with your actual API key
-const GEMINI_MODEL = 'gemini-flash-latest';
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+// The Gemini API key has been securely moved to the Netlify Serverless Function
+const API_URL = '/.netlify/functions/chat';
 
 // ── Product Knowledge Base (auto-synced) ──────────────────────
 import { productsData } from './products-data.js';
