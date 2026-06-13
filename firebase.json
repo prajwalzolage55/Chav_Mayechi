@@ -4,6 +4,12 @@
     "ignore": [
       "firebase.json",
       "**/.*",
+      "**/.*/**",
+      ".git/**",
+      ".firebase/**",
+      ".kilo/**",
+      "netlify/**",
+      "netlify.toml",
       "**/node_modules/**",
       "src",
       "public",
