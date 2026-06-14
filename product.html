@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Product Details — Chav Mayechi</title>
+    <meta name="description" content="Detailed view of authentic Maharashtrian delicacies." />
+    
+    <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20">
+
+    <!-- Unified Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 md:px-12 max-w-screen-xl mx-auto">
+        
+        <div id="loading-state" class="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
+            <span class="material-symbols-outlined animate-spin text-4xl text-primary">sync</span>
+            <p class="text-secondary font-label uppercase tracking-widest text-xs">Loading ingredients...</p>
+        </div>
+
+        <div id="error-state" class="hidden flex flex-col items-center justify-center min-h-[50vh] space-y-4">
+            <span class="material-symbols-outlined text-4xl text-error">error</span>
+            <h2 class="font-headline text-2xl">Product not found</h2>
+            <p class="text-secondary">We couldn't find the requested delicacy.</p>
+            <a href="products.html" class="mt-4 px-6 py-2 bg-primary text-on-primary font-bold uppercase tracking-widest text-xs font-label">Return to Menu</a>
+        </div>
+
+        <div id="product-container" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 opacity-0 translate-y-8 transition-all duration-700">
+            <!-- Left: Image Gallery -->
+            <div class="relative w-full aspect-square bg-surface-container shadow-sm border border-outline-variant/20">
+                <img id="product-image" src="" alt="Product Image" class="w-full h-full object-cover">
+                <div id="product-badge" class="absolute top-4 sm:top-6 right-4 sm:right-6 bg-white/90 backdrop-blur-sm px-4 py-1.5 text-[10px] sm:text-xs tracking-[0.2em] font-bold text-primary uppercase shadow-sm hidden">
+                </div>
+            </div>
+
+            <!-- Right: Details -->
+            <div class="flex flex-col justify-center">
+                <span class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-3 block" id="product-category">Category</span>
+                <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-on-surface leading-[1.1] mb-6 tracking-tight" id="product-name">Product Name</h1>
+                
+                <div class="flex items-end gap-3 mb-8 pb-8 border-b border-outline-variant/30">
+                    <span class="font-headline text-3xl sm:text-4xl font-bold text-primary" id="product-price">₹0</span>
+                    <span class="font-body text-base text-secondary mb-1" id="product-unit">/ Unit</span>
+                </div>
+
+                <p class="font-body text-base sm:text-lg text-on-surface-variant leading-relaxed mb-10" id="product-description">
+                    Description goes here.
+                </p>
+
+                <div class="space-y-6 mb-10 bg-surface-container-low p-6 border border-outline-variant/20 rounded-sm">
+                    <h3 class="font-label text-xs uppercase tracking-widest text-on-surface font-bold">The Fine Print</h3>
+                    <ul class="space-y-3 text-sm text-on-surface-variant">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">psychiatry</span>
+                            <span><strong>Ingredients:</strong> <span id="product-ingredients">Pure traditional ingredients.</span></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">calendar_month</span>
+                            <span><strong>Shelf Life:</strong> <span id="product-shelf-life">30 days from manufacturing</span></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">info</span>
+                            <span><strong>Storage:</strong> Store in a cool, dry place in an airtight container.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button id="add-to-cart-btn" class="w-full sm:w-auto self-start bg-primary text-on-primary px-8 py-4 font-bold uppercase tracking-widest text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Unified Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script type="module">
+        import { initNavbar, initFooter } from './js/ui.js';
+        import { getAllProducts } from './js/products-service.js';
+        import { addToCart } from './js/cart-service.js';
+
+        initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
+
+        async function initProductPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                showError();
+                return;
+            }
+
+            try {
+                const products = await getAllProducts();
+                const product = products.find(p => p.id === productId);
+
+                if (!product) {
+                    showError();
+                    return;
+                }
+
+                renderProduct(product);
+            } catch (error) {
+                console.error("Failed to load product:", error);
+                showError();
+            }
+        }
+
+        function renderProduct(product) {
+            document.title = `${product.name} — Chav Mayechi`;
+
+            document.getElementById('loading-state').classList.add('hidden');
+            const container = document.getElementById('product-container');
+            container.classList.remove('hidden');
+
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-image').alt = product.name;
+            
+            if (product.badge) {
+                const badgeEl = document.getElementById('product-badge');
+                badgeEl.textContent = product.badge;
+                badgeEl.classList.remove('hidden');
+            }
+
+            document.getElementById('product-category').textContent = product.category;
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').textContent = product.price;
+            document.getElementById('product-unit').textContent = `(${product.unit})`;
+            document.getElementById('product-description').textContent = product.description;
+
+            // Generate some dummy ingredients based on category if not explicitly available
+            let ingredients = "Premium authentic ingredients.";
+            if (product.category === "Laddu") ingredients = "Wheat flour/Besan/Methi, Pure Ghee, Dry fruits, Jaggery/Sugar, Cardamom.";
+            if (product.category === "Papad") ingredients = "Urad Dal, Moong Dal, Asafoetida (Hing), Salt, Spices, Cottonseed Oil.";
+            document.getElementById('product-ingredients').textContent = ingredients;
+
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                addToCart(product);
+            });
+
+            // Trigger animation
+            setTimeout(() => {
+                container.classList.remove('opacity-0', 'translate-y-8');
+            }, 50);
+        }
+
+        function showError() {
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('error-state').classList.remove('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', initProductPage);
+    </script>
+</body>
+</html>

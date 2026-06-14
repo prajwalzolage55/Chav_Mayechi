@@ -11,7 +11,13 @@ export async function getAllProducts() {
       orderBy('timestamp', 'desc')
     );
     const snap = await getDocs(q);
-    return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return snap.docs.map(doc => {
+      const data = doc.data();
+      if (data.image && typeof data.image === 'string') {
+        data.image = data.image.replace(/\.png$/i, '.webp').replace(/\.jpg$/i, '.webp');
+      }
+      return { id: doc.id, ...data };
+    });
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Join the Heritage — Chav Mayechi</title>
+    <title>Create Account — Chav Mayechi</title>
     <meta name="description" content="Create an account with Chav Mayechi to order authentic Maharashtrian delicacies." />
     
     <!-- Open Graph Tags -->
@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.383.0"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary/20">
 
@@ -155,7 +155,7 @@
             const res = await registerUser(email, password, name);
 
             if (res.success) {
-                showToast('Welcome to the Heritage!');
+                showToast('Welcome to Chav Mayechi!');
                 setTimeout(() => window.location.href = redirectUrl, 1500);
             } else {
                 showToast(res.error || 'Failed to register', 'error');

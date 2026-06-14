@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>The Heritage Selection — Chav Mayechi</title>
-    <meta name="description" content="Explore our curated heritage selection of authentic Maharashtrian delicacies." />
+    <title>Our Menu — Chav Mayechi</title>
+    <meta name="description" content="Explore our authentic homemade menu of Maharashtrian delicacies." />
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="The Heritage Selection — Chav Mayechi" />
-    <meta property="og:description" content="Explore our curated heritage selection of authentic Maharashtrian delicacies." />
+    <meta property="og:title" content="Our Menu — Chav Mayechi" />
+    <meta property="og:description" content="Explore our authentic homemade menu of Maharashtrian delicacies." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://chavmayechi.com/images/menu.png" />
     
@@ -72,8 +72,7 @@
                     The Art of <br /><span class="italic font-light">Flavor</span></h1>
                 <p
                     class="font-body text-sm sm:text-lg md:text-xl text-white/80 leading-relaxed max-w-lg hidden sm:block">
-                    A curated journey through the hearths of regional heritage. Every dish is a silent dialogue between
-                    tradition and the artisan's hand.
+                    Experience the real taste of Maharashtra. Every item is freshly prepared in our kitchen using traditional family recipes.
                 </p>
                 <div class="mt-6 sm:mt-10 md:mt-12 flex items-center gap-4 sm:gap-6">
                     <a href="#curated-selection"
@@ -92,7 +91,7 @@
             <nav
                 class="max-w-screen-xl mx-auto flex justify-center gap-5 sm:gap-8 md:gap-16 font-label text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-on-surface-variant font-bold px-4">
                 <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1"
-                    href="#curated-selection">Our Selection</a>
+                    href="#curated-selection">Our Menu</a>
                 <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1"
                     href="#our-ingredients">Our Ingredients</a>
                 <a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1"
@@ -107,7 +106,7 @@
                     <div class="max-w-2xl">
                         <span
                             class="font-label text-[10px] sm:text-xs uppercase tracking-[0.3em] text-secondary mb-3 sm:mb-4 block">The
-                            Heritage Collection</span>
+                            Our Menu</span>
                         <h2
                             class="font-headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-on-surface mb-3 sm:mb-4 md:mb-6 italic leading-tight">
                             Lessons in Time</h2>
@@ -227,7 +226,7 @@
         let searchQuery = '';
         
         async function loadProducts() {
-            productGrid.innerHTML = '<div class="col-span-full text-center py-10 opacity-50">Loading heritage selection...</div>';
+            productGrid.innerHTML = '<div class="col-span-full text-center py-10 opacity-50">Loading our menu...</div>';
             
             allProducts = await getAllProducts();
             renderProducts();
@@ -259,7 +258,7 @@
                     card.innerHTML = `
                         <div class="aspect-square overflow-hidden mb-3 sm:mb-6 relative bg-surface-container shadow-sm border border-outline-variant/20">
                             <a href="product.html?id=${product.id}" class="block w-full h-full">
-                                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover filter contrast-[1.05] group-hover:scale-105 transition-all duration-1000">
+                                <img src="${product.image}" loading="lazy" alt="${product.name}" class="w-full h-full object-cover filter contrast-[1.05] group-hover:scale-105 transition-all duration-1000">
                             </a>
                             ${badgeHtml}
                         </div>

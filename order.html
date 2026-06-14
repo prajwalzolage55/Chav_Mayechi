@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Order Your Feast — Chav Mayechi</title>
-    <meta name="description" content="Order your authentic Maharashtrian feast from Chav Mayechi." />
+    <title>Place Your Order — Chav Mayechi</title>
+    <meta name="description" content="Order authentic Maharashtrian food from Chav Mayechi." />
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Order Your Feast — Chav Mayechi" />
-    <meta property="og:description" content="Order your authentic Maharashtrian feast from Chav Mayechi." />
+    <meta property="og:title" content="Place Your Order — Chav Mayechi" />
+    <meta property="og:description" content="Order authentic Maharashtrian food from Chav Mayechi." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://chavmayechi.com/images/menu.png" />
     
@@ -35,8 +35,8 @@
         
         <div id="success-message" class="hidden text-center py-24">
             <span class="material-symbols-outlined text-6xl text-primary mb-6 animate-pulse">check_circle</span>
-            <h1 class="font-headline text-5xl font-bold tracking-tight mb-4">Feast Confirmed!</h1>
-            <p class="text-secondary font-body text-lg max-w-xl mx-auto mb-6">Your order has been securely recorded in our kitchen's ledger.</p>
+            <h1 class="font-headline text-5xl font-bold tracking-tight mb-4">Order Confirmed!</h1>
+            <p class="text-secondary font-body text-lg max-w-xl mx-auto mb-6">Your order has been successfully placed.</p>
             <div class="bg-surface-container-low border border-outline-variant/30 p-4 rounded-sm inline-block mb-8">
                 <span class="text-xs uppercase tracking-widest text-secondary block mb-1">Your Order Reference</span>
                 <span id="success-order-id" class="font-headline text-2xl font-bold text-primary"></span>
@@ -59,7 +59,7 @@
             <p class="text-secondary text-sm mt-8 italic">Prefer a call? We'll ring you at the provided number to confirm within 30 minutes.</p>
             
             <br/>
-            <a href="index.html" class="mt-4 inline-block text-primary underline font-medium">Return to Artisan Menu</a>
+            <a href="index.html" class="mt-4 inline-block text-primary underline font-medium">Return to Menu</a>
         </div>
 
         <div id="order-workflow">
@@ -88,8 +88,11 @@
                 <div class="lg:col-span-8 space-y-8 sm:space-y-12">
                     
                     <header class="opacity-0 translate-y-10 transition-all duration-700 delay-100" id="anim-header">
-                        <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">Craft Your Feast</h1>
-                        <p class="text-secondary font-body text-base sm:text-lg max-w-xl">Curate your personal culinary journey from Chav Mayechi's heritage kitchen.</p>
+                        <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                            Place Your Order
+                            <span class="px-2 py-0.5 border border-primary/30 rounded-sm text-[8px] sm:text-[10px] tracking-widest text-primary font-bold">FSSAI: 21521118000524</span>
+                        </h1>
+                        <p class="text-secondary font-body text-base sm:text-lg max-w-xl mt-2">Select your favorite items from our kitchen.</p>
                     </header>
                     
                     <!-- Dynamic Menu Grid -->
@@ -120,13 +123,21 @@
                                     <input id="phone" required class="w-full bg-transparent border-0 border-b border-primary/20 focus:ring-0 focus:border-primary transition-colors py-3 text-base sm:text-lg" placeholder="+91 98765 43210" type="tel"/>
                                 </div>
                                 <div class="sm:col-span-2 space-y-2">
-                                    <label class="font-label text-xs uppercase tracking-widest text-secondary font-medium">Delivery Sanctuary</label>
+                                    <label class="font-label text-xs uppercase tracking-widest text-secondary font-medium">Delivery Address</label>
                                     <input id="address" required class="w-full bg-transparent border-0 border-b border-primary/20 focus:ring-0 focus:border-primary transition-colors py-3 text-base sm:text-lg" placeholder="Apartment, Street Name, Landmark" type="text"/>
                                 </div>
                                 <div class="sm:col-span-2 space-y-2">
-                                    <label class="font-label text-xs uppercase tracking-widest text-secondary font-medium">Artisan Notes (Optional)</label>
+                                    <label class="font-label text-xs uppercase tracking-widest text-secondary font-medium">Special Instructions (Optional)</label>
                                     <textarea id="message" rows="2" class="w-full bg-transparent border-0 border-b border-primary/20 focus:ring-0 focus:border-primary transition-colors py-3 text-base sm:text-lg" placeholder="Any special dietary instructions..."></textarea>
                                 </div>
+                                
+                                <!-- Placeholder for Cloudflare Turnstile CAPTCHA -->
+                                <!-- 
+                                <div class="sm:col-span-2 mt-2">
+                                    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                                    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA"></div>
+                                </div>
+                                -->
                             </div>
                         </form>
                     </section>
@@ -136,10 +147,10 @@
                 <aside class="lg:col-span-4 opacity-0 translate-y-10 transition-all duration-700 delay-500" id="anim-sidebar">
                     <div class="lg:sticky lg:top-32 space-y-4 sm:space-y-8">
                         <div class="bg-surface-container-low p-5 sm:p-8 rounded-xl shadow-sm border border-outline-variant/30">
-                            <h2 class="font-headline text-xl sm:text-2xl mb-5 sm:mb-8">Your Feast</h2>
+                            <h2 class="font-headline text-xl sm:text-2xl mb-5 sm:mb-8">Your Order</h2>
                             
                             <div id="no-selection" class="text-secondary text-sm my-8 sm:my-12 text-center italic">
-                                Please select a dish from below to build your feast.
+                                Please select items from below to add to your order.
                             </div>
 
                             <div id="selection-summary" class="hidden min-h-[120px] sm:min-h-[150px]">
@@ -156,14 +167,13 @@
                             </div>
                             
                             <button id="submit-btn" disabled class="w-full bg-primary text-on-primary mt-6 sm:mt-10 py-4 sm:py-5 rounded-none font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-secondary">
-                                <span id="btn-text">Confirm Feast</span>
+                                <span id="btn-text">Confirm Order</span>
                                 <span class="material-symbols-outlined" data-icon="restaurant" id="btn-icon">restaurant</span>
                                 <span id="btn-loader" class="hidden animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full border-r-transparent"></span>
                             </button>
                             <p id="error-text" class="hidden text-[#ba1a1a] text-center mt-4 text-sm font-medium">Failed to save order.</p>
                             <p class="text-[10px] text-center mt-4 sm:mt-6 text-secondary uppercase tracking-widest leading-relaxed">
-                                Secured Artisan Checkout<br/>
-                                Encrypted by Heritage Ledger
+                                Secure Checkout
                             </p>
                         </div>
                         
@@ -240,7 +250,7 @@
 
                 card.innerHTML = `
                     <div class="relative overflow-hidden rounded-sm aspect-[4/5] bg-surface-container mb-4 shadow-sm">
-                        <img src="${product.image}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${isSelected ? '' : 'grayscale-[0.1]'}">
+                        <img src="${product.image}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-sm shadow-sm">
                             <span class="font-bold text-primary">${product.price}</span>
                         </div>
@@ -252,7 +262,7 @@
                     <button class="w-full py-3 border text-sm font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 ${
                         isSelected ? 'bg-primary text-on-primary border-primary' : 'border-outline text-secondary group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary'
                     }">
-                        ${isSelected ? 'Add More' : 'Add to Feast'}
+                        ${isSelected ? 'Add More' : 'Add to Order'}
                     </button>
                 `;
                 grid.appendChild(card);
@@ -349,7 +359,7 @@
 
         // Initialize view
         async function initialize() {
-            grid.innerHTML = '<div class="col-span-full text-center py-10 opacity-50">Loading heritage selection...</div>';
+            grid.innerHTML = '<div class="col-span-full text-center py-10 opacity-50">Loading our menu...</div>';
             productsData = await getAllProducts();
 
             // Pre-populate from the global cart (items added from products.html)
@@ -391,7 +401,7 @@
             const btnText = document.getElementById('btn-text');
             if (user) {
                 currentUid = user.uid;
-                if (btnText && btnText.textContent === "Login to Continue") btnText.textContent = "Confirm Feast";
+                if (btnText && btnText.textContent === "Login to Continue") btnText.textContent = "Confirm Order";
                 const userData = await getUserData(user.uid);
                 if (userData) {
                     document.getElementById('name').value = userData.name || user.displayName || '';
@@ -476,7 +486,7 @@
                 submitBtn.disabled = false;
                 standardIcon.classList.remove('hidden');
                 loaderIcon.classList.add('hidden');
-                btnText.textContent = "Confirm Feast";
+                btnText.textContent = "Confirm Order";
                 showToast(res.error || 'Failed to craft order', 'error');
             }
         });

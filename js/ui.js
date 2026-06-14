@@ -410,8 +410,11 @@ export function initFooter(containerId) {
                 </div>
 
                 <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-                    <div class="text-[10px] tracking-[0.3em] uppercase text-white/30 font-label flex flex-col sm:flex-row gap-2 sm:gap-6 items-center">
+                    <div class="text-[10px] tracking-[0.3em] uppercase text-white/30 font-label flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
                         <span>© ${new Date().getFullYear()} Chav Mayechi</span>
+                        <span class="px-2 py-1 border border-white/20 rounded-sm font-bold tracking-widest flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#98462f]"></span> FSSAI: 21521118000524
+                        </span>
                     </div>
                     <div class="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-white/30 font-label">
                         <a href="policies.html#privacy" class="hover:text-white/60 transition-colors">Privacy</a>

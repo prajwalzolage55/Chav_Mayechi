@@ -3,21 +3,37 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Chav Mayechi — The Digital Atelier of Homemade Heritage</title>
-    <meta name="description" content="Experience authentic Maharashtrian delicacies. Heritage recipes, pure ingredients, and handmade with a mother's love. Order your bespoke feast today." />
+    <title>Chav Mayechi — Authentic Homemade Maharashtrian Food</title>
+    <meta name="description" content="Experience authentic Maharashtrian delicacies. Heritage recipes, pure ingredients, and handmade with a mother's love. Order fresh, homemade food today." />
     
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Chav Mayechi — Authentic Homemade Heritage" />
-    <meta property="og:description" content="Experience authentic Maharashtrian delicacies made with heritage recipes, pure ingredients, and a mother's love." />
+    <meta property="og:title" content="Chav Mayechi — Authentic Homemade Maharashtrian Food" />
+    <meta property="og:description" content="Experience authentic Maharashtrian delicacies made with family recipes, pure ingredients, and a mother's love." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://chavmayechi.com/images/menu.png" />
     <meta property="og:url" content="https://chavmayechi.com/" />
-
     <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
+    <link rel="preload" as="image" href="/images/menu.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-        content="Chav Mayechi — Premium homemade Maharashtrian laddus made with traditional recipes, pure ingredients and lots of love.">
-    <title>Chav Mayechi — Homemade Laddus with Love ❤️</title>
+
+    <!-- Placeholder for Google Analytics 4 (GA4) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> 
+    -->
+
+    <!-- Placeholder for Sentry.io Error Tracking -->
+    <!-- 
+    <script src="https://js.sentry-cdn.com/XXXXXX.min.js" crossorigin="anonymous"></script>
+    <script>
+      Sentry.init({ dsn: "https://examplePublicKey@o0.ingest.sentry.io/0" });
+    </script>
+    -->
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,7 +66,7 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- Lucide Icons (in case some components still use them via ui.js) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.383.0"></script>
 </head>
 
 <body class="bg-surface text-on-surface font-body selection:bg-primary/20 selection:text-primary overflow-x-hidden">
@@ -93,7 +109,7 @@
                         class="aspect-square sm:aspect-[1/1.2] overflow-hidden relative grayscale-[0.2] hover:grayscale-0 transition-all duration-1000">
                         <img class="w-full h-full object-cover"
                             src="/images/hero.jpg"
-                            alt="Chav Mayechi Foods assortment featuring traditional laddus, papads, flours, and snacks" />
+                            alt="Traditional Maharashtrian Feast" />
                     </div>
                     <!-- Decorative Floater -->
                     <div
@@ -140,8 +156,8 @@
             <div
                 class="flex flex-col md:flex-row justify-between items-baseline mb-10 sm:mb-16 md:mb-24 border-b border-outline/30 pb-6 sm:pb-8 md:pb-12 scroll-reveal transition-all duration-700 opacity-0 translate-y-10">
                 <div>
-                    <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface mb-3 sm:mb-4">Signature Creations</h2>
-                    <p class="text-secondary font-light text-base sm:text-lg italic">Selected favorites from our seasonal menu.</p>
+                    <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface mb-3 sm:mb-4">Our Popular Items</h2>
+                    <p class="text-secondary font-light text-base sm:text-lg italic">Our most loved homemade items.</p>
                 </div>
                 <a href="products.html"
                     class="group text-primary font-semibold text-[10px] sm:text-xs uppercase tracking-[0.2em] flex items-center gap-2 sm:gap-3 mt-6 sm:mt-8 md:mt-0">
@@ -156,16 +172,60 @@
             </div>
         </section>
 
+        <!-- Customer Reviews (Social Proof) -->
+        <section class="py-16 sm:py-24 md:py-32 bg-surface-container px-4 sm:px-6 md:px-12 scroll-reveal transition-all duration-1000 opacity-0 translate-y-10">
+            <div class="max-w-screen-xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <span class="font-label text-[10px] sm:text-xs uppercase tracking-[0.3em] text-primary mb-3 sm:mb-4 block">Word of Mouth</span>
+                    <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl text-on-surface italic leading-tight">What Our Family Says</h2>
+                    <div class="w-16 sm:w-24 h-px bg-primary mx-auto mt-6"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+                    <div class="bg-surface p-8 sm:p-10 border border-outline/20 relative shadow-sm">
+                        <span class="material-symbols-outlined text-primary/20 text-6xl absolute -top-4 -left-2 rotate-180">format_quote</span>
+                        <div class="flex text-primary mb-4">
+                            <span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span>
+                        </div>
+                        <p class="font-body text-on-surface-variant text-base leading-relaxed mb-6 italic">"Absolutely phenomenal! The Methi Laddus taste exactly like what my grandmother used to make. You can immediately tell they use pure ingredients and no shortcuts."</p>
+                        <div>
+                            <p class="font-headline font-bold text-on-surface">Priya S.</p>
+                            <p class="text-xs text-secondary font-label uppercase tracking-widest mt-1">Pune</p>
+                        </div>
+                    </div>
+                    <div class="bg-surface p-8 sm:p-10 border border-outline/20 relative shadow-sm">
+                        <span class="material-symbols-outlined text-primary/20 text-6xl absolute -top-4 -left-2 rotate-180">format_quote</span>
+                        <div class="flex text-primary mb-4">
+                            <span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span>
+                        </div>
+                        <p class="font-body text-on-surface-variant text-base leading-relaxed mb-6 italic">"The spices are so fresh and aromatic. I ordered the Dryfruit Laddu and Masala, and my entire kitchen smelled amazing just opening the box. Highly recommended."</p>
+                        <div>
+                            <p class="font-headline font-bold text-on-surface">Rahul D.</p>
+                            <p class="text-xs text-secondary font-label uppercase tracking-widest mt-1">Mumbai</p>
+                        </div>
+                    </div>
+                    <div class="bg-surface p-8 sm:p-10 border border-outline/20 relative shadow-sm md:mt-8">
+                        <span class="material-symbols-outlined text-primary/20 text-6xl absolute -top-4 -left-2 rotate-180">format_quote</span>
+                        <div class="flex text-primary mb-4">
+                            <span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span><span class="material-symbols-outlined text-sm">star</span>
+                        </div>
+                        <p class="font-body text-on-surface-variant text-base leading-relaxed mb-6 italic">"Finally, a place that delivers true authentic Maharashtrian flavor without excessive oil or sugar. Their courier shipping was fast and the packaging was perfectly secure."</p>
+                        <div>
+                            <p class="font-headline font-bold text-on-surface">Sneha K.</p>
+                            <p class="text-xs text-secondary font-label uppercase tracking-widest mt-1">Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Editorial Promo (Contact / Action) -->
         <section id="contact"
             class="mb-12 sm:mb-24 md:mb-40 px-4 sm:px-6 md:px-12 max-w-screen-2xl mx-auto scroll-reveal transition-all duration-1000 opacity-0 translate-y-10">
             <div class="bg-on-surface flex flex-col lg:flex-row items-stretch">
                 <div class="w-full lg:w-1/2 p-6 sm:p-10 md:p-16 lg:p-32 flex flex-col justify-center">
-                    <h2 class="font-headline text-3xl sm:text-4xl md:text-6xl text-surface mb-4 sm:mb-6 md:mb-10 leading-tight">Host an
-                        unforgettable <span class="italic font-normal">evening</span>.</h2>
-                    <p class="text-surface/70 text-base sm:text-lg mb-8 sm:mb-12 font-light leading-relaxed">Our 'At-Home Feast' packages
-                        bring the entire Chav Mayechi experience to your dining room, complete with artisan pairing
-                        suggestions and handcrafted serving ware.</p>
+                    <h2 class="font-headline text-3xl sm:text-4xl md:text-6xl text-surface mb-4 sm:mb-6 md:mb-10 leading-tight">Bulk Orders & 
+                        <span class="italic font-normal">Catering</span>.</h2>
+                    <p class="text-surface/70 text-base sm:text-lg mb-8 sm:mb-12 font-light leading-relaxed">We accept bulk orders for festivals, weddings, and special occasions. Share the authentic taste of Maharashtra with your guests.</p>
                     <a href="https://wa.me/918208519403?text=I%20want%20to%20inquire%20about%20bulk%20catering%20from%20Chav%20Mayechi!"
                         target="_blank"
                         class="bg-primary text-on-primary w-fit px-8 sm:px-12 py-4 sm:py-5 font-semibold text-xs sm:text-sm uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all duration-500">
@@ -174,7 +234,7 @@
                 </div>
                 <div class="w-full lg:w-1/2 h-[300px] sm:h-[500px] lg:h-auto overflow-hidden">
                     <img class="w-full h-full object-cover brightness-75 hover:scale-110 transition-transform duration-[3s]"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC77laQMXyraMMwJq7HpZdBWIPuAek1jkSSZVCTI9vN37GrxphXssY5k1iAqRXxRmGmsIFchGBA0mRjBaVc2Lb0m4L4Fs840gVDCTSbf7IlMCUTI6gHd_YxDZ3rhb_3oMeo48Pw3RUBpDQ69Gk-fYZYO4VPey6YvaAdFRxttARjiUt8V1OfJCLpU9-gcL94mfqh3uMwacM3DsQ_iiZuzlnfcRFFhM2wm32qlepfuSJ7CLLcSmHE318yQ3IyvFScc_uj_To21OQUmPvH"
+                        src="/images/dining-setup.webp" loading="lazy"
                         alt="Elegant dining setup" />
                 </div>
             </div>
@@ -186,8 +246,9 @@
 
     <!-- Floating Actions -->
     <a href="https://wa.me/918208519403" target="_blank" rel="noopener noreferrer"
-        class="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-[999] w-[52px] h-[52px] sm:w-[60px] sm:h-[60px] rounded-full bg-primary flex items-center justify-center text-on-primary shadow-xl shadow-primary/20 hover:bg-on-surface hover:text-surface transition-all duration-300 overflow-hidden group">
-        <span class="material-symbols-outlined relative z-10 group-hover:scale-110 transition-transform">sms</span>
+        class="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-[999] px-4 py-3 sm:px-5 sm:py-3 rounded-full bg-[#25D366] flex items-center justify-center gap-2 text-white shadow-xl shadow-[#25D366]/20 hover:scale-105 transition-all duration-300 overflow-hidden group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <span class="font-headline font-bold text-sm tracking-wide hidden sm:block whitespace-nowrap">Chat on WhatsApp</span>
     </a>
 
     <button id="back-to-top"
@@ -224,22 +285,41 @@
                 const badgeLabel = product.badge || 'Artisan';
 
                 card.innerHTML = `
-                    <div class="aspect-[4/5] overflow-hidden mb-4 sm:mb-10 relative bg-surface-container-low">
-                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale-[0.1] group-hover:grayscale-0" src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/400x500/f4f1ea/4a4a4a?text=Chav+Mayechi'">
-                        <div class="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-1.5 text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] font-bold text-primary uppercase shadow-sm">
+                    <div class="aspect-[4/5] overflow-hidden mb-4 sm:mb-6 relative bg-surface-container-low border border-outline-variant/20">
+                        <a href="product.html?id=${product.id}" class="block w-full h-full">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="${product.image}" loading="lazy" alt="${product.name}" onerror="this.src='https://placehold.co/400x500/f4f1ea/4a4a4a?text=Chav+Mayechi'">
+                        </a>
+                        <div class="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-1.5 text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] font-bold text-primary uppercase shadow-sm pointer-events-none">
                             ${badgeLabel}
                         </div>
                     </div>
-                    <h3 class="font-headline text-lg sm:text-2xl md:text-3xl text-on-surface mb-1 sm:mb-4">${product.name}</h3>
-                    <p class="text-secondary text-xs sm:text-sm mb-3 sm:mb-8 leading-relaxed font-light line-clamp-2 pr-2 sm:pr-4 hidden sm:block">${product.description}</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-base sm:text-xl md:text-2xl font-light text-on-surface font-headline">${product.price}<span class="text-[10px] sm:text-sm ml-0.5 sm:ml-1 text-secondary font-body">${product.unit}</span></span>
-                        <a href="order.html?product=${encodeURIComponent(product.name)}" class="w-8 h-8 sm:w-12 sm:h-12 border border-outline flex items-center justify-center group-hover:bg-on-surface group-hover:text-surface transition-colors duration-500 cursor-pointer" title="Order ${product.name}">
-                            <span class="material-symbols-outlined font-light text-base sm:text-2xl">add</span>
-                        </a>
+                    <a href="product.html?id=${product.id}" class="hover:text-primary transition-colors block">
+                        <h3 class="font-headline text-lg sm:text-2xl md:text-3xl text-on-surface mb-1 sm:mb-2 transition-colors">${product.name}</h3>
+                    </a>
+                    <p class="text-secondary text-xs sm:text-sm mb-3 sm:mb-6 leading-relaxed font-light line-clamp-1 sm:line-clamp-2 pr-2 sm:pr-4">${product.description}</p>
+                    <div class="flex justify-between items-center bg-surface-container-low p-2 sm:p-4 rounded-sm border border-outline-variant/30">
+                        <span class="text-base sm:text-xl md:text-2xl font-bold text-primary font-headline">${product.price}<span class="text-[10px] sm:text-sm ml-0.5 sm:ml-1 text-secondary font-body">(${product.unit})</span></span>
+                        <button class="add-to-cart-btn-home w-auto font-label text-[8px] sm:text-[10px] uppercase tracking-widest border border-primary text-primary px-3 py-2 sm:px-4 sm:py-2 hover:bg-primary hover:text-on-primary transition-colors font-bold flex items-center justify-center gap-1" data-product-id="${product.id}">
+                            <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            <span class="hidden sm:inline">Add</span>
+                        </button>
                     </div>
                 `;
                 productGrid.appendChild(card);
+            });
+            
+            // Wire "Add to Cart" buttons
+            document.querySelectorAll('.add-to-cart-btn-home').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.productId;
+                    const product = productsData.find(p => p.id === id);
+                    if (product) {
+                        import('./js/cart-service.js').then(module => {
+                            module.addToCart(product);
+                            // Toast handles itself via cart-service.js if wired to a UI event, or user sees badge update
+                        });
+                    }
+                });
             });
             handleScrollReveal();
         }
