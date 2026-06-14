@@ -116,13 +116,23 @@
                                     <th class="px-4 md:px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant text-right">Delivery Details</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-outline-variant/10" id="orders-list">
-                                <!-- Loader State -->
-                                <tr id="orders-loader">
-                                    <td colspan="5" class="px-8 py-12 text-center text-on-surface-variant font-label text-sm uppercase tracking-widest animate-pulse">
-                                        Loading Archives...
-                                    </td>
+                            <tbody id="orders-loader" class="divide-y divide-outline-variant/10">
+                                <tr class="animate-pulse">
+                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-32 mb-2 rounded-sm"></div><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-20 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-24 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6 flex justify-end"><div class="h-4 bg-surface-container-high w-32 rounded-sm"></div></td>
                                 </tr>
+                                <tr class="animate-pulse">
+                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-32 mb-2 rounded-sm"></div><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-20 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-24 rounded-sm"></div></td>
+                                    <td class="px-4 md:px-8 py-6 flex justify-end"><div class="h-4 bg-surface-container-high w-32 rounded-sm"></div></td>
+                                </tr>
+                            </tbody>
+                            <tbody class="divide-y divide-outline-variant/10" id="orders-list">
                                 <!-- Empty State -->
                                 <tr id="no-orders" class="hidden">
                                     <td colspan="5" class="px-8 py-16 text-center">

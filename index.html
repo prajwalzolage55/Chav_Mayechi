@@ -275,8 +275,27 @@
 
         // Render products
         async function loadProducts() {
-            const productsData = await getAllProducts();
             const productGrid = document.getElementById('product-grid');
+            
+            // Show skeletons
+            productGrid.innerHTML = '';
+            for(let i=0; i<4; i++) {
+                productGrid.innerHTML += `
+                <div class="animate-pulse">
+                    <div class="aspect-[4/5] bg-surface-container-high mb-4 sm:mb-6 border border-outline-variant/20 rounded-sm"></div>
+                    <div class="h-6 sm:h-8 bg-surface-container-high w-3/4 mb-2 rounded-sm"></div>
+                    <div class="h-4 bg-surface-container-high w-full mb-2 rounded-sm"></div>
+                    <div class="h-4 bg-surface-container-high w-5/6 mb-6 rounded-sm"></div>
+                    <div class="flex justify-between items-center bg-surface-container-low p-2 sm:p-4 rounded-sm border border-outline-variant/30">
+                        <div class="h-6 sm:h-8 bg-surface-container-high w-24 rounded-sm"></div>
+                        <div class="h-8 sm:h-10 bg-surface-container-high w-20 rounded-sm"></div>
+                    </div>
+                </div>
+                `;
+            }
+
+            const productsData = await getAllProducts();
+            productGrid.innerHTML = '';
             productsData.slice(0, 4).forEach((product) => {
                 const card = document.createElement('div');
                 card.className = "group scroll-reveal opacity-0 translate-y-10 transition-all duration-700";

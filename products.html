@@ -226,7 +226,22 @@
         let searchQuery = '';
         
         async function loadProducts() {
-            productGrid.innerHTML = '<div class="col-span-full text-center py-10 opacity-50">Loading our menu...</div>';
+            // Show skeletons
+            productGrid.innerHTML = '';
+            for(let i=0; i<8; i++) {
+                productGrid.innerHTML += `
+                <div class="animate-pulse flex flex-col">
+                    <div class="aspect-square bg-surface-container-high mb-3 sm:mb-6 border border-outline-variant/20 rounded-sm"></div>
+                    <div class="h-6 sm:h-8 bg-surface-container-high w-3/4 mb-2 rounded-sm"></div>
+                    <div class="h-4 bg-surface-container-high w-full mb-2 rounded-sm"></div>
+                    <div class="h-4 bg-surface-container-high w-5/6 mb-6 mt-auto rounded-sm"></div>
+                    <div class="mt-auto flex justify-between items-center bg-surface-container-low p-2 sm:p-4 rounded-sm border border-outline-variant/30">
+                        <div class="h-6 sm:h-8 bg-surface-container-high w-20 rounded-sm"></div>
+                        <div class="h-8 sm:h-10 bg-surface-container-high w-24 rounded-sm"></div>
+                    </div>
+                </div>
+                `;
+            }
             
             allProducts = await getAllProducts();
             renderProducts();
