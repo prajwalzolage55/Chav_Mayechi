@@ -1,7 +1,7 @@
 import { db } from './firebase-config.js';
 import { 
   collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, deleteDoc, serverTimestamp 
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+} from 'firebase/firestore';
 
 // Save order to Firestore
 export async function saveOrder(orderData, userId = null) {
@@ -26,11 +26,16 @@ export async function getUserOrders(userId) {
   try {
     const q = query(
       collection(db, 'orders'), 
-      where('userId', '==', userId),
-      orderBy('timestamp', 'desc')
+      where('userId', '==', userId)
     );
     const snap = await getDocs(q);
-    return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const orders = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // Sort in memory to avoid needing a Firestore composite index
+    return orders.sort((a, b) => {
+      const timeA = a.timestamp ? (a.timestamp.toMillis ? a.timestamp.toMillis() : a.timestamp) : 0;
+      const timeB = b.timestamp ? (b.timestamp.toMillis ? b.timestamp.toMillis() : b.timestamp) : 0;
+      return timeB - timeA;
+    });
   } catch (error) {
     console.error('Error fetching user orders:', error);
     return [];

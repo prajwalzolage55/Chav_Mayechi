@@ -8,47 +8,19 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script id="tailwind-config">
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-                "primary": "#98462f",
-                "on-primary": "#ffffff",
-                "primary-container": "#1c1b1b",
-                "surface": "#fbf9f4",
-                "on-surface": "#1c1b1b",
-                "secondary": "#4a4a4a",
-                "on-secondary": "#ffffff",
-                "outline": "#747878",
-                "outline-variant": "#c4c7c7",
-                "surface-container-highest": "#e4e2dd",
-                "surface-container-high": "#eae8e3",
-                "surface-container-low": "#f5f3ee",
-                "surface-container-lowest": "#ffffff",
-                "surface-container": "#f0eee9",
-                "on-surface-variant": "#444748"
-            },
-            fontFamily: {
-                "headline": ["Noto Serif", "serif"],
-                "body": ["Inter", "sans-serif"],
-                "label": ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
-    </script>
+    
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, .serif-font { font-family: 'Noto Serif', serif; }
         .view-section { transition: opacity 0.3s ease-in-out; }
     </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="bg-surface text-on-surface antialiased hidden" id="body-content">
 
@@ -202,6 +174,16 @@
                             <input type="text" id="new-product-unit" required placeholder="/plate, /kg" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
                         </div>
                         <div class="space-y-1">
+                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Category</label>
+                            <select id="new-product-category" required class="w-full px-3 py-2 bg-[#1c1b1b] border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors">
+                                <option value="Laddu">Laddu</option>
+                                <option value="Papad">Papad</option>
+                                <option value="Flours">Flours</option>
+                                <option value="Kurmure">Kurmure</option>
+                                <option value="Pulses">Pulses</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
                             <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Lore</label>
                             <textarea id="new-product-desc" required rows="2" class="w-full px-3 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white resize-none transition-colors"></textarea>
                         </div>
@@ -214,7 +196,12 @@
             </section>
             
             <section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
-                <h3 class="text-xl font-headline font-bold mb-4 text-on-surface">Active Products</h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-headline font-bold text-on-surface">Active Products</h3>
+                    <button onclick="migrateCategories()" class="text-[10px] uppercase tracking-widest font-bold bg-primary/10 text-primary px-3 py-1.5 rounded-sm hover:bg-primary/20 transition-colors border border-primary/20">
+                        Auto-Migrate Categories
+                    </button>
+                </div>
                 <div id="active-products-list" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
                     <!-- Loaded dynamically -->
                     <div class="text-center py-4 text-on-surface-variant font-label text-sm animate-pulse">Loading Catalog...</div>
@@ -309,11 +296,11 @@
 <!-- Scripts -->
 <script type="module">
     import { getAllOrders, updateOrderStatus, deleteOrder } from './js/orders-service.js';
-    import { getAllProducts, addProduct, deleteProduct } from './js/products-service.js';
+    import { getAllProducts, addProduct, deleteProduct, updateProduct } from './js/products-service.js';
     import { onAuthChange, getUserData, logoutUser, getAllUsers } from './js/auth-service.js';
     import { initNavbar, showToast } from './js/ui.js';
     import { storage } from './js/firebase-config.js';
-    import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js';
+    import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
     let allOrders = [];
     let chartsInstance = [];
@@ -416,6 +403,7 @@
                 name: document.getElementById('new-product-name').value,
                 price: '₹' + document.getElementById('new-product-price').value,
                 unit: document.getElementById('new-product-unit').value,
+                category: document.getElementById('new-product-category').value,
                 description: document.getElementById('new-product-desc').value,
                 image: finalImageUrl,
                 badge: 'New',
@@ -615,6 +603,59 @@
             `;
         });
     }
+
+    // Auto Migrate Categories
+    window.migrateCategories = async function() {
+        if (!confirm("Are you sure you want to map old categories to new ones?")) return;
+        
+        const products = await getAllProducts();
+        let updated = 0;
+        
+        for (const p of products) {
+            let newCat = "Kurmure"; // default
+            const name = p.name ? p.name.toLowerCase() : "";
+            
+            if (name.includes("laddu")) newCat = "Laddu";
+            else if (name.includes("papad")) newCat = "Papad";
+            else if (name.includes("pith") || name.includes("flour") || name.includes("atta") || name.includes("besan") || name.includes("rava")) newCat = "Flours";
+            else if (name.includes("kurmura") || name.includes("poha") || name.includes("chivda")) newCat = "Kurmure";
+            else if (name.includes("vaal") || name.includes("mataki") || name.includes("udit") || name.includes("pulses")) newCat = "Pulses";
+            else {
+                // Try old categories if name doesn't match
+                if (p.category === "Sweets") newCat = "Laddu";
+                if (p.category === "Spices") newCat = "Flours"; // rough fallback
+                if (p.category === "Snacks") newCat = "Kurmure";
+            }
+            
+            if (p.category !== newCat) {
+                await updateProduct(p.id, { category: newCat });
+                updated++;
+            }
+        }
+        showToast(`Migration complete. Updated ${updated} products.`);
+        loadProducts();
+    };
+
+    // Global Delete Handlers
+    window.deleteOrderGlobal = async function(id) {
+        if (!confirm('Eliminate this record?')) return;
+        if (await deleteOrder(id)) {
+            showToast('Record eradicated.');
+            loadOrders();
+        } else {
+            showToast('Eradication failed.', 'error');
+        }
+    };
+    
+    window.deleteProductGlobal = async function(id) {
+        if (!confirm('Eliminate this creation from the catalog?')) return;
+        if (await deleteProduct(id)) {
+            showToast('Creation removed.');
+            loadProducts();
+        } else {
+            showToast('Removal failed.', 'error');
+        }
+    };
 
     // ANALYTICS GENERATOR
     function renderAnalytics(orders) {

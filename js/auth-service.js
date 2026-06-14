@@ -5,8 +5,8 @@ import {
   signOut,
   updateProfile,
   onAuthStateChanged
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-import { doc, setDoc, getDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+} from 'firebase/auth';
+import { doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 // Register User
 export async function registerUser(email, password, name) {

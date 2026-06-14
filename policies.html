@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Policies — Chav Mayechi</title>
+    <link rel="icon" type="image/png" href="/images/logo.png?v=2" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20">
+
+    <!-- Unified Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="pt-24 md:pt-32 pb-24 max-w-3xl mx-auto px-6 md:px-8">
+        <header class="mb-16 md:mb-20 text-center">
+            <span class="font-label text-[10px] sm:text-xs uppercase tracking-[0.3em] text-secondary mb-3 sm:mb-4 block">Chav Mayechi</span>
+            <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold mb-6 italic leading-tight">Store Policies</h1>
+            <p class="font-body text-base md:text-lg text-on-surface-variant leading-relaxed max-w-2xl mx-auto">Transparency and trust are the foundation of our heritage kitchen. Everything you need to know about ordering from us.</p>
+        </header>
+
+        <div class="space-y-20 md:space-y-24">
+            <section id="shipping" class="scroll-mt-32">
+                <h2 class="font-headline text-3xl font-bold mb-8 text-on-surface text-center">Shipping & Delivery</h2>
+                <div class="space-y-6 text-on-surface-variant leading-relaxed font-light text-base md:text-lg">
+                    <p><strong class="font-bold text-on-surface">Delivery Methods:</strong> We offer both local delivery for nearby customers and reliable courier services (via delivery apps) for customers further away. Since our authentic products are shelf-stable and packaged securely, we can safely ship far beyond our immediate area.</p>
+                    <p><strong class="font-bold text-on-surface">Delivery Charges:</strong> Delivery is not included in the product price. Customers pay the actual courier or local delivery cost separately. We will provide you with the exact shipping cost via WhatsApp when confirming your order.</p>
+                    <p><strong class="font-bold text-on-surface">Preparation & Dispatch Time:</strong> Because our items are crafted fresh, preparation and dispatch times vary depending on your order size and delivery location. We will give you a clear timeline when you finalize your order.</p>
+                </div>
+            </section>
+
+            <div class="w-24 h-px bg-outline-variant/30 mx-auto"></div>
+
+            <section id="privacy" class="scroll-mt-32">
+                <h2 class="font-headline text-3xl font-bold mb-8 text-on-surface text-center">Privacy Policy</h2>
+                <div class="space-y-6 text-on-surface-variant leading-relaxed font-light text-base md:text-lg">
+                    <p>Your privacy is as sacred as our family recipes. Information collected during checkout (Name, Phone, Address) is used strictly for order fulfillment, delivery coordination, and providing you with the best possible service.</p>
+                    <p>We do not sell, rent, or share your personal data with third-party marketers. Your authentication data is securely encrypted and managed via Google Firebase.</p>
+                    <p>If you have subscribed to our newsletter, you may occasionally receive updates about seasonal specialties. You can opt out of these communications at any time.</p>
+                </div>
+            </section>
+
+            <div class="w-24 h-px bg-outline-variant/30 mx-auto"></div>
+
+            <section id="terms" class="scroll-mt-32">
+                <h2 class="font-headline text-3xl font-bold mb-8 text-on-surface text-center">Terms of Service</h2>
+                <div class="space-y-6 text-on-surface-variant leading-relaxed font-light text-base md:text-lg">
+                    <p><strong class="font-bold text-on-surface">Order Confirmation:</strong> By placing an order with Chav Mayechi through our website, you agree to complete the payment via WhatsApp communication as instructed by our team.</p>
+                    <p><strong class="font-bold text-on-surface">Cancellations:</strong> Because our items are made-to-order and highly perishable, orders cannot be canceled once preparation has begun in our kitchen.</p>
+                    <p><strong class="font-bold text-on-surface">Returns & Refunds:</strong> Due to health and safety regulations surrounding food products, we cannot accept returns. However, if there is a legitimate issue with the quality or condition of your delivery, please contact us within 12 hours of receipt with a photograph, and we will make it right.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { initNavbar, initFooter } from './js/ui.js';
+        
+        // Initialize Shared Global Navbar & Footer
+        initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
+    </script>
+</body>
+</html>

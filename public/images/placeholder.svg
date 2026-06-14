@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#f0eee9"/>
+  <rect x="0" y="0" width="600" height="600" fill="url(#grain)" opacity="0.3"/>
+  <defs>
+    <pattern id="grain" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="#d1cfc9" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <g transform="translate(300,260)" opacity="0.35">
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#98462f" stroke-width="2"/>
+    <path d="M-20,-20 L20,20 M-20,20 L20,-20" stroke="#98462f" stroke-width="2" stroke-linecap="round"/>
+    <path d="M0,-30 L0,30" stroke="#98462f" stroke-width="2" stroke-linecap="round"/>
+    <path d="M-30,0 L30,0" stroke="#98462f" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <text x="300" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#98462f" opacity="0.5" letter-spacing="3" text-transform="uppercase">IMAGE COMING SOON</text>
+</svg>

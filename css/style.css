@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ===== Base Styles ===== */
 html {
   scroll-behavior: smooth;
@@ -6,9 +10,7 @@ html {
 }
 
 body {
-  background-color: #FDFBF7; /* cream */
-  color: #4A3728; /* warm-brown */
-  font-family: 'Inter', sans-serif;
+  /* Let Tailwind utilities on the body handle colors */
   overflow-x: hidden;
 }
 

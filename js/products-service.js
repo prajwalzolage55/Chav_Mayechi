@@ -1,7 +1,7 @@
 import { db } from './firebase-config.js';
 import { 
-  collection, addDoc, getDocs, query, where, orderBy, doc, deleteDoc, serverTimestamp 
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+  collection, addDoc, getDocs, query, where, orderBy, doc, deleteDoc, updateDoc, serverTimestamp 
+} from 'firebase/firestore';
 
 // Fetch all active products
 export async function getAllProducts() {
@@ -40,6 +40,18 @@ export async function deleteProduct(productId) {
     return true;
   } catch (error) {
     console.error('Error deleting product:', error);
+    return false;
+  }
+}
+
+// Update a product
+export async function updateProduct(productId, productData) {
+  try {
+    const docRef = doc(db, 'products', productId);
+    await updateDoc(docRef, productData);
+    return true;
+  } catch (error) {
+    console.error('Error updating product:', error);
     return false;
   }
 }

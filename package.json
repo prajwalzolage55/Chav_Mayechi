@@ -1,0 +1,33 @@
+{
+  "name": "chav",
+  "version": "1.0.0",
+  "description": "Chav Mayechi is a premium web application for an artisan culinary brand specializing in homemade Maharashtrian laddus. Engineered with a sophisticated \"Culinary Editorial\" design system, the platform offers a seamless shopping and order management experience.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prajwalzolage55/Chav_Mayechi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prajwalzolage55/Chav_Mayechi/issues"
+  },
+  "homepage": "https://github.com/prajwalzolage55/Chav_Mayechi#readme",
+  "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.0.16"
+  },
+  "dependencies": {
+    "firebase": "^12.14.0"
+  }
+}
