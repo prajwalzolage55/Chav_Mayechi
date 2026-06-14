@@ -15,7 +15,9 @@ export default defineConfig({
                 dashboard: resolve(__dirname, 'dashboard.html'),
                 admin: resolve(__dirname, 'admin.html'),
                 login: resolve(__dirname, 'login.html'),
-                register: resolve(__dirname, 'register.html')
+                register: resolve(__dirname, 'register.html'),
+                policies: resolve(__dirname, 'policies.html'),
+                product: resolve(__dirname, 'product.html')
             }
         }
     }

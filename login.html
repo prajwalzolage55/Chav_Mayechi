@@ -94,6 +94,22 @@
                     </button>
                 </form>
 
+                <div class="relative flex items-center py-5">
+                    <div class="flex-grow border-t border-on-surface-variant/20"></div>
+                    <span class="flex-shrink-0 mx-4 text-on-surface-variant text-sm font-semibold">OR</span>
+                    <div class="flex-grow border-t border-on-surface-variant/20"></div>
+                </div>
+
+                <button type="button" id="google-login-btn" class="w-full py-3.5 rounded-xl font-semibold text-on-surface flex items-center justify-center gap-3 bg-white border border-on-surface-variant/20 hover:bg-surface-container-lowest hover:border-primary/50 transition-all duration-300 shadow-sm">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#EA4335" d="M5.266 9.765A7.077 7.077 0 0112 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115z"/>
+                        <path fill="#34A853" d="M16.04 18.013c-1.09.703-2.474 1.078-4.04 1.078a7.076 7.076 0 01-6.725-4.806l-4.04 3.127C3.365 21.258 7.42 24 12 24c3.395 0 6.491-1.227 8.705-3.515l-4.665-2.472z"/>
+                        <path fill="#4A90E2" d="M19.98 12c0-.853-.115-1.621-.304-2.364H12v4.467h4.632c-.227 1.282-.937 2.39-1.954 3.107l4.665 2.472c2.723-2.512 4.637-6.22 4.637-10.154z"/>
+                        <path fill="#FBBC05" d="M5.275 14.336A7.002 7.002 0 014.92 12c0-.822.148-1.61.408-2.35l-4.025-3.115A11.967 11.967 0 000 12c0 1.92.445 3.73 1.237 5.335l4.038-2.999z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
                 <p class="text-center text-sm text-on-surface-variant mt-8">
                     Don't have an account? 
                     <a href="register.html" class="text-primary font-semibold hover:text-primary-container transition-colors">Create one</a>
@@ -107,7 +123,7 @@
 
     <!-- Scripts -->
     <script type="module">
-        import { loginUser, onAuthChange } from './js/auth-service.js';
+        import { loginUser, loginWithGoogle, onAuthChange } from './js/auth-service.js';
         import { initNavbar, initFooter, showToast } from './js/ui.js';
 
         const params = new URLSearchParams(window.location.search);
@@ -175,6 +191,25 @@
                 submitBtn.disabled = false;
                 btnText.classList.remove('hidden');
                 loader.classList.add('hidden');
+            }
+        });
+
+        // Handle Google Login
+        const googleBtn = document.getElementById('google-login-btn');
+        googleBtn.addEventListener('click', async () => {
+            const originalText = googleBtn.innerHTML;
+            googleBtn.disabled = true;
+            googleBtn.innerHTML = '<span class="animate-spin w-5 h-5 border-2 border-primary border-t-transparent rounded-full mr-2"></span> Signing in...';
+
+            const res = await loginWithGoogle();
+
+            if (res.success) {
+                showToast('Welcome!');
+                setTimeout(() => window.location.href = redirectUrl, 1000);
+            } else {
+                showToast(res.error || 'Failed to login with Google', 'error');
+                googleBtn.disabled = false;
+                googleBtn.innerHTML = originalText;
             }
         });
     </script>

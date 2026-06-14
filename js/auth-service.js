@@ -4,9 +4,13 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  onAuthStateChanged
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
+
+const googleProvider = new GoogleAuthProvider();
 
 // Register User
 export async function registerUser(email, password, name) {
@@ -37,6 +41,33 @@ export async function loginUser(email, password) {
     return { success: true, user: userCredential.user };
   } catch (error) {
     console.error('Login Error:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Google Login
+export async function loginWithGoogle() {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+    
+    // Check if user exists in Firestore
+    const docRef = doc(db, 'users', user.uid);
+    const docSnap = await getDoc(docRef);
+    
+    // If not, create a new document for them
+    if (!docSnap.exists()) {
+      await setDoc(docRef, {
+        name: user.displayName || 'Google User',
+        email: user.email,
+        role: 'user',
+        createdAt: new Date().toISOString()
+      });
+    }
+    
+    return { success: true, user };
+  } catch (error) {
+    console.error('Google Login Error:', error);
     return { success: false, error: error.message };
   }
 }
