@@ -46,7 +46,7 @@ function renderNavbar(container, user, userData) {
                 <!-- Desktop Links -->
                 <div class="hidden lg:flex items-center gap-12">
                     <a href="index.html#home" class="${isHome ? 'text-primary font-semibold border-b-2 border-primary pb-1' : 'text-on-surface/70 hover:text-primary transition-colors'} font-headline text-lg leading-tight tracking-tight">Home</a>
-                    <a href="index.html#about" class="text-on-surface/70 hover:text-primary transition-colors font-headline text-lg leading-tight tracking-tight">Our Story</a>
+                    <a href="about.html" class="${path.includes('about.html') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : 'text-on-surface/70 hover:text-primary transition-colors'} font-headline text-lg leading-tight tracking-tight">Our Story</a>
                     <a href="products.html" class="${isMenu ? 'text-primary font-semibold border-b-2 border-primary pb-1' : 'text-on-surface/70 hover:text-primary transition-colors'} font-headline text-lg leading-tight tracking-tight">Menu</a>
                     ${user ? `
                         <a href="dashboard.html" class="${isDashboard ? 'text-primary font-semibold border-b-2 border-primary pb-1' : 'text-on-surface/70 hover:text-primary transition-colors'} font-headline text-lg leading-tight tracking-tight">Dashboard</a>
@@ -85,7 +85,7 @@ function renderNavbar(container, user, userData) {
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden absolute top-full inset-x-0 bg-surface/95 backdrop-blur-xl border-t border-outline/20 py-8 px-6 flex flex-col gap-6 items-center text-center">
                  <a href="index.html#home" class="font-headline text-xl ${isHome ? 'text-primary font-bold' : 'text-on-surface'}">Home</a>
-                 <a href="index.html#about" class="font-headline text-xl text-on-surface">Our Story</a>
+                 <a href="about.html" class="font-headline text-xl ${path.includes('about.html') ? 'text-primary font-bold' : 'text-on-surface'}">Our Story</a>
                  <a href="products.html" class="font-headline text-xl ${isMenu ? 'text-primary font-bold' : 'text-on-surface'}">Menu</a>
                  ${user ? `
                     <a href="dashboard.html" class="font-headline text-xl ${isDashboard ? 'text-primary font-bold' : 'text-on-surface'}">Dashboard</a>
