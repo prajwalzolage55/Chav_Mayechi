@@ -137,7 +137,7 @@ export async function initChatbot() {
             <div class="relative px-5 py-4 flex items-center gap-3 text-white shrink-0"
                  style="background: linear-gradient(135deg, #1c1b1b 0%, #2a2524 100%);">
                 <div class="relative">
-                    <img src="/images/logo.png" alt="Chav" class="w-10 h-10 rounded-full object-contain bg-white/10 p-1 border border-white/10">
+                    <img src="/images/logo.webp" alt="Chav" class="w-10 h-10 rounded-full object-contain bg-white/10 p-1 border border-white/10">
                     <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-[#1c1b1b]"></span>
                 </div>
                 <div class="flex-1">

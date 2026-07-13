@@ -37,7 +37,7 @@ function renderNavbar(container, user, userData) {
             <div class="w-full max-w-screen-2xl mx-auto flex items-center justify-between px-6 lg:px-12 py-6 transition-all duration-300" id="navbar-inner">
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="/images/logo.png" alt="Logo" class="w-10 h-10 object-contain">
+                    <img src="/images/logo.webp" alt="Logo" class="w-10 h-10 object-contain">
                     <span class="font-headline text-2xl font-bold text-on-surface tracking-tighter">
                         Chav Mayechi
                     </span>
@@ -357,7 +357,7 @@ export function initFooter(containerId) {
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-14 md:mb-20 pb-10 md:pb-14 border-b border-white/10">
                     <div>
                         <a href="index.html" class="flex items-center gap-3 mb-4">
-                            <img src="/images/logo.png" alt="Chav Mayechi Logo" class="w-10 h-10 sm:w-12 sm:h-12 object-contain brightness-200">
+                            <img src="/images/logo.webp" alt="Chav Mayechi Logo" class="w-10 h-10 sm:w-12 sm:h-12 object-contain brightness-200">
                             <span class="font-headline text-2xl sm:text-3xl tracking-tighter text-[#fbf9f4]">Chav Mayechi</span>
                         </a>
                         <p class="text-white/50 text-sm font-light max-w-sm leading-relaxed">
