@@ -6,6 +6,10 @@ service cloud.firestore {
       return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
 
+    function isValidString(text, maxLength) {
+      return text is string && text.size() <= maxLength;
+    }
+
     match /users/{userId} {
       allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
       // Users can only create their doc with role 'user'
@@ -16,13 +20,22 @@ service cloud.firestore {
     }
 
     match /orders/{orderId} {
-      allow create: if (request.auth != null && request.resource.data.userId == request.auth.uid) || (request.auth == null && request.resource.data.userId == null);
+      allow create: if ((request.auth != null && request.resource.data.userId == request.auth.uid) || (request.auth == null && request.resource.data.userId == null))
+                    && isValidString(request.resource.data.name, 100)
+                    && isValidString(request.resource.data.phone, 20)
+                    && isValidString(request.resource.data.address, 500)
+                    && (!('message' in request.resource.data) || isValidString(request.resource.data.message, 1000))
+                    && request.resource.data.items is list
+                    && request.resource.data.items.size() <= 50;
       allow read: if request.auth != null && (resource.data.userId == request.auth.uid || isAdmin());
       allow update, delete: if isAdmin();
     }
 
     match /inquiries/{inquiryId} {
-      allow create: if true;
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message'])
+                    && isValidString(request.resource.data.name, 100)
+                    && isValidString(request.resource.data.email, 100)
+                    && isValidString(request.resource.data.message, 2000);
       allow read, update, delete: if isAdmin();
     }
 

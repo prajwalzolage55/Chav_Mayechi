@@ -448,6 +448,13 @@
             const standardIcon = document.getElementById('btn-icon');
             const errorText = document.getElementById('error-text');
             
+            // Client-side rate limiting (30s cooldown)
+            const lastOrderTime = localStorage.getItem('lastOrderTime');
+            if (lastOrderTime && (Date.now() - parseInt(lastOrderTime)) < 30000) {
+                showToast('Please wait a moment before placing another order to prevent duplicates.', 'error');
+                return;
+            }
+
             submitBtn.disabled = true;
             standardIcon.classList.add('hidden');
             loaderIcon.classList.remove('hidden');
@@ -464,6 +471,9 @@
                 document.getElementById('success-message').classList.remove('hidden');
                 document.getElementById('success-order-id').textContent = '#' + orderRef;
                 
+                // Update cooldown timer
+                localStorage.setItem('lastOrderTime', Date.now().toString());
+
                 // Clear the global cart
                 clearGlobalCart();
                 
