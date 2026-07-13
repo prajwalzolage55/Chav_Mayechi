@@ -167,59 +167,95 @@
 
     <!-- MANAGE PRODUCT VIEW -->
     <div id="view-manage-product" class="view-section hidden space-y-8">
-        <section class="bg-primary-container text-surface p-8 rounded-xl relative overflow-hidden shadow-lg max-w-3xl mx-auto">
-            <div class="absolute -right-10 -bottom-10 opacity-5 w-48 h-48 bg-white rounded-full blur-3xl pointer-events-none"></div>
-            <div class="relative z-10">
-                <p class="text-xs text-outline-variant mb-8 leading-relaxed font-light tracking-wide" id="page-desc">Synthesize a new product to be injected directly into the live consumer portal.</p>
+        <form id="manage-product-form" class="w-full flex flex-col gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 
-                <form id="manage-product-form" class="space-y-6">
-                    <div class="space-y-1">
-                        <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Heritage Item (Name)</label>
-                        <input type="text" id="new-product-name" required class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors hover:border-white/40">
+                <!-- Left Column -->
+                <div class="flex flex-col gap-6">
+                    <!-- 1. PRODUCT DETAILS -->
+                    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+                        <h4 class="font-label text-[10px] uppercase tracking-widest font-bold mb-4 text-on-surface">1. Product Details</h4>
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Heritage Item (Name)</label>
+                                <input type="text" id="new-product-name" required placeholder="e.g. Vintage Silk Sari" class="w-full px-4 py-3 bg-surface border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none text-on-surface transition-colors">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Category</label>
+                                <select id="new-product-category" required class="w-full px-4 py-3 bg-surface border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none text-on-surface transition-colors">
+                                    <option value="Laddu">Laddu</option>
+                                    <option value="Papad">Papad</option>
+                                    <option value="Flours">Flours</option>
+                                    <option value="Kurmure">Kurmure</option>
+                                    <option value="Pulses">Pulses</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-1">
-                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Asset Link / Upload</label>
-                            <div class="flex flex-col gap-3">
-                                <input type="url" id="new-product-image-url" placeholder="https://..." class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
-                                <div class="relative w-full">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-white/30 text-[10px] uppercase tracking-widest font-bold">OR FILE:</div>
-                                    <input type="file" id="new-product-file" accept="image/*" class="w-full pl-24 pr-2 py-2 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors file:mr-2 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:text-[10px] file:uppercase file:tracking-widest file:font-semibold file:bg-surface file:text-primary hover:file:bg-surface/90 cursor-pointer">
+
+                    <!-- 2. ASSETS & VALUE -->
+                    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+                        <h4 class="font-label text-[10px] uppercase tracking-widest font-bold mb-4 text-on-surface">2. Assets & Value</h4>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Asset Link / Upload</label>
+                                    <input type="url" id="new-product-image-url" placeholder="https://..." class="w-full px-4 py-3 bg-surface border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none text-on-surface transition-colors">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Value (₹)</label>
+                                    <input type="number" id="new-product-price" required min="1" placeholder="e.g. 2500" class="w-full px-4 py-3 bg-surface border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none text-on-surface transition-colors">
+                                </div>
+                            </div>
+                            <div class="space-y-1 mt-2">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">File Upload</label>
+                                <div class="flex flex-col sm:flex-row items-center gap-4 bg-surface border border-outline-variant/30 border-dashed rounded-sm p-4 hover:bg-surface-container-low transition-colors relative cursor-pointer group">
+                                    <input type="file" id="new-product-file" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full" onchange="document.getElementById('file-chosen-text').textContent = this.files[0] ? this.files[0].name : 'No file chosen'">
+                                    <div class="bg-[#1c1b1b] text-white px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-widest flex-shrink-0 group-hover:bg-[#2c2b2b] transition-colors border border-outline-variant/20">Choose File</div>
+                                    <span class="text-xs text-on-surface-variant font-label truncate max-w-[150px]" id="file-chosen-text">No file chosen</span>
+                                    <span class="ml-auto text-xs text-on-surface-variant flex items-center gap-1 font-label"><span class="material-symbols-outlined text-[16px]">cloud_upload</span> Drag and drop</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="space-y-1">
-                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Value (₹)</label>
-                            <input type="number" id="new-product-price" required min="1" placeholder="e.g. 250" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="flex flex-col gap-6">
+                    <!-- 3. METRICS & LORE -->
+                    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm flex-1 flex flex-col">
+                        <h4 class="font-label text-[10px] uppercase tracking-widest font-bold mb-4 text-on-surface">3. Metrics & Lore</h4>
+                        <div class="space-y-4 flex-1 flex flex-col">
+                            <div class="space-y-1">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Metric Form (Unit)</label>
+                                <input type="text" id="new-product-unit" required placeholder="e.g. /piece, /set" class="w-full px-4 py-3 bg-surface border border-outline-variant/30 rounded-sm text-sm focus:ring-0 focus:border-primary outline-none text-on-surface transition-colors">
+                            </div>
+                            <div class="space-y-1 flex-1 flex flex-col pt-2">
+                                <label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Lore (Description)</label>
+                                <div class="bg-surface border border-outline-variant/30 border-b-0 rounded-t-sm p-2 flex gap-2">
+                                    <button type="button" class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+                                    <button type="button" class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+                                    <button type="button" class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">format_underlined</span></button>
+                                    <div class="w-px h-5 bg-outline-variant/30 my-auto mx-1"></div>
+                                    <button type="button" class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+                                </div>
+                                <textarea id="new-product-desc" required rows="6" placeholder="Enter a detailed product description..." class="w-full px-4 py-3 bg-surface border border-outline-variant/30 rounded-b-sm text-sm focus:ring-0 focus:border-primary outline-none text-on-surface resize-none transition-colors flex-1"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-1">
-                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Metric Form (Unit)</label>
-                            <input type="text" id="new-product-unit" required placeholder="e.g. /plate, /kg" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white placeholder-white/30 transition-colors">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Category</label>
-                            <select id="new-product-category" required class="w-full px-4 py-3 bg-[#1c1b1b] border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white transition-colors">
-                                <option value="Laddu">Laddu</option>
-                                <option value="Papad">Papad</option>
-                                <option value="Flours">Flours</option>
-                                <option value="Kurmure">Kurmure</option>
-                                <option value="Pulses">Pulses</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="font-label text-[10px] uppercase tracking-widest text-surface/70">Lore (Description)</label>
-                        <textarea id="new-product-desc" required rows="4" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-sm text-sm focus:ring-0 focus:border-white outline-none text-white resize-none transition-colors"></textarea>
-                    </div>
-                    
-                    <button type="submit" id="submit-btn" class="w-full py-4 mt-4 bg-surface text-primary font-bold text-xs uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-xl">
-                        Inject Creation <span class="material-symbols-outlined text-[16px]">science</span>
-                    </button>
-                </form>
+                </div>
             </div>
-        </section>
+            
+            <!-- Actions -->
+            <div class="flex justify-end gap-4 mt-2">
+                <button type="button" onclick="switchTab('products')" class="px-6 py-3 bg-surface-container-lowest border border-outline-variant/30 text-on-surface font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-surface-container transition-colors">
+                    Cancel
+                </button>
+                <button type="submit" id="submit-btn" class="px-8 py-3 bg-[#0f172a] text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity shadow-lg">
+                    Save Product
+                </button>
+            </div>
+        </form>
     </div>
 
     <!-- ANALYTICS VIEW -->
