@@ -1,21 +1,11 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/.*/**",
-      ".git/**",
-      ".firebase/**",
-      ".kilo/**",
-      "netlify/**",
-      "netlify.toml",
-      "**/node_modules/**",
-      "src",
-      "public",
-      "package.json",
-      "package-lock.json",
-      "README.md"
+      "node_modules/**"
     ],
     "cleanUrls": true
   },

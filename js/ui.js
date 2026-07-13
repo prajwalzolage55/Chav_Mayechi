@@ -380,7 +380,7 @@ export function initFooter(containerId) {
                             <li><a href="index.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Home</a></li>
                             <li><a href="products.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Menu</a></li>
                             <li><a href="order.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Order Now</a></li>
-                            <li><a href="index.html#about" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Our Story</a></li>
+                            <li><a href="about.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Our Story</a></li>
                         </ul>
                     </div>
                     <div class="space-y-5">
