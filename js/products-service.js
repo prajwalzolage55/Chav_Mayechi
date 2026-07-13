@@ -1,6 +1,6 @@
 import { db } from './firebase-config.js';
 import { 
-  collection, addDoc, getDocs, query, where, orderBy, doc, deleteDoc, updateDoc, serverTimestamp 
+  collection, addDoc, getDocs, query, where, orderBy, doc, deleteDoc, updateDoc, serverTimestamp, getDoc 
 } from 'firebase/firestore';
 
 // Fetch all active products
@@ -59,5 +59,25 @@ export async function updateProduct(productId, productData) {
   } catch (error) {
     console.error('Error updating product:', error);
     return false;
+  }
+}
+
+// Get a product by ID
+export async function getProductById(productId) {
+  try {
+    const docRef = doc(db, 'products', productId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      if (data.image && typeof data.image === 'string') {
+        data.image = data.image.replace(/\.png$/i, '.webp').replace(/\.jpg$/i, '.webp');
+      }
+      return { id: docSnap.id, ...data };
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting product by id:', error);
+    return null;
   }
 }
