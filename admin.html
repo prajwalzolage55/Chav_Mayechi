@@ -26,9 +26,12 @@
 
 <!-- SideNavBar Component -->
 <aside id="admin-sidebar" class="h-screen w-64 fixed left-0 top-0 bg-surface-container-highest flex flex-col py-8 z-40 transition-transform duration-300 -translate-x-full lg:translate-x-0 border-r border-outline-variant/20 shadow-2xl lg:shadow-none">
-    <div class="px-8 mb-12">
-        <h1 class="font-headline text-xl font-black text-on-surface leading-tight">Admin Atelier</h1>
-        <p class="font-label text-[10px] uppercase tracking-[0.2em] text-primary mt-1">Master Curator</p>
+    <div class="px-8 mb-12 flex flex-col gap-4">
+        <img src="/images/logo.webp" alt="Chav Mayechi" class="w-16 h-auto object-contain">
+        <div>
+            <h1 class="font-headline text-xl font-black text-on-surface leading-tight">Admin Atelier</h1>
+            <p class="font-label text-[10px] uppercase tracking-[0.2em] text-primary mt-1">Master Curator</p>
+        </div>
     </div>
     <nav class="flex-1 space-y-2" id="sidebar-nav">
         <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center px-4 py-3 text-on-surface font-bold border-l-4 border-primary bg-surface-container/30 pl-4 transition-all duration-200">
