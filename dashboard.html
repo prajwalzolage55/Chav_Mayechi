@@ -30,127 +30,122 @@
     <!-- Unified Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
-    <main class="pt-28 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 md:px-8 max-w-screen-2xl mx-auto">
-        <!-- Hero Welcome -->
-        <header class="mb-16">
-            <span class="font-label text-xs uppercase tracking-widest text-primary mb-4 block">Welcome Back, Patron</span>
-            <h1 class="font-headline text-4xl md:text-5xl lg:text-7xl font-black text-on-surface leading-none tracking-tighter mb-4">
-                The Curated <br/> Table of <span id="user-display-name" class="italic font-normal">Guest</span>
-            </h1>
-            <p class="text-on-surface-variant max-w-xl text-lg font-light">Your artisan journey continues here. Explore your latest acquisitions and manage your profile.</p>
-        </header>
+    <main class="pt-24 min-h-screen bg-[#fdfaf5]">
+        <!-- Hero Section with Grid -->
+        <div class="relative border-b border-[#e5e0d8] mb-16">
+            <!-- Grid Background Lines -->
+            <div class="absolute inset-0 pointer-events-none grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 z-0">
+                <div class="border-r border-[#e5e0d8] h-full"></div>
+                <div class="border-r border-[#e5e0d8] h-full"></div>
+                <div class="border-r border-[#e5e0d8] h-full"></div>
+                <div class="border-r border-[#e5e0d8] h-full hidden md:block"></div>
+                <!-- Horizontal lines -->
+                <div class="border-b border-[#e5e0d8] absolute inset-x-0 top-[33%] w-full h-[1px]"></div>
+                <div class="border-b border-[#e5e0d8] absolute inset-x-0 top-[66%] w-full h-[1px]"></div>
+            </div>
 
-        <!-- Bento Dashboard Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <!-- Loyalty & Points - Large Featured Card -->
-            <div class="md:col-span-8 bg-surface-container-lowest editorial-shadow p-10 rounded-lg flex flex-col justify-between relative overflow-hidden group border border-outline-variant/30">
-                <div class="relative z-10">
-                    <h3 class="font-headline text-3xl font-bold mb-2 text-primary">Heritage Tier</h3>
-                    <p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-8">Unlocking Grand Cru</p>
-                    
-                    <div class="w-full bg-surface-container-high h-1 rounded-full mb-4">
-                        <div id="tier-progress-bar" class="h-full bg-primary w-[0%] rounded-full relative transition-all duration-1000">
-                            <div class="absolute right-0 -top-1 w-3 h-3 copper-glow rounded-full shadow-lg"></div>
+            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 flex flex-col lg:flex-row justify-between pt-12 pb-16">
+                <!-- Left: Welcome text -->
+                <div class="mb-12 lg:mb-0 lg:w-2/3 pr-8 pt-8 bg-[#fdfaf5]/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none inline-block">
+                    <span class="font-inter text-xs uppercase tracking-[0.2em] text-gray-500 mb-4 block">Welcome Back, Patron</span>
+                    <h1 class="font-headline text-5xl md:text-6xl lg:text-7xl font-black text-[#292c2b] leading-[1.1] tracking-tight">
+                        The Curated Table<br/> of <span id="user-display-name" class="font-normal capitalize">Guest</span>
+                    </h1>
+                </div>
+
+                <!-- Right: Quick Protocol -->
+                <div class="lg:w-1/3 flex flex-col justify-end pb-8">
+                    <h2 class="font-headline text-2xl mb-6 text-[#292c2b] bg-[#fdfaf5] inline-block pr-4">Quick Protocol</h2>
+                    <div class="flex gap-4">
+                        <a href="order.html" class="flex-1 bg-[#292c2b] rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-transform hover:-translate-y-1 shadow-xl">
+                            <span class="material-symbols-outlined text-4xl text-[#c16e53] mb-4 group-hover:scale-110 transition-transform">restaurant</span>
+                            <span class="font-inter text-[10px] uppercase tracking-widest text-white leading-tight">Order<br/>Feast</span>
+                        </a>
+                        <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20recent%20order." target="_blank" class="flex-1 bg-[#292c2b] rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-transform hover:-translate-y-1 shadow-xl">
+                            <span class="material-symbols-outlined text-4xl text-[#c16e53] mb-4 group-hover:scale-110 transition-transform">chat_bubble</span>
+                            <span class="font-inter text-[10px] uppercase tracking-widest text-white leading-tight">Contact<br/>Artisan</span>
+                        </a>
+                        <a href="admin.html" id="admin-link" class="hidden flex-1 bg-[#292c2b] rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-transform hover:-translate-y-1 shadow-xl">
+                            <span class="material-symbols-outlined text-4xl text-[#c16e53] mb-4 group-hover:scale-110 transition-transform">shield_person</span>
+                            <span class="font-inter text-[10px] uppercase tracking-widest text-white leading-tight">Admin<br/>Vault</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 pb-20">
+            
+            <!-- Left: Heritage Tier -->
+            <div class="lg:col-span-4">
+                <h2 class="font-headline text-3xl text-[#292c2b] mb-12">Heritage Tier</h2>
+                <div class="flex items-center">
+                    <div class="relative w-64 h-64 flex-shrink-0">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                            <!-- Background circle -->
+                            <circle cx="50" cy="50" r="42" fill="none" stroke="#292c2b" stroke-width="12"></circle>
+                            <!-- Progress circle -->
+                            <circle id="tier-progress-svg" cx="50" cy="50" r="42" fill="none" stroke="#a3543b" stroke-width="12" stroke-dasharray="263.89" stroke-dashoffset="263.89" stroke-linecap="round" class="transition-all duration-1000 ease-out"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                            <span id="total-orders-count" class="font-headline text-5xl font-bold text-[#292c2b] leading-none mb-1">0</span>
+                            <span class="font-inter text-[10px] uppercase tracking-widest text-[#292c2b] font-medium mb-3">Orders</span>
+                            <span class="font-inter text-[9px] uppercase tracking-widest text-gray-500 leading-tight">Unlocking<br/>Grand Cru</span>
                         </div>
                     </div>
-                    
-                    <div class="flex justify-between text-xs font-medium text-on-surface-variant">
-                        <span><span id="total-orders-count">0</span> ORDERS</span>
-                        <span>10 ORDERS TARGET</span>
+                    <div class="ml-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-xl text-[#292c2b]">arrow_left</span>
+                        <span class="font-inter text-[10px] uppercase tracking-widest text-[#292c2b] leading-tight font-medium">10 Orders<br/>Target</span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Right: Recent Acquisitions -->
+            <div class="lg:col-span-8 flex flex-col">
+                <h2 class="font-headline text-3xl text-[#292c2b] mb-8">Recent Acquisitions</h2>
                 
-                <div class="mt-12 flex gap-4">
-                    <button class="hidden bg-primary text-on-primary px-6 py-3 font-label text-xs uppercase tracking-widest items-center gap-2 hover:opacity-90 transition-opacity duration-200">
-                        View Benefits <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </button>
-                    <a href="order.html" class="bg-surface-container-highest text-on-surface px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-surface-container-high transition-colors">
+                <div class="flex-1 w-full overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[700px]">
+                        <thead>
+                            <tr class="border-b border-[#e5e0d8]">
+                                <th class="py-4 pr-4 font-inter text-[10px] uppercase tracking-widest text-gray-600 font-normal">Order Ref</th>
+                                <th class="py-4 px-4 font-inter text-[10px] uppercase tracking-widest text-gray-600 font-normal">Heritage Item</th>
+                                <th class="py-4 px-4 font-inter text-[10px] uppercase tracking-widest text-gray-600 font-normal">Qty · Total</th>
+                                <th class="py-4 px-4 font-inter text-[10px] uppercase tracking-widest text-gray-600 font-normal">Date</th>
+                                <th class="py-4 px-4 font-inter text-[10px] uppercase tracking-widest text-gray-600 font-normal">Status</th>
+                                <th class="py-4 pl-4 font-inter text-[10px] uppercase tracking-widest text-gray-600 font-normal text-right">Delivery Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-loader">
+                            <tr class="animate-pulse border-b border-[#e5e0d8]/50">
+                                <td class="py-6 pr-4"><div class="h-4 bg-[#e5e0d8] w-16 rounded"></div></td>
+                                <td class="py-6 px-4"><div class="h-4 bg-[#e5e0d8] w-32 rounded"></div></td>
+                                <td class="py-6 px-4"><div class="h-4 bg-[#e5e0d8] w-20 rounded"></div></td>
+                                <td class="py-6 px-4"><div class="h-4 bg-[#e5e0d8] w-24 rounded"></div></td>
+                                <td class="py-6 px-4"><div class="h-6 bg-[#e5e0d8] w-20 rounded-full"></div></td>
+                                <td class="py-6 pl-4 flex justify-end"><div class="h-4 bg-[#e5e0d8] w-16 rounded"></div></td>
+                            </tr>
+                        </tbody>
+                        <tbody id="orders-list">
+                            <tr id="no-orders" class="hidden">
+                                <td colspan="6" class="py-16 text-center">
+                                    <p class="font-headline text-lg text-gray-500">No Acquisitions Yet</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 flex justify-end gap-4">
+                    <a href="order.html" class="px-6 py-3 border border-[#292c2b] text-[#292c2b] rounded-[4px] font-inter text-[10px] uppercase tracking-widest hover:bg-[#292c2b] hover:text-[#fdfaf5] transition-colors font-medium">
                         Order Again
                     </a>
-                </div>
-                
-                <!-- Decorative element -->
-                <div class="absolute -right-16 -bottom-16 w-64 h-64 border-primary/5 border-[32px] rounded-full group-hover:scale-110 transition-transform duration-700"></div>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="md:col-span-4 space-y-6">
-                <div class="bg-on-surface p-8 rounded-lg text-surface h-full flex flex-col justify-center shadow-xl">
-                    <h4 class="font-headline text-xl mb-6 text-surface">Quick Protocol</h4>
-                    <div class="space-y-4">
-                        <a href="order.html" class="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer border border-transparent hover:border-white/10">
-                            <span class="font-label text-sm uppercase tracking-widest">Order Feast</span>
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">restaurant</span>
-                        </a>
-                        <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20recent%20order." target="_blank" class="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer border border-transparent hover:border-white/10">
-                            <span class="font-label text-sm uppercase tracking-widest">Contact Artisan</span>
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chat_bubble</span>
-                        </a>
-                        <a href="admin.html" id="admin-link" class="hidden w-full flex items-center justify-between p-4 bg-primary/20 hover:bg-primary/40 transition-colors group cursor-pointer border border-primary/30">
-                            <span class="font-label text-sm uppercase tracking-widest text-[#ffceb8]">Admin Vault</span>
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[#ffceb8]">admin_panel_settings</span>
-                        </a>
-                        <button id="dashboard-logout" class="w-full flex items-center justify-between p-4 bg-red-900/40 hover:bg-red-900/60 transition-colors group cursor-pointer border border-transparent">
-                            <span class="font-label text-sm uppercase tracking-widest text-[red]">Terminate Session</span>
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[red]">logout</span>
-                        </button>
-                    </div>
+                    <button id="dashboard-logout" class="px-6 py-3 border border-[#292c2b] text-[#292c2b] rounded-[4px] font-inter text-[10px] uppercase tracking-widest hover:bg-[#292c2b] hover:text-[#fdfaf5] transition-colors font-medium">
+                        Terminate Session
+                    </button>
                 </div>
             </div>
-
-            <!-- Recent Orders Section -->
-            <div class="md:col-span-12 py-12">
-                <div class="flex justify-between items-end mb-8">
-                    <h2 class="font-headline text-4xl font-bold">Recent Acquisitions</h2>
-                </div>
-                
-                <div class="bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/30">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead class="bg-surface-container-high/50 border-b border-outline-variant/20">
-                                <tr>
-                                    <th class="px-4 md:px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Order Ref</th>
-                                    <th class="px-4 md:px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Heritage Item</th>
-                                    <th class="px-4 md:px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Date</th>
-                                    <th class="px-4 md:px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Status</th>
-                                    <th class="px-4 md:px-8 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant text-right">Delivery Details</th>
-                                </tr>
-                            </thead>
-                            <tbody id="orders-loader" class="divide-y divide-outline-variant/10">
-                                <tr class="animate-pulse">
-                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-32 mb-2 rounded-sm"></div><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-20 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-24 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6 flex justify-end"><div class="h-4 bg-surface-container-high w-32 rounded-sm"></div></td>
-                                </tr>
-                                <tr class="animate-pulse">
-                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-32 mb-2 rounded-sm"></div><div class="h-4 bg-surface-container-high w-16 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6"><div class="h-4 bg-surface-container-high w-20 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6"><div class="h-6 bg-surface-container-high w-24 rounded-sm"></div></td>
-                                    <td class="px-4 md:px-8 py-6 flex justify-end"><div class="h-4 bg-surface-container-high w-32 rounded-sm"></div></td>
-                                </tr>
-                            </tbody>
-                            <tbody class="divide-y divide-outline-variant/10" id="orders-list">
-                                <!-- Empty State -->
-                                <tr id="no-orders" class="hidden">
-                                    <td colspan="5" class="px-8 py-16 text-center">
-                                        <span class="material-symbols-outlined text-4xl text-on-surface-variant opacity-50 mb-4 block">receipt_long</span>
-                                        <p class="font-headline text-xl text-on-surface mb-2">No Acquisitions Yet</p>
-                                        <p class="text-secondary font-label text-sm mb-6">Begin your culinary journey today.</p>
-                                        <a href="order.html" class="inline-block bg-primary text-on-primary px-8 py-3 font-label text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
-                                            Curate Your Feast
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Skipped Favorite Dishes Section as per instructions -->
         </div>
     </main>
 
@@ -197,15 +192,22 @@
             const loader = document.getElementById('orders-loader');
             const noOrders = document.getElementById('no-orders');
             const totalCount = document.getElementById('total-orders-count');
+            const progressSvg = document.getElementById('tier-progress-svg');
 
             try {
                 const orders = await getUserOrders(uid);
                 loader.classList.add('hidden');
                 totalCount.textContent = orders.length;
 
-                // Update dynamic progress bar (max 10 orders for 100%)
+                // Update dynamic SVG donut chart (max 10 orders for 100%)
                 const progressPercent = Math.min((orders.length / 10) * 100, 100);
-                document.getElementById('tier-progress-bar').style.width = `${progressPercent}%`;
+                const circumference = 263.89; // 2 * pi * 42
+                const offset = circumference - (circumference * progressPercent / 100);
+                
+                // Add a small delay for animation effect
+                setTimeout(() => {
+                    if (progressSvg) progressSvg.style.strokeDashoffset = offset;
+                }, 100);
 
                 if (orders.length === 0) {
                     noOrders.classList.remove('hidden');
@@ -215,26 +217,33 @@
                         const dateStr = date.toLocaleDateString('en-US', { day:'numeric', month:'short', year:'numeric' });
                         const statusBadge = getStatusBadge(order.status);
                         
-                        const itemsHtml = order.items 
-                            ? order.items.map(i => `${i.product} <span class="font-body text-xs text-secondary ml-1 mr-3 font-normal">x${i.quantity}</span>`).join('<br/>')
-                            : `${order.product} <span class="font-body text-xs text-secondary ml-1 mr-3 font-normal">x${order.quantity}</span>`;
+                        // Extract total quantity
+                        let totalQty = 0;
+                        let itemsText = "";
+                        if (order.items && order.items.length > 0) {
+                            totalQty = order.items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                            itemsText = order.items.map(item => item.product).join(', ');
+                        } else {
+                            totalQty = order.quantity || 1;
+                            itemsText = order.product || "Unknown Item";
+                        }
                         
-                        const totalHtml = order.totalAmount ? `<div class="text-xs text-primary mt-2 font-bold font-body">Total: ₹${order.totalAmount}</div>` : '';
+                        const qtyTotalHtml = `${totalQty} = ₹${order.totalAmount || 0}`;
 
                         const tr = document.createElement('tr');
-                        tr.className = "hover:bg-surface-container-highest/20 transition-colors opacity-0 translate-y-4";
+                        tr.className = "border-b border-[#e5e0d8]/50 hover:bg-[#e5e0d8]/20 transition-colors opacity-0 translate-y-4";
                         
                         tr.innerHTML = `
-                            <td class="px-4 md:px-8 py-6 font-mono text-xs opacity-60 uppercase tracking-widest text-primary font-bold">#${order.id.slice(0, 8)}</td>
-                            <td class="px-4 md:px-8 py-6 font-headline font-bold text-on-surface text-lg">
-                                ${itemsHtml}
-                                ${totalHtml}
-                            </td>
-                            <td class="px-4 md:px-8 py-6 text-sm text-on-surface-variant font-label">${dateStr}</td>
-                            <td class="px-4 md:px-8 py-6">${statusBadge}</td>
-                            <td class="px-4 md:px-8 py-6 text-right text-xs text-on-surface-variant max-w-[200px] truncate leading-relaxed">
-                                <span class="material-symbols-outlined text-[10px] mr-1">location_on</span>
-                                ${order.address}
+                            <td class="py-6 pr-4 font-inter text-sm text-[#292c2b]">${order.id.slice(0, 8)}</td>
+                            <td class="py-6 px-4 font-inter text-sm text-[#292c2b] font-medium">${itemsText}</td>
+                            <td class="py-6 px-4 font-inter text-sm text-[#292c2b]">${qtyTotalHtml}</td>
+                            <td class="py-6 px-4 font-inter text-sm text-[#292c2b]">${dateStr}</td>
+                            <td class="py-6 px-4">${statusBadge}</td>
+                            <td class="py-6 pl-4 text-right">
+                                <div class="flex items-center justify-end font-inter text-sm text-[#292c2b]">
+                                    <span class="material-symbols-outlined text-[14px] mr-1 text-gray-400">location_on</span>
+                                    <span class="truncate max-w-[150px]" title="${order.address || 'Unknown'}">${(order.address || 'Unknown').split(',')[0]}</span>
+                                </div>
                             </td>
                         `;
                         ordersList.appendChild(tr);
@@ -247,17 +256,17 @@
                     });
                 }
             } catch (err) {
-                loader.innerHTML = `<td colspan="5" class="px-8 py-12 text-center text-[red] font-label text-sm uppercase tracking-widest">Failed to retrieve archives.</td>`;
+                loader.innerHTML = `<td colspan="6" class="py-12 text-center text-red-500 font-inter text-sm">Failed to retrieve archives.</td>`;
             }
         }
 
         function getStatusBadge(status) {
-            const commonClasses = "inline-flex items-center px-3 py-1.5 rounded-sm text-[10px] font-bold uppercase tracking-widest";
+            const commonClasses = "inline-flex items-center px-3 py-1 rounded-[4px] text-[10px] font-bold uppercase tracking-widest font-inter";
             switch(status) {
-                case 'confirmed': return `<span class="${commonClasses} bg-[#dbeafe] text-[#1e40af]"><span class="material-symbols-outlined text-xs mr-2 border-r border-[#1e40af]/30 pr-2">done_all</span> Confirmed</span>`
-                case 'delivered': return `<span class="${commonClasses} bg-[#dcfce7] text-[#166534]"><span class="material-symbols-outlined text-xs mr-2 border-r border-[#166534]/30 pr-2">local_shipping</span> Delivered</span>`
+                case 'confirmed': return `<span class="${commonClasses} bg-[#e0e8f5] text-[#2c4b7e]">Confirmed</span>`
+                case 'delivered': return `<span class="${commonClasses} bg-[#e2efe1] text-[#3b6b36]">Delivered</span>`
                 case 'pending':
-                default: return `<span class="${commonClasses} bg-[#fef08a] text-[#854d0e]"><span class="material-symbols-outlined text-xs mr-2 border-r border-[#854d0e]/30 pr-2">schedule</span> Pending</span>`
+                default: return `<span class="${commonClasses} bg-[#fcedd2] text-[#a3543b]">Pending</span>`
             }
         }
 
