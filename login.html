@@ -171,8 +171,52 @@
         const btnText = document.getElementById('btn-text');
         const loader = document.getElementById('loader');
 
+        // --- Rate Limiting Logic ---
+        let lockoutTimer = null;
+        function updateLockoutState() {
+            const lockoutUntil = localStorage.getItem('loginLockout');
+            if (lockoutUntil && Date.now() < parseInt(lockoutUntil)) {
+                const remaining = Math.ceil((parseInt(lockoutUntil) - Date.now()) / 1000);
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+                btnText.innerHTML = `Locked (${remaining}s) <i data-lucide="lock" class="w-5 h-5"></i>`;
+                lucide.createIcons();
+                if (!lockoutTimer) lockoutTimer = setInterval(updateLockoutState, 1000);
+                return false;
+            } else {
+                if (lockoutTimer) {
+                    clearInterval(lockoutTimer);
+                    lockoutTimer = null;
+                }
+                localStorage.removeItem('loginLockout');
+                localStorage.setItem('loginAttempts', '0');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                btnText.innerHTML = `Sign In <i data-lucide="arrow-right" class="w-5 h-5"></i>`;
+                lucide.createIcons();
+                return true;
+            }
+        }
+        updateLockoutState(); // Check on page load
+
+        function handleFailedLogin(error) {
+            let attempts = parseInt(localStorage.getItem('loginAttempts') || '0') + 1;
+            localStorage.setItem('loginAttempts', attempts);
+            
+            // Lock out after 5 attempts or if Firebase explicitly throws too-many-requests
+            if (attempts >= 5 || (error && error.includes('too-many-requests'))) {
+                localStorage.setItem('loginLockout', Date.now() + 60000); // 60s lockout
+                showToast('Too many attempts. Please wait 60 seconds.', 'error');
+                updateLockoutState();
+            } else {
+                showToast(error || 'Invalid credentials.', 'error');
+            }
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!updateLockoutState()) return;
+
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
@@ -184,13 +228,15 @@
             const res = await loginUser(email, password);
 
             if (res.success) {
+                localStorage.removeItem('loginAttempts');
+                localStorage.removeItem('loginLockout');
                 showToast('Welcome back!');
                 setTimeout(() => window.location.href = redirectUrl, 1000);
             } else {
-                showToast(res.error || 'Failed to login', 'error');
                 submitBtn.disabled = false;
                 btnText.classList.remove('hidden');
                 loader.classList.add('hidden');
+                handleFailedLogin(res.error);
             }
         });
 
