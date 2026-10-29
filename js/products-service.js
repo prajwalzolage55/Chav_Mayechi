@@ -16,6 +16,9 @@ export async function getAllProducts() {
       if (data.image && typeof data.image === 'string') {
         data.image = data.image.replace(/\.png$/i, '.webp').replace(/\.jpg$/i, '.webp');
       }
+      if (data.name && (data.name.toLowerCase().includes('kombadi') || data.name.toLowerCase().includes('komari')) && (!data.image || data.image.includes('placeholder'))) {
+        data.image = '/images/Kombadi_vade.webp';
+      }
       return { id: doc.id, ...data };
     });
   } catch (error) {
@@ -71,6 +74,9 @@ export async function getProductById(productId) {
       const data = docSnap.data();
       if (data.image && typeof data.image === 'string') {
         data.image = data.image.replace(/\.png$/i, '.webp').replace(/\.jpg$/i, '.webp');
+      }
+      if (data.name && (data.name.toLowerCase().includes('kombadi') || data.name.toLowerCase().includes('komari')) && (!data.image || data.image.includes('placeholder'))) {
+        data.image = '/images/Kombadi_vade.webp';
       }
       return { id: docSnap.id, ...data };
     } else {

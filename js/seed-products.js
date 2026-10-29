@@ -219,7 +219,7 @@ const PRODUCTS = [
         price: "₹200",
         unit: "/kg",
         category: "Flours",
-        image: "/images/placeholder.svg",
+        image: "/images/Kombadi_vade.webp",
         badge: "Konkan Special",
         badgeColor: "bg-amber-700 text-white"
     }
