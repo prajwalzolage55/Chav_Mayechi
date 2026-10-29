@@ -3,631 +3,546 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Customer Dashboard — Chav Mayechi</title>
+    <title>My Dashboard — Chav Mayechi</title>
     <link rel="icon" type="image/png" href="/images/logo.webp?v=2" />
     
-    <!-- Google Fonts & Material Symbols -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css">
 
     <style>
         .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
-        .material-symbols-filled {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        /* Custom scrollbar for table */
-        .custom-scrollbar::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1ede6;
-            border-radius: 999px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #d6cebf;
-            border-radius: 999px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #b5aa96;
-        }
+        /* Dashboard-specific scrollbar for tables */
+        .dash-scroll::-webkit-scrollbar { height: 5px; }
+        .dash-scroll::-webkit-scrollbar-track { background: #f5f3ee; }
+        .dash-scroll::-webkit-scrollbar-thumb { background: #d1cfc9; border-radius: 9999px; }
+        .dash-scroll::-webkit-scrollbar-thumb:hover { background: #98462f; }
     </style>
+
+    <!-- Custom CSS (site-wide theme) -->
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-[#fbf9f4] text-[#242721] font-sans antialiased min-h-screen flex flex-col hidden" id="body-content">
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20 hidden" id="body-content">
 
-    <!-- Top Branded Header -->
-    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-[#ece6db] px-4 sm:px-8 py-3.5 transition-shadow shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
-        <div class="max-w-[1520px] mx-auto flex items-center justify-between gap-4">
-            <!-- Brand Logo & Tagline -->
-            <div class="flex items-center gap-3.5">
-                <a href="index.html" class="flex items-center gap-3 group">
-                    <img src="/images/logo.webp" alt="Chav Mayechi" class="w-10 h-10 object-contain rounded-full shadow-sm group-hover:scale-105 transition-transform" />
-                    <div>
-                        <span class="font-headline font-bold text-xl sm:text-2xl text-[#222420] tracking-tight block leading-tight">Chav Mayechi</span>
-                        <span class="text-[11px] text-[#787f71] font-medium tracking-normal block -mt-0.5">
-                            Homemade Maharashtrian Delights <span class="hidden sm:inline text-[#a65d44] font-serif">· आईच्या हाताचा गोडवा</span>
-                        </span>
-                    </div>
-                </a>
+    <!-- Unified Navbar Placeholder (same navbar as every other page) -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="pt-28 pb-20 min-h-screen">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8">
+
+            <!-- Welcome Section -->
+            <div class="mb-8 sm:mb-10">
+                <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-bold text-on-surface leading-tight tracking-tight">
+                    Hello, <span id="user-display-name" class="font-normal italic capitalize">Guest</span>!
+                </h1>
+                <p class="text-secondary text-sm sm:text-base mt-2 font-light">Here's what's happening with your orders and purchases.</p>
             </div>
 
-            <!-- Header Quick Nav / Links -->
-            <nav class="hidden md:flex items-center gap-8 text-[14px] font-medium text-[#4f5649]">
-                <a href="index.html" class="hover:text-[#a65d44] transition-colors">Home</a>
-                <a href="about.html" class="hover:text-[#a65d44] transition-colors">Our Story</a>
-                <a href="order.html" class="hover:text-[#a65d44] transition-colors">Menu</a>
-                <a href="dashboard.html" class="text-[#3b5334] font-semibold border-b-2 border-[#3b5334] pb-0.5">Dashboard</a>
-            </nav>
+            <!-- Dashboard Layout: Main Content + Right Sidebar -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-            <!-- User Status & Actions -->
-            <div class="flex items-center gap-3">
-                <!-- Notifications Bell -->
-                <div class="relative" id="notif-wrapper">
-                    <button id="notif-btn" type="button" class="w-10 h-10 rounded-full hover:bg-[#f3eee5] text-[#555d4f] flex items-center justify-center transition-colors relative" aria-label="Notifications">
-                        <span class="material-symbols-outlined text-[22px]">notifications</span>
-                        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#c8483b] ring-2 ring-white"></span>
-                    </button>
-                    <!-- Notifications Dropdown -->
-                    <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-[#ede8de] p-4 z-50 animate-fade-in">
-                        <div class="flex items-center justify-between pb-3 border-b border-[#f1ede6]">
-                            <h4 class="font-semibold text-sm text-[#222420]">Notifications</h4>
-                            <span class="text-[11px] text-[#6f7567] bg-[#f2eee7] px-2 py-0.5 rounded-full font-medium">1 new</span>
-                        </div>
-                        <div class="py-2 space-y-2">
-                            <div class="p-2.5 rounded-xl bg-[#f8f6f0] hover:bg-[#f2eee7] transition-colors flex gap-3 text-xs text-[#444a3e]">
-                                <span class="material-symbols-outlined text-[#486b3f] text-lg">local_shipping</span>
-                                <div>
-                                    <p class="font-semibold text-[#242721]">Welcome to Chav Mayechi!</p>
-                                    <p class="text-[11px] text-[#717769] mt-0.5">Explore authentic homemade items delivered straight from mother's kitchen.</p>
-                                </div>
+                <!-- LEFT: Main Content Area (9 cols on desktop) -->
+                <div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-8">
+
+                    <!-- 4 Metric Cards -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Total Orders -->
+                        <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-xl">shopping_cart</span>
+                                </span>
                             </div>
+                            <p class="font-label text-[11px] uppercase tracking-widest text-secondary font-medium">Total Orders</p>
+                            <h3 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface mt-1" id="metric-total-orders">0</h3>
+                        </div>
+
+                        <!-- Total Spent -->
+                        <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center font-headline font-bold text-lg">
+                                    ₹
+                                </span>
+                            </div>
+                            <p class="font-label text-[11px] uppercase tracking-widest text-secondary font-medium">Total Spent</p>
+                            <h3 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface mt-1" id="metric-total-spent">₹ 0</h3>
+                        </div>
+
+                        <!-- Products Bought -->
+                        <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-xl">inventory_2</span>
+                                </span>
+                            </div>
+                            <p class="font-label text-[11px] uppercase tracking-widest text-secondary font-medium">Products Bought</p>
+                            <h3 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface mt-1" id="metric-products-bought">0</h3>
+                        </div>
+
+                        <!-- Loyalty Points -->
+                        <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-xl">stars</span>
+                                </span>
+                            </div>
+                            <p class="font-label text-[11px] uppercase tracking-widest text-secondary font-medium">Loyalty Points</p>
+                            <h3 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface mt-1" id="metric-loyalty-points">0</h3>
+                            <p class="text-[10px] text-secondary mt-1 font-label">10 pts per ₹100 spent</p>
                         </div>
                     </div>
-                </div>
 
-                <!-- User Profile Pill -->
-                <div class="relative" id="profile-pill-wrapper">
-                    <button id="profile-pill-btn" type="button" class="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-full hover:bg-[#f3eee5] transition-colors border border-transparent hover:border-[#ece6db]">
-                        <div class="w-8 h-8 rounded-full bg-[#e8eee4] text-[#344d32] font-semibold text-xs flex items-center justify-center shadow-inner" id="user-avatar-initials">
-                            P
-                        </div>
-                        <div class="text-left hidden sm:block">
-                            <p class="text-xs font-semibold text-[#222420] leading-tight" id="user-full-name">Prajwal</p>
-                            <p class="text-[10px] text-[#787f71] leading-none" id="user-role-badge">Customer</p>
-                        </div>
-                        <span class="material-symbols-outlined text-[18px] text-[#787f71]">expand_more</span>
-                    </button>
-
-                    <!-- Profile Dropdown -->
-                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-[#ede8de] py-2 z-50">
-                        <div class="px-4 py-3 border-b border-[#f1ede6]">
-                            <p class="text-xs text-[#787f71]">Signed in as</p>
-                            <p class="text-sm font-semibold text-[#222420] truncate" id="dropdown-user-email">customer@chavmayechi.com</p>
-                        </div>
-                        <a href="order.html" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-[#444a3e] hover:bg-[#f8f6f0] transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
-                            Order Today
-                        </a>
-                        <a href="admin.html" id="dropdown-admin-link" class="hidden flex items-center gap-2.5 px-4 py-2.5 text-xs text-[#444a3e] hover:bg-[#f8f6f0] transition-colors">
-                            <span class="material-symbols-outlined text-[18px] text-[#a65d44]">admin_panel_settings</span>
-                            Admin Panel
-                        </a>
-                        <button id="quick-manage-address-btn" type="button" class="w-full text-left flex items-center gap-2.5 px-4 py-2.5 text-xs text-[#444a3e] hover:bg-[#f8f6f0] transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">pin_drop</span>
-                            Delivery Addresses
-                        </button>
-                        <div class="border-t border-[#f1ede6] my-1"></div>
-                        <button id="header-logout-btn" type="button" class="w-full text-left flex items-center gap-2.5 px-4 py-2.5 text-xs text-[#b83333] hover:bg-rose-50 transition-colors font-medium">
-                            <span class="material-symbols-outlined text-[18px]">logout</span>
-                            Sign Out
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Application Layout with Left Sidebar, Central Content, and Right Quick Panel -->
-    <div class="max-w-[1520px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- LEFT SIDEBAR -->
-            <aside class="lg:col-span-2 flex flex-col gap-8">
-                <!-- Navigation Pill List -->
-                <nav class="space-y-1.5 bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-[#ece6db]/80 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
-                    <a href="dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs bg-[#e9f0e6] text-[#2c4728] shadow-sm">
-                        <span class="material-symbols-filled text-[20px] text-[#3d5a37]">space_dashboard</span>
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="#recent-orders-section" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-[#52594d] hover:bg-[#f4efe6] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">package_2</span>
-                        <span>My Orders</span>
-                    </a>
-                    <a href="order.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-[#52594d] hover:bg-[#f4efe6] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
-                        <span>Products Menu</span>
-                    </a>
-                    <button type="button" id="sidebar-profile-btn" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-[#52594d] hover:bg-[#f4efe6] transition-colors text-left">
-                        <span class="material-symbols-outlined text-[20px]">person</span>
-                        <span>Profile</span>
-                    </button>
-                    <button type="button" id="sidebar-addresses-btn" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-[#52594d] hover:bg-[#f4efe6] transition-colors text-left">
-                        <span class="material-symbols-outlined text-[20px]">location_on</span>
-                        <span>Addresses</span>
-                    </button>
-                    <a href="order.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-[#52594d] hover:bg-[#f4efe6] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">favorite</span>
-                        <span>Wishlist</span>
-                    </a>
-                    <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20orders%20on%20Chav%20Mayechi." target="_blank" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-xs text-[#52594d] hover:bg-[#f4efe6] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">support_agent</span>
-                        <span>Support</span>
-                    </a>
-                    <!-- Conditional Admin Link -->
-                    <a href="admin.html" id="sidebar-admin-link" class="hidden flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs text-[#a65d44] bg-[#faf0ea] hover:bg-[#f5e3d7] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">shield_person</span>
-                        <span>Admin Vault</span>
-                    </a>
-                </nav>
-
-                <!-- Traditional Decorative Motif Box -->
-                <div class="hidden lg:flex flex-col items-center justify-center p-5 rounded-2xl bg-[#f4efe4]/60 border border-[#ebe3d4] text-center">
-                    <img src="/images/logo.webp" alt="Tradition" class="w-14 h-14 object-contain rounded-full shadow-sm mb-3 opacity-90" />
-                    <span class="font-headline font-semibold text-xs text-[#3b4334] tracking-tight">Traditional Taste</span>
-                    <span class="text-[11px] text-[#71786a] font-serif italic mt-0.5">Healthy Choices</span>
-                    <span class="text-sm text-[#a65d44] mt-1">❦</span>
-                </div>
-            </aside>
-
-            <!-- CENTER MAIN CONTENT -->
-            <main class="lg:col-span-7 flex flex-col gap-6">
-                <!-- Welcome Title Banner -->
-                <div>
-                    <h1 class="text-2xl sm:text-3xl font-headline font-bold text-[#20231d] tracking-tight">
-                        Hello, <span id="welcome-user-name" class="capitalize">Prajwal</span>!
-                    </h1>
-                    <p class="text-xs sm:text-sm text-[#6c7263] mt-1">Here's what's happening with your orders and purchases.</p>
-                </div>
-
-                <!-- 4 Top Stat Cards (ChatGPT style) -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <!-- Stat 1: Total Orders -->
-                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="w-10 h-10 rounded-full bg-[#e8f5e9] text-[#2e7d32] flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-                            </span>
-                        </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Total Orders</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-total-orders">0</h3>
-                        <p class="text-[10px] text-[#2e7d32] font-semibold mt-2 flex items-center gap-0.5">
-                            <span class="material-symbols-outlined text-[13px]">arrow_upward</span>
-                            <span>Active shopper</span>
-                        </p>
-                    </div>
-
-                    <!-- Stat 2: Total Spent -->
-                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="w-10 h-10 rounded-full bg-[#fef5e5] text-[#b26a00] flex items-center justify-center font-bold text-base">
-                                ₹
-                            </span>
-                        </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Total Spent</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-total-spent">₹ 0</h3>
-                        <p class="text-[10px] text-[#2e7d32] font-semibold mt-2 flex items-center gap-0.5">
-                            <span class="material-symbols-outlined text-[13px]">arrow_upward</span>
-                            <span>Pure quality</span>
-                        </p>
-                    </div>
-
-                    <!-- Stat 3: Products Bought -->
-                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="w-10 h-10 rounded-full bg-[#f1edfa] text-[#673ab7] flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
-                            </span>
-                        </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Products Bought</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-products-bought">0</h3>
-                        <p class="text-[10px] text-[#2e7d32] font-semibold mt-2 flex items-center gap-0.5">
-                            <span class="material-symbols-outlined text-[13px]">arrow_upward</span>
-                            <span>Authentic items</span>
-                        </p>
-                    </div>
-
-                    <!-- Stat 4: Loyalty Points -->
-                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="w-10 h-10 rounded-full bg-[#fdeeee] text-[#d32f2f] flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[20px]">stars</span>
-                            </span>
-                        </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Loyalty Points</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-loyalty-points">0</h3>
-                        <p class="text-[10px] text-[#d32f2f] font-semibold mt-2 flex items-center gap-0.5">
-                            <span class="material-symbols-outlined text-[13px]">redeem</span>
-                            <span>10 pts per ₹100</span>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Middle Row: Purchase Overview & Top Products Bought -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-                    <!-- Purchase Overview Bar Chart (7 Cols) -->
-                    <div class="md:col-span-7 bg-white rounded-2xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
-                        <div class="flex items-center justify-between mb-5">
-                            <h2 class="text-sm font-bold text-[#20231d] tracking-tight">Purchase Overview</h2>
-                            <div class="relative">
-                                <select id="chart-time-filter" class="text-xs bg-[#f7f5ee] border border-[#e5dfd2] rounded-lg px-2.5 py-1 text-[#4f5647] font-medium focus:outline-none focus:ring-1 focus:ring-[#3b5334] cursor-pointer">
+                    <!-- Middle Row: Purchase Overview + Top Products -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <!-- Purchase Overview Bar Chart -->
+                        <div class="md:col-span-7 bg-surface-bright border border-outline/40 p-5 sm:p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-5">
+                                <h2 class="font-headline text-lg font-bold text-on-surface">Purchase Overview</h2>
+                                <select id="chart-time-filter" class="text-xs font-label bg-surface-container border border-outline/40 px-2.5 py-1 text-secondary font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
                                     <option value="7">Last 7 Days</option>
                                     <option value="30">Last 30 Days</option>
-                                    <option value="all">Recent Orders</option>
+                                    <option value="all">All Orders</option>
                                 </select>
                             </div>
+
+                            <!-- Chart container -->
+                            <div id="chart-area">
+                                <!-- Bars + labels rendered dynamically -->
+                                <div class="flex items-end gap-2 sm:gap-3 h-44 pt-4 pb-2 px-1 border-b border-outline/30" id="chart-bars-container"></div>
+                                <div class="flex justify-between items-center text-[10px] text-secondary pt-2 px-1 font-label" id="chart-x-labels"></div>
+                            </div>
+
+                            <!-- Empty state for chart when no orders -->
+                            <div id="chart-empty" class="hidden flex flex-col items-center justify-center py-10 text-center">
+                                <span class="material-symbols-outlined text-4xl text-outline mb-3">bar_chart</span>
+                                <p class="font-headline text-sm text-secondary">No purchase data yet</p>
+                                <p class="text-xs text-secondary/70 mt-1">Your spending chart will appear here after your first order.</p>
+                            </div>
                         </div>
 
-                        <!-- Bar Chart Area with Y Axis & Bars -->
-                        <div class="flex items-end gap-3 h-48 pt-4 pb-2 px-1 border-b border-[#f0ede6]" id="chart-bars-container">
-                            <!-- Dynamic Bars will be rendered here -->
-                        </div>
-                        <div class="flex justify-between items-center text-[10px] text-[#868d7f] pt-2 px-1" id="chart-x-labels">
-                            <!-- X Labels -->
-                        </div>
-                    </div>
+                        <!-- Top Products Bought -->
+                        <div class="md:col-span-5 bg-surface-bright border border-outline/40 p-5 sm:p-6 shadow-sm flex flex-col">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="font-headline text-lg font-bold text-on-surface">Top Products</h2>
+                                <span class="text-[10px] text-secondary font-label font-medium uppercase tracking-wider" id="top-products-note"></span>
+                            </div>
 
-                    <!-- Top Products Bought (5 Cols) -->
-                    <div class="md:col-span-5 bg-white rounded-2xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-sm font-bold text-[#20231d] tracking-tight">Top Products Bought</h2>
-                            <span class="text-[10px] text-[#787f71] font-medium" id="top-products-note">Favorites</span>
-                        </div>
-
-                        <!-- Products List -->
-                        <div class="space-y-3 flex-1 overflow-y-auto max-h-[220px] custom-scrollbar pr-1" id="top-products-list">
-                            <!-- Loading Skeleton -->
-                            <div class="flex items-center gap-3 animate-pulse">
-                                <div class="w-10 h-10 rounded-lg bg-[#efe9df]"></div>
-                                <div class="flex-1 space-y-1.5">
-                                    <div class="w-24 h-3 bg-[#efe9df] rounded"></div>
-                                    <div class="w-16 h-2 bg-[#efe9df] rounded"></div>
+                            <!-- Products List -->
+                            <div class="space-y-3 flex-1 overflow-y-auto max-h-[220px] dash-scroll pr-1" id="top-products-list">
+                                <!-- Loading Skeleton -->
+                                <div class="flex items-center gap-3 animate-pulse">
+                                    <div class="w-10 h-10 bg-surface-container-high"></div>
+                                    <div class="flex-1 space-y-1.5">
+                                        <div class="w-24 h-3 bg-surface-container-high"></div>
+                                        <div class="w-16 h-2 bg-surface-container-high"></div>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <!-- Empty state for top products when no orders -->
+                            <div id="products-empty" class="hidden flex flex-col items-center justify-center py-8 text-center">
+                                <span class="material-symbols-outlined text-3xl text-outline mb-2">category</span>
+                                <p class="text-xs text-secondary">No products ordered yet.</p>
+                                <a href="order.html" class="btn-outline mt-3 text-[10px] px-3 py-1.5">Browse Menu</a>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Bottom Row: Recent Orders Table -->
-                <div class="bg-white rounded-2xl p-5 sm:p-6 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)]" id="recent-orders-section">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-sm sm:text-base font-bold text-[#20231d] tracking-tight">Recent Orders</h2>
-                        <a href="order.html" class="text-xs font-semibold text-[#3d5a37] hover:text-[#a65d44] transition-colors flex items-center gap-0.5">
-                            <span>Order New Item</span>
-                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                        </a>
-                    </div>
-
-                    <!-- Orders Table Container -->
-                    <div class="overflow-x-auto custom-scrollbar">
-                        <table class="w-full text-left border-collapse min-w-[560px]">
-                            <thead>
-                                <tr class="text-[11px] font-semibold text-[#73796d] border-b border-[#f1ece2] pb-2">
-                                    <th class="py-2.5 font-medium">Order ID</th>
-                                    <th class="py-2.5 font-medium">Date</th>
-                                    <th class="py-2.5 font-medium">Items</th>
-                                    <th class="py-2.5 font-medium">Amount</th>
-                                    <th class="py-2.5 font-medium text-right sm:text-left">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="orders-table-body" class="text-xs divide-y divide-[#f5f1ea]">
-                                <!-- Loader Skeleton -->
-                                <tr id="orders-table-loader" class="animate-pulse">
-                                    <td class="py-4"><div class="h-3.5 bg-[#ede8de] w-16 rounded"></div></td>
-                                    <td class="py-4"><div class="h-3.5 bg-[#ede8de] w-20 rounded"></div></td>
-                                    <td class="py-4"><div class="h-3.5 bg-[#ede8de] w-36 rounded"></div></td>
-                                    <td class="py-4"><div class="h-3.5 bg-[#ede8de] w-14 rounded"></div></td>
-                                    <td class="py-4"><div class="h-5 bg-[#ede8de] w-16 rounded-full"></div></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Empty State -->
-                    <div id="orders-empty-state" class="hidden text-center py-10 px-4">
-                        <div class="w-12 h-12 rounded-full bg-[#f4efe4] text-[#868d7f] flex items-center justify-center mx-auto mb-3">
-                            <span class="material-symbols-outlined text-2xl">receipt_long</span>
+                    <!-- Recent Orders Table -->
+                    <div class="bg-surface-bright border border-outline/40 p-5 sm:p-6 shadow-sm" id="recent-orders-section">
+                        <div class="flex items-center justify-between mb-5">
+                            <h2 class="font-headline text-lg font-bold text-on-surface">Recent Orders</h2>
+                            <a href="order.html" class="btn-ghost text-xs gap-1">
+                                <span>Order New Item</span>
+                                <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
+                            </a>
                         </div>
-                        <h4 class="text-sm font-bold text-[#2b3026]">No Orders Placed Yet</h4>
-                        <p class="text-xs text-[#73796d] max-w-sm mx-auto mt-1 mb-4">
-                            Treat yourself and your family to authentic Maharashtrian delicacies made with pure ingredients and mother's warmth.
-                        </p>
-                        <a href="order.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#2e472a] text-white text-xs font-semibold hover:bg-[#233720] transition-colors shadow-sm">
-                            <span class="material-symbols-outlined text-[16px]">restaurant</span>
-                            Explore Menu & Order
-                        </a>
-                    </div>
-                </div>
-            </main>
 
-            <!-- RIGHT PANEL (Quick Actions, Promo Banner, Patron Thank You) -->
-            <aside class="lg:col-span-3 flex flex-col gap-5">
-                
-                <!-- Quick Actions Card -->
-                <div class="bg-white rounded-2xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-                    <h3 class="text-sm font-bold text-[#20231d] mb-4">Quick Actions</h3>
-                    <div class="space-y-2.5">
-                        <a href="order.html" class="flex items-center gap-3 p-3 rounded-xl border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#fbfbf8] transition-all group">
-                            <span class="w-8 h-8 rounded-lg bg-[#f4efe4] text-[#344d32] flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
-                            </span>
-                            <span class="text-xs font-medium text-[#2d3228]">Shop More</span>
-                        </a>
+                        <!-- Table -->
+                        <div class="overflow-x-auto dash-scroll">
+                            <table class="w-full text-left border-collapse min-w-[560px]">
+                                <thead>
+                                    <tr class="border-b border-outline/40">
+                                        <th class="py-3 font-label text-[10px] uppercase tracking-widest text-secondary font-medium">Order ID</th>
+                                        <th class="py-3 font-label text-[10px] uppercase tracking-widest text-secondary font-medium">Date</th>
+                                        <th class="py-3 font-label text-[10px] uppercase tracking-widest text-secondary font-medium">Items</th>
+                                        <th class="py-3 font-label text-[10px] uppercase tracking-widest text-secondary font-medium">Amount</th>
+                                        <th class="py-3 font-label text-[10px] uppercase tracking-widest text-secondary font-medium">Status</th>
+                                        <th class="py-3 font-label text-[10px] uppercase tracking-widest text-secondary font-medium text-right">Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders-table-body">
+                                    <!-- Loader Skeleton -->
+                                    <tr id="orders-table-loader" class="animate-pulse">
+                                        <td class="py-5"><div class="h-3.5 bg-surface-container-high w-16"></div></td>
+                                        <td class="py-5"><div class="h-3.5 bg-surface-container-high w-20"></div></td>
+                                        <td class="py-5"><div class="h-3.5 bg-surface-container-high w-36"></div></td>
+                                        <td class="py-5"><div class="h-3.5 bg-surface-container-high w-14"></div></td>
+                                        <td class="py-5"><div class="h-5 bg-surface-container-high w-16 rounded-full"></div></td>
+                                        <td class="py-5"><div class="h-3.5 bg-surface-container-high w-20 ml-auto"></div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <a href="#recent-orders-section" class="flex items-center gap-3 p-3 rounded-xl border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#fbfbf8] transition-all group">
-                            <span class="w-8 h-8 rounded-lg bg-[#f4efe4] text-[#344d32] flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <span class="material-symbols-outlined text-[18px]">package_2</span>
-                            </span>
-                            <span class="text-xs font-medium text-[#2d3228]">View All Orders</span>
-                        </a>
-
-                        <button type="button" id="quick-address-btn" class="w-full flex items-center gap-3 p-3 rounded-xl border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#fbfbf8] transition-all group text-left">
-                            <span class="w-8 h-8 rounded-lg bg-[#f4efe4] text-[#344d32] flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <span class="material-symbols-outlined text-[18px]">location_on</span>
-                            </span>
-                            <span class="text-xs font-medium text-[#2d3228]">Manage Address</span>
-                        </button>
-
-                        <a href="https://wa.me/918208519403?text=Hi!%20I%20have%20a%20question%20about%20my%20orders." target="_blank" class="flex items-center gap-3 p-3 rounded-xl border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#fbfbf8] transition-all group">
-                            <span class="w-8 h-8 rounded-lg bg-[#e8f5e9] text-[#2e7d32] flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <span class="material-symbols-outlined text-[18px]">support_agent</span>
-                            </span>
-                            <span class="text-xs font-medium text-[#2d3228]">Contact Support</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Promo / Brand Feature Banner -->
-                <div class="relative overflow-hidden rounded-2xl shadow-sm border border-[#ede8de] group">
-                    <img src="/images/hero.webp" alt="Authentic Food" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end p-5 text-white">
-                        <span class="text-[11px] font-semibold text-amber-200 tracking-wide uppercase">Pure. Homemade.</span>
-                        <h4 class="font-headline font-bold text-base leading-tight mt-0.5 mb-3">Maharashtrian Delights.</h4>
-                        <div>
-                            <a href="order.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-[11px] font-semibold transition-colors border border-white/20">
-                                <span>Explore Products</span>
-                                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                        <!-- Empty State for orders -->
+                        <div id="orders-empty-state" class="hidden text-center py-12 px-4">
+                            <span class="material-symbols-outlined text-5xl text-outline mb-4">receipt_long</span>
+                            <h4 class="font-headline text-lg font-bold text-on-surface">No Orders Yet</h4>
+                            <p class="text-sm text-secondary max-w-sm mx-auto mt-2 mb-6 font-light">
+                                Treat yourself to authentic Maharashtrian delicacies made with pure ingredients and mother's warmth.
+                            </p>
+                            <a href="order.html" class="btn-primary">
+                                <span class="material-symbols-outlined text-base" aria-hidden="true">restaurant</span>
+                                Explore Menu & Order
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Patron Gratitude Card -->
-                <div class="bg-white rounded-2xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-[#edf5ec] text-[#3d683a] flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span class="material-symbols-outlined text-[18px]">eco</span>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-[#2b3026] leading-tight">Thank you for supporting homemade food!</p>
-                        <p class="text-[11px] text-[#717769] font-serif italic mt-1">— Chav Mayechi</p>
-                    </div>
-                </div>
+                <!-- RIGHT: Sidebar (3-4 cols on desktop) -->
+                <aside class="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
 
-                <!-- Logout Action -->
-                <button id="sidebar-logout-btn" type="button" class="w-full py-2.5 rounded-xl border border-[#e5dfd2] text-xs font-medium text-[#6c7263] hover:text-[#b83333] hover:border-[#b83333]/30 hover:bg-rose-50/50 transition-colors flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined text-[16px]">logout</span>
-                    <span>Sign Out of Account</span>
-                </button>
-            </aside>
-        </div>
-    </div>
+                    <!-- Quick Actions -->
+                    <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm">
+                        <h3 class="font-headline text-base font-bold text-on-surface mb-4">Quick Actions</h3>
+                        <div class="space-y-2">
+                            <a href="order.html" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
+                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">shopping_cart</span>
+                                </span>
+                                <span class="text-xs font-semibold text-on-surface font-label">Shop More</span>
+                            </a>
 
-    <!-- Address / Profile Modal -->
-    <div id="address-modal" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-[#ede8de] animate-fade-in">
-            <div class="flex items-center justify-between pb-3 border-b border-[#f1ede6]">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-8 h-8 rounded-full bg-[#eaf1e7] text-[#2e5229] flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[18px]">location_on</span>
-                    </span>
-                    <h3 class="font-bold text-sm text-[#242721]">Delivery Address</h3>
-                </div>
-                <button id="close-address-modal" type="button" class="w-8 h-8 rounded-full hover:bg-[#f1ede6] text-[#73796d] flex items-center justify-center transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">close</span>
-                </button>
-            </div>
-            <div class="py-4 space-y-3">
-                <p class="text-xs text-[#6e7467]">Your primary delivery destination on record:</p>
-                <div class="p-3.5 rounded-xl bg-[#faf7f0] border border-[#ece4d4] text-xs text-[#353b30]" id="modal-address-content">
-                    <p class="font-semibold" id="modal-customer-name">Customer</p>
-                    <p class="mt-1 text-[#666c5f]" id="modal-customer-address">No specific delivery address recorded yet. Your address will be saved automatically upon your next order.</p>
-                </div>
-            </div>
-            <div class="pt-3 border-t border-[#f1ede6] flex justify-end gap-2">
-                <a href="order.html" class="px-4 py-2 rounded-xl bg-[#2e472a] text-white text-xs font-semibold hover:bg-[#233720] transition-colors">
-                    Order with New Address
-                </a>
+                            <a href="#recent-orders-section" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
+                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">package_2</span>
+                                </span>
+                                <span class="text-xs font-semibold text-on-surface font-label">View All Orders</span>
+                            </a>
+
+                            <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20recent%20order." target="_blank" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
+                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">support_agent</span>
+                                </span>
+                                <span class="text-xs font-semibold text-on-surface font-label">Contact Support</span>
+                            </a>
+
+                            <!-- Admin link (hidden until admin role) -->
+                            <a href="admin.html" id="admin-link" class="hidden items-center gap-3 p-3 border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-all group">
+                                <span class="w-8 h-8 bg-primary text-on-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-lg">shield_person</span>
+                                </span>
+                                <span class="text-xs font-semibold text-primary font-label">Admin Panel</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Promo Banner -->
+                    <div class="relative overflow-hidden border border-outline/40 shadow-sm group">
+                        <img src="/images/hero.webp" alt="Authentic Food" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-5 text-white">
+                            <span class="font-label text-[10px] font-semibold text-primary/90 tracking-widest uppercase">Pure · Homemade</span>
+                            <h4 class="font-headline font-bold text-base leading-tight mt-0.5 mb-3">Maharashtrian Delights.</h4>
+                            <a href="order.html" class="btn-outline border-white/30 text-white hover:bg-white/20 hover:text-white text-[10px] px-3 py-1.5 w-fit">
+                                Explore Products →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Patron Gratitude -->
+                    <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm flex items-start gap-3">
+                        <span class="material-symbols-outlined text-xl text-primary mt-0.5">eco</span>
+                        <div>
+                            <p class="text-xs font-semibold text-on-surface">Thank you for supporting homemade food!</p>
+                            <p class="text-[11px] text-secondary font-headline italic mt-1">— Chav Mayechi</p>
+                        </div>
+                    </div>
+
+                    <!-- Logout -->
+                    <button id="dashboard-logout" type="button" class="w-full py-3 border border-outline/40 text-xs font-label font-medium text-secondary hover:text-primary hover:border-primary/40 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-base">logout</span>
+                        Sign Out
+                    </button>
+                </aside>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
     <script type="module">
         import { onAuthChange, logoutUser, getUserData } from './js/auth-service.js';
         import { getUserOrders } from './js/orders-service.js';
         import { getAllProducts } from './js/products-service.js';
-        import { showToast } from './js/ui.js';
+        import { initNavbar, initFooter, showToast } from './js/ui.js';
 
-        let currentUser = null;
-        let currentUserData = null;
+        // Init shared UI components (same navbar & footer as all pages)
+        initNavbar('navbar-placeholder');
+        initFooter('footer-placeholder');
+
         let userOrders = [];
         let catalogProducts = [];
 
-        // Curated Top Bestsellers fallback list (with actual public images)
-        const BESTSELLERS = [
-            { name: "Dryfruit Laddu", weight: "1 kg", image: "/images/Dryfruit.webp" },
-            { name: "Papad (Kothimbir)", weight: "2 packets", image: "/images/Kothimbir.webp" },
-            { name: "Nachani Pith", weight: "1 kg", image: "/images/Nachani_pith.webp" },
-            { name: "Roasted Jowar", weight: "2 packets", image: "/images/Roasted_jowar.webp" },
-            { name: "Modak Pith", weight: "1 kg", image: "/images/Modak_pith.webp" }
-        ];
-
-        // Auth Guardian
+        // Auth Guard
         onAuthChange(async (user) => {
             if (!user) {
                 window.location.href = 'login.html';
                 return;
             }
 
-            currentUser = user;
             document.getElementById('body-content').classList.remove('hidden');
 
-            try {
-                currentUserData = await getUserData(user.uid);
-            } catch (err) {
-                console.warn('Failed to load extra user data:', err);
-            }
+            // Set user display name
+            let userData = null;
+            try { userData = await getUserData(user.uid); } catch(e) {}
 
-            // Populate user identity in header & greeting
-            const displayName = currentUserData?.name || user.displayName || 'Patron';
-            const firstName = displayName.split(' ')[0] || 'Patron';
-            const email = user.email || '';
-            const role = currentUserData?.role || 'user';
+            const displayName = userData?.name || user.displayName || 'Guest';
+            const firstName = displayName.split(' ')[0] || 'Guest';
+            document.getElementById('user-display-name').textContent = firstName;
 
-            document.getElementById('welcome-user-name').textContent = firstName;
-            document.getElementById('user-full-name').textContent = displayName;
-            document.getElementById('dropdown-user-email').textContent = email;
-            document.getElementById('user-avatar-initials').textContent = (firstName[0] || 'C').toUpperCase();
-            
-            if (role === 'admin') {
-                document.getElementById('user-role-badge').textContent = 'Administrator';
-                document.getElementById('sidebar-admin-link').classList.remove('hidden');
-                document.getElementById('dropdown-admin-link').classList.remove('hidden');
-            } else {
-                document.getElementById('user-role-badge').textContent = 'Customer';
+            // Show admin link if admin role
+            if (userData?.role === 'admin') {
+                const adminLink = document.getElementById('admin-link');
+                adminLink.classList.remove('hidden');
+                adminLink.classList.add('flex');
             }
 
             // Load data
             await Promise.all([
-                loadUserOrders(user.uid),
+                loadOrders(user.uid),
                 loadCatalog()
             ]);
-
-            setupInteractions();
         });
 
-        // Load Catalog
+        // Load product catalog
         async function loadCatalog() {
             try {
                 catalogProducts = await getAllProducts();
             } catch (e) {
                 console.warn('Catalog load error:', e);
             }
-            renderTopProducts();
         }
 
-        // Load Orders
-        async function loadUserOrders(uid) {
+        // Load orders and compute everything
+        async function loadOrders(uid) {
             try {
                 userOrders = await getUserOrders(uid);
             } catch (err) {
                 console.error('Error loading orders:', err);
                 userOrders = [];
             }
-            computeMetricsAndRender();
+            renderDashboard();
         }
 
-        // Metrics Calculation & Rendering
-        function computeMetricsAndRender() {
-            const ordersBody = document.getElementById('orders-table-body');
-            const emptyState = document.getElementById('orders-empty-state');
-            const metricOrders = document.getElementById('metric-total-orders');
-            const metricSpent = document.getElementById('metric-total-spent');
-            const metricProducts = document.getElementById('metric-products-bought');
-            const metricPoints = document.getElementById('metric-loyalty-points');
+        function renderDashboard() {
+            renderMetrics();
+            renderOrdersTable();
+            renderChart();
+            renderTopProducts();
+        }
 
-            const orderCount = userOrders.length;
+        // === METRICS ===
+        function renderMetrics() {
             let totalSpent = 0;
-            let totalProductsCount = 0;
+            let totalProducts = 0;
 
             userOrders.forEach(order => {
                 totalSpent += Number(order.totalAmount || 0);
                 if (order.items && Array.isArray(order.items)) {
-                    totalProductsCount += order.items.reduce((s, it) => s + (Number(it.quantity) || 1), 0);
+                    totalProducts += order.items.reduce((s, it) => s + (Number(it.quantity) || 1), 0);
                 } else {
-                    totalProductsCount += Number(order.quantity || 1);
+                    totalProducts += Number(order.quantity || 1);
                 }
             });
 
-            // 10 loyalty points per ₹100 spent
             const loyaltyPoints = Math.floor(totalSpent / 10);
 
-            metricOrders.textContent = orderCount;
-            metricSpent.textContent = `₹ ${totalSpent.toLocaleString('en-IN')}`;
-            metricProducts.textContent = totalProductsCount;
-            metricPoints.textContent = loyaltyPoints;
-
-            // Clear skeleton
-            ordersBody.innerHTML = '';
-
-            if (orderCount === 0) {
-                emptyState.classList.remove('hidden');
-            } else {
-                emptyState.classList.add('hidden');
-                userOrders.slice(0, 10).forEach(order => {
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-[#faf7f0] transition-colors";
-
-                    const shortId = '#' + (order.id ? order.id.slice(0, 7).toUpperCase() : 'CM1000');
-                    
-                    let dateStr = 'Recent';
-                    if (order.timestamp) {
-                        const date = order.timestamp.toDate ? order.timestamp.toDate() : new Date(order.timestamp);
-                        dateStr = date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-                    }
-
-                    // Format Items summary
-                    let itemsStr = '';
-                    if (order.items && order.items.length > 0) {
-                        itemsStr = order.items.map(it => `${it.product || it.name || 'Item'} (${it.quantity || 1})`).join(', ');
-                    } else {
-                        itemsStr = `${order.product || 'Maharashtrian Special'} (${order.quantity || 1})`;
-                    }
-
-                    const formattedAmount = `₹ ${(order.totalAmount || 0).toLocaleString('en-IN')}`;
-                    const statusHtml = getStatusBadge(order.status || 'pending');
-
-                    tr.innerHTML = `
-                        <td class="py-3 font-semibold text-[#242721] font-mono text-[11px]">${shortId}</td>
-                        <td class="py-3 text-[#676e60] whitespace-nowrap">${dateStr}</td>
-                        <td class="py-3 text-[#242721] max-w-[220px] truncate" title="${itemsStr}">${itemsStr}</td>
-                        <td class="py-3 font-semibold text-[#242721]">${formattedAmount}</td>
-                        <td class="py-3 text-right sm:text-left">${statusHtml}</td>
-                    `;
-                    ordersBody.appendChild(tr);
-                });
-            }
-
-            renderChart();
-            renderTopProducts();
-            populateAddressData();
+            document.getElementById('metric-total-orders').textContent = userOrders.length;
+            document.getElementById('metric-total-spent').textContent = `₹ ${totalSpent.toLocaleString('en-IN')}`;
+            document.getElementById('metric-products-bought').textContent = totalProducts;
+            document.getElementById('metric-loyalty-points').textContent = loyaltyPoints;
         }
 
-        // Render Top Products List
+        // === ORDERS TABLE ===
+        function renderOrdersTable() {
+            const tbody = document.getElementById('orders-table-body');
+            const emptyState = document.getElementById('orders-empty-state');
+            tbody.innerHTML = '';
+
+            if (userOrders.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            userOrders.slice(0, 10).forEach((order, i) => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-outline/20 hover:bg-surface-container-low transition-colors opacity-0 translate-y-4";
+
+                const shortId = '#' + (order.id ? order.id.slice(0, 7).toUpperCase() : 'CM----');
+
+                let dateStr = '—';
+                if (order.timestamp) {
+                    const date = order.timestamp.toDate ? order.timestamp.toDate() : new Date(order.timestamp);
+                    dateStr = date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                }
+
+                let itemsStr = '';
+                if (order.items && order.items.length > 0) {
+                    itemsStr = order.items.map(it => `${it.product || it.name || 'Item'} (${it.quantity || 1})`).join(', ');
+                } else {
+                    itemsStr = `${order.product || 'Item'} (${order.quantity || 1})`;
+                }
+
+                const amount = `₹ ${(order.totalAmount || 0).toLocaleString('en-IN')}`;
+                const statusHtml = getStatusBadge(order.status || 'pending');
+                const addressText = order.address ? order.address.split(',')[0] : '—';
+
+                tr.innerHTML = `
+                    <td class="py-4 pr-3 font-label text-xs font-semibold text-on-surface">${shortId}</td>
+                    <td class="py-4 pr-3 font-label text-xs text-secondary whitespace-nowrap">${dateStr}</td>
+                    <td class="py-4 pr-3 font-label text-xs text-on-surface max-w-[200px] truncate" title="${itemsStr}">${itemsStr}</td>
+                    <td class="py-4 pr-3 font-label text-xs font-semibold text-on-surface">${amount}</td>
+                    <td class="py-4 pr-3">${statusHtml}</td>
+                    <td class="py-4 text-right">
+                        <span class="font-label text-xs text-secondary truncate max-w-[120px] inline-block" title="${order.address || ''}">${addressText}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                // Staggered reveal animation
+                setTimeout(() => {
+                    tr.classList.remove('opacity-0', 'translate-y-4');
+                    tr.classList.add('opacity-100', 'translate-y-0', 'transition-all', 'duration-500');
+                }, i * 80);
+            });
+        }
+
+        function getStatusBadge(status) {
+            const base = "inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest font-label border";
+            switch(status?.toLowerCase()) {
+                case 'delivered':
+                    return `<span class="${base} bg-green-50 text-green-700 border-green-200">Delivered</span>`;
+                case 'confirmed':
+                    return `<span class="${base} bg-blue-50 text-blue-700 border-blue-200">Confirmed</span>`;
+                case 'cancelled':
+                    return `<span class="${base} bg-red-50 text-red-700 border-red-200">Cancelled</span>`;
+                case 'pending':
+                default:
+                    return `<span class="${base} bg-amber-50 text-amber-700 border-amber-200">Pending</span>`;
+            }
+        }
+
+        // === BAR CHART (only real data — no fakes) ===
+        function renderChart() {
+            const barsContainer = document.getElementById('chart-bars-container');
+            const labelsContainer = document.getElementById('chart-x-labels');
+            const chartArea = document.getElementById('chart-area');
+            const chartEmpty = document.getElementById('chart-empty');
+
+            barsContainer.innerHTML = '';
+            labelsContainer.innerHTML = '';
+
+            // If no orders at all, show empty state
+            if (userOrders.length === 0) {
+                chartArea.classList.add('hidden');
+                chartEmpty.classList.remove('hidden');
+                return;
+            }
+
+            chartArea.classList.remove('hidden');
+            chartEmpty.classList.add('hidden');
+
+            const filterVal = document.getElementById('chart-time-filter').value;
+
+            let displayData = [];
+
+            if (filterVal === 'all') {
+                // Show all orders as individual bars (latest 8)
+                const recent = userOrders.slice(0, 8).reverse();
+                displayData = recent.map((o, idx) => {
+                    let label = `#${idx + 1}`;
+                    if (o.timestamp) {
+                        const d = o.timestamp.toDate ? o.timestamp.toDate() : new Date(o.timestamp);
+                        label = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+                    }
+                    return { label, total: Number(o.totalAmount || 0) };
+                });
+            } else {
+                // Time-bucketed view (7 or 30 days)
+                const numDays = parseInt(filterVal);
+                const buckets = [];
+                for (let i = numDays - 1; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i);
+                    buckets.push({
+                        dateObj: d,
+                        label: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                        total: 0
+                    });
+                }
+
+                userOrders.forEach(order => {
+                    if (!order.timestamp) return;
+                    const oDate = order.timestamp.toDate ? order.timestamp.toDate() : new Date(order.timestamp);
+                    const match = buckets.find(b =>
+                        b.dateObj.getFullYear() === oDate.getFullYear() &&
+                        b.dateObj.getMonth() === oDate.getMonth() &&
+                        b.dateObj.getDate() === oDate.getDate()
+                    );
+                    if (match) match.total += Number(order.totalAmount || 0);
+                });
+
+                // For 30-day view, show every 3rd label to avoid crowding
+                displayData = buckets.map((b, idx) => ({
+                    label: numDays > 7 ? (idx % 3 === 0 ? b.label : '') : b.label,
+                    total: b.total
+                }));
+            }
+
+            // If all totals are zero in the selected range, show empty message
+            if (displayData.every(d => d.total === 0)) {
+                chartArea.classList.add('hidden');
+                chartEmpty.classList.remove('hidden');
+                return;
+            }
+
+            const maxTotal = Math.max(...displayData.map(d => d.total), 100);
+
+            displayData.forEach(d => {
+                const pct = d.total > 0 ? Math.max((d.total / maxTotal) * 100, 8) : 3;
+
+                const col = document.createElement('div');
+                col.className = "flex-1 flex flex-col items-center justify-end h-full group relative cursor-pointer";
+
+                col.innerHTML = `
+                    <div class="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-on-surface text-surface text-[10px] px-2 py-0.5 shadow pointer-events-none whitespace-nowrap z-20 font-label">
+                        ₹ ${d.total.toLocaleString('en-IN')}
+                    </div>
+                    <div class="w-full max-w-[24px] ${d.total > 0 ? 'bg-primary group-hover:bg-primary-container' : 'bg-outline/30'} transition-all duration-500 ease-out" style="height: ${pct}%;"></div>
+                `;
+                barsContainer.appendChild(col);
+
+                const lbl = document.createElement('span');
+                lbl.className = "flex-1 text-center font-label font-medium truncate";
+                lbl.textContent = d.label;
+                labelsContainer.appendChild(lbl);
+            });
+        }
+
+        // === TOP PRODUCTS (only real data — no fakes) ===
         function renderTopProducts() {
             const container = document.getElementById('top-products-list');
             const note = document.getElementById('top-products-note');
+            const emptyProducts = document.getElementById('products-empty');
             container.innerHTML = '';
 
-            // Aggregate user's ordered items if available
+            // Aggregate items from user's actual orders
             const itemCounts = {};
             userOrders.forEach(order => {
                 if (order.items && Array.isArray(order.items)) {
@@ -641,43 +556,38 @@
                 }
             });
 
-            const sortedUserItems = Object.keys(itemCounts).map(k => ({ name: k, count: itemCounts[k] }))
+            const sorted = Object.keys(itemCounts)
+                .map(k => ({ name: k, count: itemCounts[k] }))
                 .sort((a, b) => b.count - a.count);
 
-            let displayList = [];
-
-            if (sortedUserItems.length > 0) {
-                note.textContent = "Your Ordered Items";
-                displayList = sortedUserItems.slice(0, 5).map(item => {
-                    // Try to match image from catalog or fallback
-                    const matched = catalogProducts.find(p => p.name && p.name.toLowerCase().includes(item.name.toLowerCase()));
-                    const matchedBestseller = BESTSELLERS.find(b => b.name.toLowerCase().includes(item.name.toLowerCase()));
-                    const image = matched?.image || matchedBestseller?.image || '/images/hero.webp';
-                    return {
-                        name: item.name,
-                        detail: `${item.count} ordered`,
-                        image
-                    };
-                });
-            } else {
-                note.textContent = "Family Bestsellers";
-                displayList = BESTSELLERS.map(b => ({
-                    name: b.name,
-                    detail: b.weight,
-                    image: b.image
-                }));
+            // If user has zero ordered products, show empty state
+            if (sorted.length === 0) {
+                container.classList.add('hidden');
+                emptyProducts.classList.remove('hidden');
+                note.textContent = '';
+                return;
             }
 
-            displayList.forEach(item => {
+            container.classList.remove('hidden');
+            emptyProducts.classList.add('hidden');
+            note.textContent = 'Your Orders';
+
+            sorted.slice(0, 5).forEach(item => {
+                // Try to find the product image from the catalog
+                const matched = catalogProducts.find(p =>
+                    p.name && p.name.toLowerCase().includes(item.name.toLowerCase())
+                );
+                const image = matched?.image || '/images/hero.webp';
+
                 const row = document.createElement('div');
-                row.className = "flex items-center gap-3 p-1.5 rounded-xl hover:bg-[#faf7f0] transition-colors";
+                row.className = "flex items-center gap-3 p-2 hover:bg-surface-container-low transition-colors";
                 row.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-10 h-10 rounded-lg object-cover border border-[#ebe5da] flex-shrink-0" onerror="this.src='/images/hero.webp'" />
+                    <img src="${image}" alt="${item.name}" class="w-10 h-10 object-cover border border-outline/30 flex-shrink-0" onerror="this.src='/images/hero.webp'" />
                     <div class="flex-1 min-w-0">
-                        <p class="text-xs font-semibold text-[#242721] truncate">${item.name}</p>
-                        <p class="text-[10px] text-[#717769]">${item.detail}</p>
+                        <p class="text-xs font-semibold text-on-surface font-label truncate">${item.name}</p>
+                        <p class="text-[10px] text-secondary font-label">${item.count} ordered</p>
                     </div>
-                    <a href="order.html" class="text-[11px] font-semibold text-[#3b5334] hover:text-[#a65d44] px-2 py-1 rounded-md hover:bg-[#f0ebe0] transition-colors">
+                    <a href="order.html" class="text-[10px] font-semibold text-primary hover:text-primary-container px-2 py-1 border border-primary/20 hover:bg-primary/5 transition-colors font-label uppercase tracking-wider">
                         Order
                     </a>
                 `;
@@ -685,199 +595,19 @@
             });
         }
 
-        // Render Bar Chart (Purchase Overview)
-        function renderChart() {
-            const barsContainer = document.getElementById('chart-bars-container');
-            const labelsContainer = document.getElementById('chart-x-labels');
-            barsContainer.innerHTML = '';
-            labelsContainer.innerHTML = '';
+        // === Chart filter listener ===
+        document.getElementById('chart-time-filter')?.addEventListener('change', () => {
+            renderChart();
+        });
 
-            // Generate last 7 days buckets
-            const days = [];
-            for (let i = 6; i >= 0; i--) {
-                const d = new Date();
-                d.setDate(d.getDate() - i);
-                days.push({
-                    dateObj: d,
-                    label: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-                    dayName: d.toLocaleDateString('en-US', { weekday: 'short' }),
-                    total: 0
-                });
+        // === Logout ===
+        document.getElementById('dashboard-logout').addEventListener('click', async () => {
+            const res = await logoutUser();
+            if (res.success) {
+                showToast('Signed out successfully');
+                window.location.href = 'index.html';
             }
-
-            // Distribute order amounts
-            userOrders.forEach(order => {
-                if (!order.timestamp) return;
-                const oDate = order.timestamp.toDate ? order.timestamp.toDate() : new Date(order.timestamp);
-                const matchingDay = days.find(d => 
-                    d.dateObj.getFullYear() === oDate.getFullYear() &&
-                    d.dateObj.getMonth() === oDate.getMonth() &&
-                    d.dateObj.getDate() === oDate.getDate()
-                );
-                if (matchingDay) {
-                    matchingDay.total += Number(order.totalAmount || 0);
-                }
-            });
-
-            // If user has 0 orders in last 7 days, provide a gentle visual demonstration baseline
-            const hasSpending = days.some(d => d.total > 0);
-            let displayDays = days;
-
-            if (!hasSpending) {
-                // If the user has older orders, show spending by order sequence
-                if (userOrders.length > 0) {
-                    displayDays = userOrders.slice(0, 7).reverse().map((o, idx) => ({
-                        label: `Order ${idx + 1}`,
-                        total: Number(o.totalAmount || 0)
-                    }));
-                } else {
-                    // Soft preview bars for clean visual aesthetics
-                    displayDays = [
-                        { label: 'Day 1', total: 350 },
-                        { label: 'Day 2', total: 600 },
-                        { label: 'Day 3', total: 1100 },
-                        { label: 'Day 4', total: 750 },
-                        { label: 'Day 5', total: 820 },
-                        { label: 'Day 6', total: 1500 },
-                        { label: 'Day 7', total: 900 }
-                    ];
-                }
-            }
-
-            const maxTotal = Math.max(...displayDays.map(d => d.total), 1200);
-
-            displayDays.forEach(d => {
-                const pct = Math.max((d.total / maxTotal) * 100, 10); // minimum 10% for nice visibility
-                
-                // Column wrapper
-                const col = document.createElement('div');
-                col.className = "flex-1 flex flex-col items-center justify-end h-full group relative cursor-pointer";
-                
-                col.innerHTML = `
-                    <!-- Tooltip -->
-                    <div class="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-[#242721] text-white text-[10px] px-2 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-20">
-                        ₹ ${d.total.toLocaleString('en-IN')}
-                    </div>
-                    <!-- Bar -->
-                    <div class="w-full max-w-[28px] bg-[#617451] group-hover:bg-[#4f6041] rounded-t-md transition-all duration-500 ease-out" style="height: ${pct}%;"></div>
-                `;
-                barsContainer.appendChild(col);
-
-                // Label
-                const lbl = document.createElement('span');
-                lbl.className = "flex-1 text-center font-medium";
-                lbl.textContent = d.label;
-                labelsContainer.appendChild(lbl);
-            });
-        }
-
-        // Status Badge Helper
-        function getStatusBadge(status) {
-            const base = "inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide border";
-            switch(status?.toLowerCase()) {
-                case 'delivered':
-                    return `<span class="${base} bg-[#ecf7ed] text-[#2c6e32] border-[#c8e6c9]">Delivered</span>`;
-                case 'confirmed':
-                    return `<span class="${base} bg-[#edf4fb] text-[#24588e] border-[#c2dbf3]">Confirmed</span>`;
-                case 'cancelled':
-                    return `<span class="${base} bg-[#fdeded] text-[#b83333] border-[#f8c6c6]">Cancelled</span>`;
-                case 'pending':
-                default:
-                    return `<span class="${base} bg-[#fef7ea] text-[#9c6319] border-[#fae2b8]">Pending</span>`;
-            }
-        }
-
-        // Address helper
-        function populateAddressData() {
-            const customerNameEl = document.getElementById('modal-customer-name');
-            const customerAddressEl = document.getElementById('modal-customer-address');
-
-            const name = currentUserData?.name || currentUser?.displayName || 'Customer';
-            customerNameEl.textContent = name;
-
-            // Find latest address from orders
-            const latestOrderWithAddress = userOrders.find(o => o.address && o.address.trim().length > 3);
-            if (latestOrderWithAddress) {
-                customerAddressEl.textContent = latestOrderWithAddress.address + (latestOrderWithAddress.pincode ? ` - ${latestOrderWithAddress.pincode}` : '');
-            } else if (currentUserData?.address) {
-                customerAddressEl.textContent = currentUserData.address;
-            }
-        }
-
-        // Setup UI Interactivity (Dropdowns, modals, logout)
-        function setupInteractions() {
-            // Notifications Toggle
-            const notifBtn = document.getElementById('notif-btn');
-            const notifDropdown = document.getElementById('notif-dropdown');
-            notifBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                notifDropdown.classList.toggle('hidden');
-                document.getElementById('profile-dropdown').classList.add('hidden');
-            });
-
-            // Profile Dropdown Toggle
-            const profileBtn = document.getElementById('profile-pill-btn');
-            const profileDropdown = document.getElementById('profile-dropdown');
-            profileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                profileDropdown.classList.toggle('hidden');
-                notifDropdown.classList.add('hidden');
-            });
-
-            // Global Click to close popovers
-            window.addEventListener('click', () => {
-                notifDropdown.classList.add('hidden');
-                profileDropdown.classList.add('hidden');
-            });
-
-            // Address Modal Triggers
-            const modal = document.getElementById('address-modal');
-            const closeModal = document.getElementById('close-address-modal');
-            
-            const openModal = () => {
-                populateAddressData();
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            };
-
-            document.getElementById('quick-address-btn')?.addEventListener('click', openModal);
-            document.getElementById('sidebar-addresses-btn')?.addEventListener('click', openModal);
-            document.getElementById('sidebar-profile-btn')?.addEventListener('click', openModal);
-            document.getElementById('quick-manage-address-btn')?.addEventListener('click', openModal);
-
-            closeModal?.addEventListener('click', () => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            });
-
-            modal?.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                }
-            });
-
-            // Logout Handlers
-            const handleLogout = async () => {
-                try {
-                    const res = await logoutUser();
-                    if (res.success) {
-                        showToast('Signed out successfully');
-                        window.location.href = 'index.html';
-                    }
-                } catch (e) {
-                    window.location.href = 'index.html';
-                }
-            };
-
-            document.getElementById('sidebar-logout-btn')?.addEventListener('click', handleLogout);
-            document.getElementById('header-logout-btn')?.addEventListener('click', handleLogout);
-
-            // Chart Filter
-            document.getElementById('chart-time-filter')?.addEventListener('change', () => {
-                renderChart();
-            });
-        }
+        });
     </script>
 </body>
 </html>
