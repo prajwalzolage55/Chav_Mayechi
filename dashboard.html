@@ -288,6 +288,64 @@
         let userOrders = [];
         let catalogProducts = [];
 
+        // Known product name → image mapping (from seed catalog)
+        const PRODUCT_IMAGES = {
+            'methi laddu': '/images/Methi_laddu.webp',
+            'nachani laddu': '/images/Nachani_laddu.webp',
+            'dryfruit laddu': '/images/Dryfruit.webp',
+            'khajur laddu': '/images/Khajur.webp',
+            'besan laddu': '/images/Besan.webp',
+            'rava laddu': '/images/Rava.webp',
+            'kothimbir papad': '/images/Kothimbir.webp',
+            'palak papad': '/images/Palak.webp',
+            'masala papad': '/images/Masala.webp',
+            'udit papad': '/images/Udit.webp',
+            'nachani pith': '/images/Nachani_pith.webp',
+            'modak pith': '/images/Modak_pith.webp',
+            'jowar kurmura': '/images/Jowar_kurmura.webp',
+            'nachani kurmura': '/images/Nachani_kurmura.webp',
+            'roasted bajra': '/images/Roasted_bajra.webp',
+            'roasted jowar': '/images/Roasted_jowar.webp',
+            'bhajka poha': '/images/Bhajka_poha.webp',
+            'white poha': '/images/Poha.webp',
+            'red poha': '/images/red_poha.webp',
+            'kadve vaal': '/images/Vaal.webp',
+            'gavran mataki': '/images/Mataki.webp',
+            'kombadi vade': '/images/Kombadi_vade.webp',
+            'umed laddu': '/images/umed.webp',
+            'last laddu': '/images/last.webp'
+        };
+
+        // Find the best image for a product name
+        function findProductImage(name) {
+            if (!name) return '/images/placeholder.svg';
+            const lower = name.toLowerCase().trim();
+            const clean = lower.replace(/\(.*?\)/g, '').trim();
+
+            // 1. Exact match in hardcoded map
+            if (PRODUCT_IMAGES[clean]) return PRODUCT_IMAGES[clean];
+            if (PRODUCT_IMAGES[lower]) return PRODUCT_IMAGES[lower];
+
+            // 2. Partial match in hardcoded map
+            for (const [key, img] of Object.entries(PRODUCT_IMAGES)) {
+                if (clean.includes(key) || key.includes(clean) || lower.includes(key) || key.includes(lower)) return img;
+            }
+
+            // 3. Match from live catalog data
+            if (catalogProducts.length > 0) {
+                const exact = catalogProducts.find(p => p.name && (p.name.toLowerCase().trim() === clean || p.name.toLowerCase().trim() === lower));
+                if (exact?.image) return exact.image;
+
+                const partial = catalogProducts.find(p =>
+                    p.name && (p.name.toLowerCase().includes(clean) || clean.includes(p.name.toLowerCase()))
+                );
+                if (partial?.image) return partial.image;
+            }
+
+            // 4. No match — return placeholder
+            return '/images/placeholder.svg';
+        }
+
         // Auth Guard
         onAuthChange(async (user) => {
             if (!user) {
@@ -574,16 +632,12 @@
             note.textContent = 'Your Orders';
 
             sorted.slice(0, 5).forEach(item => {
-                // Try to find the product image from the catalog
-                const matched = catalogProducts.find(p =>
-                    p.name && p.name.toLowerCase().includes(item.name.toLowerCase())
-                );
-                const image = matched?.image || '/images/hero.webp';
+                const image = findProductImage(item.name);
 
                 const row = document.createElement('div');
                 row.className = "flex items-center gap-3 p-2 hover:bg-surface-container-low transition-colors";
                 row.innerHTML = `
-                    <img src="${image}" alt="${item.name}" class="w-10 h-10 object-cover border border-outline/30 flex-shrink-0" onerror="this.src='/images/hero.webp'" />
+                    <img src="${image}" alt="${item.name}" class="w-10 h-10 object-cover border border-outline/30 flex-shrink-0" onerror="this.src='/images/placeholder.svg'" />
                     <div class="flex-1 min-w-0">
                         <p class="text-xs font-semibold text-on-surface font-label truncate">${item.name}</p>
                         <p class="text-[10px] text-secondary font-label">${item.count} ordered</p>
