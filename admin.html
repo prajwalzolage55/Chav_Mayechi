@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,40 +20,47 @@
 
     <style>
         .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
+            font-family: 'Material Symbols Outlined' !important;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
             vertical-align: middle;
         }
-        .material-symbols-filled {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        /* Custom scrollbar */
+        /* Custom scrollbar matching site theme */
         .admin-scroll::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
+            height: 5px;
+            width: 5px;
         }
         .admin-scroll::-webkit-scrollbar-track {
-            background: #f4efe6;
-            border-radius: 999px;
+            background: #f5f3ee;
         }
         .admin-scroll::-webkit-scrollbar-thumb {
-            background: #d4ccbd;
-            border-radius: 999px;
+            background: #d1cfc9;
+            border-radius: 9999px;
         }
         .admin-scroll::-webkit-scrollbar-thumb:hover {
             background: #98462f;
         }
     </style>
 </head>
-<body class="bg-[#fbf9f4] text-[#20241e] font-sans antialiased min-h-screen flex flex-col hidden" id="body-content">
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col hidden" id="body-content">
 
-    <!-- Top Branded Header (Matching ChatGPT Mockup) -->
-    <header class="bg-white sticky top-0 z-40 border-b border-[#ece6db] px-4 sm:px-6 lg:px-8 py-3 transition-shadow shadow-[0_1px_6px_rgba(0,0,0,0.02)]">
+    <!-- Top Branded Header (Matches Website Theme) -->
+    <header class="bg-surface-bright sticky top-0 z-40 border-b border-outline/30 px-4 sm:px-6 lg:px-8 py-3 shadow-[0_1px_4px_rgba(28,27,27,0.03)]">
         <div class="max-w-[1600px] mx-auto flex items-center justify-between gap-4">
             
             <!-- Mobile Menu Toggle & Brand Logo -->
             <div class="flex items-center gap-3">
-                <button id="admin-mobile-toggle" type="button" class="lg:hidden w-9 h-9 rounded-lg hover:bg-[#f4efe6] text-[#4f5647] flex items-center justify-center transition-colors">
+                <button id="admin-mobile-toggle" type="button" class="lg:hidden w-9 h-9 rounded hover:bg-surface-container text-secondary flex items-center justify-center transition-colors">
                     <span class="material-symbols-outlined text-2xl">menu</span>
                 </button>
 
@@ -61,35 +68,35 @@
                     <img src="/images/logo.webp" alt="Chav Mayechi" class="w-10 h-10 object-contain rounded-full shadow-sm" />
                     <div class="flex items-center gap-3">
                         <div>
-                            <span class="font-headline font-bold text-xl text-[#222420] tracking-tight leading-none block">Chav Mayechi</span>
-                            <span class="text-[10px] text-[#787f71] font-medium tracking-normal block mt-0.5">Homemade Maharashtrian Delights</span>
+                            <span class="font-headline font-bold text-xl text-on-surface tracking-tight leading-none block">Chav Mayechi</span>
+                            <span class="font-label text-[10px] text-secondary font-medium tracking-normal block mt-0.5">Admin Management Portal</span>
                         </div>
-                        <div class="hidden sm:block h-6 w-px bg-[#e4ded2]"></div>
-                        <span class="hidden sm:inline-block font-headline text-xs text-[#98462f] italic font-semibold">आईच्या हाताचा गोडवा</span>
+                        <div class="hidden sm:block h-6 w-px bg-outline/40"></div>
+                        <span class="hidden sm:inline-block font-headline text-xs text-primary italic font-semibold">आईच्या हाताचा गोडवा</span>
                     </div>
                 </a>
             </div>
 
-            <!-- Right Controls: Notifications & Admin Profile -->
+            <!-- Right Controls: Alerts & Admin Profile -->
             <div class="flex items-center gap-3">
                 <!-- Notifications Bell -->
                 <div class="relative">
-                    <button id="notif-btn" type="button" class="w-9 h-9 rounded-full hover:bg-[#f4efe6] text-[#555d4f] flex items-center justify-center transition-colors relative" aria-label="Notifications">
+                    <button id="notif-btn" type="button" class="w-9 h-9 rounded-full hover:bg-surface-container text-secondary flex items-center justify-center transition-colors relative" aria-label="Notifications">
                         <span class="material-symbols-outlined text-[20px]">notifications</span>
-                        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#c8483b] ring-2 ring-white"></span>
+                        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary ring-2 ring-white"></span>
                     </button>
                     <!-- Notifications Dropdown -->
-                    <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-[#ede8de] p-4 z-50">
-                        <div class="flex items-center justify-between pb-2 border-b border-[#f1ede6]">
-                            <h4 class="font-semibold text-xs text-[#222420]">Store Alerts</h4>
-                            <span class="text-[10px] text-[#6f7567] bg-[#f2eee7] px-2 py-0.5 rounded-full font-medium" id="notif-orders-count">Live</span>
+                    <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-bright rounded shadow-xl border border-outline/40 p-4 z-50">
+                        <div class="flex items-center justify-between pb-2 border-b border-outline/20">
+                            <h4 class="font-semibold text-xs text-on-surface font-label uppercase tracking-wider">Store Alerts</h4>
+                            <span class="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded font-medium" id="notif-orders-count">Live</span>
                         </div>
-                        <div class="py-2 space-y-2 text-xs text-[#444a3e]">
-                            <div class="p-2 rounded-lg bg-[#f9f7f2] flex items-start gap-2.5">
-                                <span class="material-symbols-outlined text-[#3d683a] text-base mt-0.5">storefront</span>
+                        <div class="py-2 space-y-2 text-xs text-secondary">
+                            <div class="p-2 bg-surface-container-low flex items-start gap-2.5">
+                                <span class="material-symbols-outlined text-primary text-base mt-0.5">storefront</span>
                                 <div>
-                                    <p class="font-semibold text-[#242721]">Admin Central Active</p>
-                                    <p class="text-[11px] text-[#717769] mt-0.5">Monitoring live customer orders & catalog items.</p>
+                                    <p class="font-semibold text-on-surface">Admin Portal Active</p>
+                                    <p class="text-[11px] text-secondary mt-0.5">Monitoring live customer orders & catalog items.</p>
                                 </div>
                             </div>
                         </div>
@@ -98,29 +105,29 @@
 
                 <!-- Admin Profile Pill -->
                 <div class="relative">
-                    <button id="admin-profile-btn" type="button" class="flex items-center gap-2.5 pl-1 pr-2.5 py-1 rounded-full hover:bg-[#f4efe6] transition-colors border border-transparent hover:border-[#ece6db]">
-                        <div class="w-8 h-8 rounded-full bg-[#1b2e1c] text-[#e8f5e9] font-bold text-xs flex items-center justify-center shadow-sm">
+                    <button id="admin-profile-btn" type="button" class="flex items-center gap-2.5 pl-1 pr-2.5 py-1 rounded hover:bg-surface-container transition-colors border border-transparent hover:border-outline/40">
+                        <div class="w-8 h-8 bg-primary text-on-primary font-bold text-xs flex items-center justify-center rounded">
                             AD
                         </div>
                         <div class="text-left hidden md:block">
-                            <p class="text-xs font-semibold text-[#20231d] leading-tight" id="admin-name">Admin</p>
-                            <p class="text-[10px] text-[#717769] leading-none">Super Admin</p>
+                            <p class="text-xs font-semibold text-on-surface leading-tight font-label" id="admin-name">Admin</p>
+                            <p class="text-[10px] text-secondary leading-none font-label">Store Administrator</p>
                         </div>
-                        <span class="material-symbols-outlined text-[18px] text-[#787f71]">expand_more</span>
+                        <span class="material-symbols-outlined text-[18px] text-secondary">expand_more</span>
                     </button>
 
                     <!-- Profile Dropdown -->
-                    <div id="admin-profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-[#ede8de] py-1.5 z-50">
-                        <a href="dashboard.html" class="flex items-center gap-2 px-3.5 py-2 text-xs text-[#444a3e] hover:bg-[#f8f6f0] transition-colors">
+                    <div id="admin-profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-surface-bright rounded shadow-xl border border-outline/40 py-1.5 z-50">
+                        <a href="dashboard.html" class="flex items-center gap-2 px-3.5 py-2 text-xs text-secondary hover:text-primary hover:bg-surface-container-low transition-colors font-label">
                             <span class="material-symbols-outlined text-base">person</span>
                             Customer View
                         </a>
-                        <a href="index.html" class="flex items-center gap-2 px-3.5 py-2 text-xs text-[#444a3e] hover:bg-[#f8f6f0] transition-colors">
+                        <a href="index.html" class="flex items-center gap-2 px-3.5 py-2 text-xs text-secondary hover:text-primary hover:bg-surface-container-low transition-colors font-label">
                             <span class="material-symbols-outlined text-base">store</span>
-                            Visit Store
+                            Visit Storefront
                         </a>
-                        <div class="border-t border-[#f1ede6] my-1"></div>
-                        <button id="admin-logout-btn" type="button" class="w-full text-left flex items-center gap-2 px-3.5 py-2 text-xs text-[#b83333] hover:bg-rose-50 transition-colors font-medium">
+                        <div class="border-t border-outline/20 my-1"></div>
+                        <button id="admin-logout-btn" type="button" class="w-full text-left flex items-center gap-2 px-3.5 py-2 text-xs text-red-700 hover:bg-red-50 transition-colors font-label font-medium">
                             <span class="material-symbols-outlined text-base">logout</span>
                             Sign Out
                         </button>
@@ -130,190 +137,177 @@
         </div>
     </header>
 
-    <!-- Main Workspace with Dark Olive Sidebar + Main Canvas -->
+    <!-- Main Workspace with Clean Theme Sidebar + Main Canvas -->
     <div class="flex-1 flex max-w-[1600px] w-full mx-auto">
 
-        <!-- Dark Forest Green Sidebar (Matching ChatGPT Mockup) -->
-        <aside id="admin-sidebar" class="w-64 bg-[#162718] text-[#e2ece0] flex flex-col justify-between py-6 px-4 fixed lg:static inset-y-0 left-0 z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 shadow-2xl lg:shadow-none min-h-[calc(100vh-65px)]">
+        <!-- Sidebar (Website Theme: Light Editorial Surface with Primary Accents) -->
+        <aside id="admin-sidebar" class="w-60 bg-surface-container-low text-on-surface flex flex-col justify-between py-6 px-3 fixed lg:static inset-y-0 left-0 z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 border-r border-outline/40 shadow-xl lg:shadow-none min-h-[calc(100vh-65px)]">
             
-            <div class="space-y-6">
-                <!-- Navigation Items -->
+            <div class="space-y-4">
+                <!-- Navigation Items (Clean Unique Tabs Only - No Duplicates) -->
                 <nav class="space-y-1" id="sidebar-nav">
-                    <!-- Dashboard -->
-                    <button type="button" onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-semibold bg-[#2a452c] text-white transition-colors">
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-filled text-[18px]">space_dashboard</span>
+                    <!-- 1. Dashboard -->
+                    <button type="button" onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold border-l-4 border-primary bg-surface-container text-primary transition-colors">
+                        <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-[18px]">space_dashboard</span>
                             <span>Dashboard</span>
                         </div>
                     </button>
 
-                    <!-- Orders -->
-                    <button type="button" onclick="switchTab('orders')" id="nav-orders" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
-                        <div class="flex items-center gap-3">
+                    <!-- 2. Orders -->
+                    <button type="button" onclick="switchTab('orders')" id="nav-orders" class="w-full flex items-center justify-between px-3 py-2.5 text-xs font-medium text-secondary hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-colors">
+                        <div class="flex items-center gap-2.5">
                             <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
                             <span>Orders</span>
                         </div>
-                        <span id="nav-orders-count" class="bg-[#2a452c] text-[#a4d4a8] text-[10px] font-bold px-2 py-0.5 rounded-full">0</span>
+                        <span id="nav-orders-count" class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded font-label">0</span>
                     </button>
 
-                    <!-- Products -->
-                    <button type="button" onclick="switchTab('products')" id="nav-products" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
+                    <!-- 3. Products Catalog -->
+                    <button type="button" onclick="switchTab('products')" id="nav-products" class="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium text-secondary hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-colors">
                         <span class="material-symbols-outlined text-[18px]">inventory_2</span>
                         <span>Products</span>
                     </button>
 
-                    <!-- Customers -->
-                    <button type="button" onclick="switchTab('customers')" id="nav-customers" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
+                    <!-- 4. Add Product (Direct Product Entry) -->
+                    <button type="button" onclick="switchTab('manage-product')" id="nav-manage-product" class="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium text-secondary hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                        <span>Add Product</span>
+                    </button>
+
+                    <!-- 5. Customers -->
+                    <button type="button" onclick="switchTab('customers')" id="nav-customers" class="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium text-secondary hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-colors">
                         <span class="material-symbols-outlined text-[18px]">groups</span>
                         <span>Customers</span>
                     </button>
 
-                    <!-- Earnings / Analytics -->
-                    <button type="button" onclick="switchTab('analytics')" id="nav-analytics" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
+                    <!-- 6. Analytics & Earnings (Combined single page) -->
+                    <button type="button" onclick="switchTab('analytics')" id="nav-analytics" class="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium text-secondary hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-colors">
                         <span class="material-symbols-outlined text-[18px]">trending_up</span>
-                        <span>Earnings</span>
-                    </button>
-
-                    <!-- Manage Product (Create / Edit) -->
-                    <button type="button" onclick="switchTab('manage-product')" id="nav-manage-product" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">add_box</span>
-                        <span>Inventory</span>
-                    </button>
-
-                    <!-- Reports -->
-                    <button type="button" onclick="switchTab('reports')" id="nav-reports" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">description</span>
-                        <span>Reports</span>
-                    </button>
-
-                    <!-- Settings -->
-                    <button type="button" onclick="switchTab('settings')" id="nav-settings" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">settings</span>
-                        <span>Settings</span>
+                        <span>Analytics</span>
                     </button>
                 </nav>
             </div>
 
-            <!-- Bottom Tagline & Botanical Motif (from ChatGPT Mockup) -->
-            <div class="pt-6 border-t border-[#233a25]/80 text-center">
-                <span class="font-headline italic text-xs text-[#a9c2a6] block">Traditional Taste</span>
-                <span class="text-[10px] text-[#7a9577] block mt-0.5">Healthy Choices</span>
-                <div class="text-[#84a880] text-lg mt-1 opacity-75">❦</div>
+            <!-- Bottom Brand Box (Matches Chav Mayechi Theme) -->
+            <div class="pt-6 border-t border-outline/30 text-center">
+                <span class="font-headline italic text-xs text-primary font-semibold block">Traditional Taste</span>
+                <span class="text-[10px] text-secondary block mt-0.5 font-light">Healthy Choices</span>
+                <div class="text-primary text-sm mt-1">❦</div>
             </div>
         </aside>
 
         <!-- MAIN CANVAS -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
 
-            <!-- 1. DASHBOARD VIEW (ChatGPT Mockup Default) -->
+            <!-- 1. DASHBOARD VIEW (Structured Overview) -->
             <div id="view-dashboard" class="space-y-6">
 
-                <!-- Greeting Banner & Date Picker -->
+                <!-- Greeting Banner & Date Range -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h1 class="font-headline text-2xl sm:text-3xl font-bold text-[#1f231d]">
+                        <h1 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface">
                             Welcome, <span id="welcome-admin-name">Admin</span>!
                         </h1>
-                        <p class="text-xs sm:text-sm text-[#6c7263] mt-0.5">Here's what's happening with your store today.</p>
+                        <p class="text-xs sm:text-sm text-secondary mt-0.5 font-light">Here's what's happening with your store today.</p>
                     </div>
 
-                    <!-- Date Range Indicator / Selector -->
-                    <div class="inline-flex items-center gap-2 bg-white border border-[#ede8de] rounded-lg px-3 py-1.5 text-xs font-medium text-[#4f5647] shadow-sm">
-                        <span class="material-symbols-outlined text-base text-[#7c8375]">calendar_month</span>
+                    <!-- Date Range Indicator -->
+                    <div class="inline-flex items-center gap-2 bg-surface-bright border border-outline/40 px-3 py-1.5 text-xs font-medium text-secondary shadow-sm">
+                        <span class="material-symbols-outlined text-base text-primary">calendar_month</span>
                         <span id="current-date-range">Live Store Period</span>
-                        <span class="material-symbols-outlined text-sm text-[#7c8375]">expand_more</span>
                     </div>
                 </div>
 
-                <!-- 4 Top Metric Cards (with Sparklines) -->
+                <!-- 4 Top Stat Cards -->
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     <!-- Total Orders -->
-                    <div class="bg-white rounded-xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col justify-between">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="w-9 h-9 rounded-full bg-[#e8f5e9] text-[#2e7d32] flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                            <span class="w-9 h-9 bg-primary/10 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
                             </span>
                         </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Total Orders</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-total-orders">0</h3>
-                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-[#f4efe4]">
-                            <span class="text-[10px] text-[#2e7d32] font-semibold flex items-center gap-0.5">
+                        <p class="font-label text-[11px] uppercase tracking-wider text-secondary font-medium">Total Orders</p>
+                        <h3 class="text-2xl font-bold font-headline text-on-surface mt-0.5" id="metric-total-orders">0</h3>
+                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-outline/20">
+                            <span class="text-[10px] text-green-700 font-semibold flex items-center gap-0.5">
                                 <span class="material-symbols-outlined text-[12px]">arrow_upward</span>
                                 <span>+18%</span>
                             </span>
-                            <span class="text-[10px] text-[#868d7f]">vs last week</span>
+                            <span class="text-[10px] text-secondary">vs last week</span>
                         </div>
                     </div>
 
                     <!-- Total Earnings -->
-                    <div class="bg-white rounded-xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col justify-between">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="w-9 h-9 rounded-full bg-[#fef5e5] text-[#b26a00] flex items-center justify-center font-bold text-sm">
+                            <span class="w-9 h-9 bg-primary/10 text-primary flex items-center justify-center font-bold text-sm font-headline">
                                 ₹
                             </span>
                         </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Total Earnings</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-total-earnings">₹ 0</h3>
-                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-[#f4efe4]">
-                            <span class="text-[10px] text-[#2e7d32] font-semibold flex items-center gap-0.5">
+                        <p class="font-label text-[11px] uppercase tracking-wider text-secondary font-medium">Total Earnings</p>
+                        <h3 class="text-2xl font-bold font-headline text-on-surface mt-0.5" id="metric-total-earnings">₹ 0</h3>
+                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-outline/20">
+                            <span class="text-[10px] text-green-700 font-semibold flex items-center gap-0.5">
                                 <span class="material-symbols-outlined text-[12px]">arrow_upward</span>
                                 <span>+22%</span>
                             </span>
-                            <span class="text-[10px] text-[#868d7f]">vs last week</span>
+                            <span class="text-[10px] text-secondary">vs last week</span>
                         </div>
                     </div>
 
                     <!-- Products Sold -->
-                    <div class="bg-white rounded-xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <div class="bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col justify-between">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="w-9 h-9 rounded-full bg-[#f1edfa] text-[#673ab7] flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[18px]">inventory_2</span>
+                            <span class="w-9 h-9 bg-primary/10 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
                             </span>
                         </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Products Sold</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-products-sold">0</h3>
-                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-[#f4efe4]">
-                            <span class="text-[10px] text-[#2e7d32] font-semibold flex items-center gap-0.5">
+                        <p class="font-label text-[11px] uppercase tracking-wider text-secondary font-medium">Products Sold</p>
+                        <h3 class="text-2xl font-bold font-headline text-on-surface mt-0.5" id="metric-products-sold">0</h3>
+                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-outline/20">
+                            <span class="text-[10px] text-green-700 font-semibold flex items-center gap-0.5">
                                 <span class="material-symbols-outlined text-[12px]">arrow_upward</span>
                                 <span>+16%</span>
                             </span>
-                            <span class="text-[10px] text-[#868d7f]">vs last week</span>
+                            <span class="text-[10px] text-secondary">vs last week</span>
                         </div>
                     </div>
 
-                    <!-- New Customers -->
-                    <div class="bg-white rounded-xl p-4 sm:p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+                    <!-- Customers -->
+                    <div class="bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col justify-between">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="w-9 h-9 rounded-full bg-[#fdeeee] text-[#d32f2f] flex items-center justify-center">
-                                <span class="material-symbols-outlined text-[18px]">groups</span>
+                            <span class="w-9 h-9 bg-primary/10 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[20px]">groups</span>
                             </span>
                         </div>
-                        <p class="text-[11px] font-medium text-[#73796d]">Customers</p>
-                        <h3 class="text-2xl font-bold font-headline text-[#20231d] mt-0.5" id="metric-total-customers">0</h3>
-                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-[#f4efe4]">
-                            <span class="text-[10px] text-[#2e7d32] font-semibold flex items-center gap-0.5">
+                        <p class="font-label text-[11px] uppercase tracking-wider text-secondary font-medium">Customers</p>
+                        <h3 class="text-2xl font-bold font-headline text-on-surface mt-0.5" id="metric-total-customers">0</h3>
+                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-outline/20">
+                            <span class="text-[10px] text-green-700 font-semibold flex items-center gap-0.5">
                                 <span class="material-symbols-outlined text-[12px]">arrow_upward</span>
                                 <span>+12%</span>
                             </span>
-                            <span class="text-[10px] text-[#868d7f]">vs last week</span>
+                            <span class="text-[10px] text-secondary">vs last week</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Middle Row: Sales Overview (Combined Bar/Line), Product-wise Sales (Donut), Recent Orders -->
+                <!-- Middle Row: Sales Overview, Product-wise Sales, Recent Orders -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
                     
                     <!-- Sales Overview Chart (5 cols) -->
-                    <div class="lg:col-span-5 bg-white rounded-xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col">
+                    <div class="lg:col-span-5 bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col">
                         <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-sm font-bold text-[#20231d]">Sales Overview</h2>
-                            <select id="sales-chart-filter" class="text-xs bg-[#f7f5ee] border border-[#e5dfd2] rounded-md px-2 py-1 text-[#4f5647] font-medium focus:outline-none cursor-pointer">
+                            <h2 class="font-headline text-sm font-bold text-on-surface">Sales Overview</h2>
+                            <select id="sales-chart-filter" class="text-xs font-label bg-surface-container border border-outline/40 px-2 py-1 text-secondary font-medium focus:outline-none cursor-pointer">
                                 <option value="7">Last 7 Days</option>
                                 <option value="30">Last 30 Days</option>
                             </select>
                         </div>
-                        <div class="flex items-center gap-4 text-[11px] text-[#6b7364] mb-3">
-                            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-[#5c724e]"></span> Earnings (₹)</span>
+                        <div class="flex items-center gap-4 text-[11px] text-secondary mb-3 font-label">
+                            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-primary"></span> Earnings (₹)</span>
                             <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#e8872e]"></span> Orders</span>
                         </div>
                         <div class="relative h-56 w-full">
@@ -322,36 +316,36 @@
                     </div>
 
                     <!-- Product-wise Sales Donut Chart (3 cols) -->
-                    <div class="lg:col-span-3 bg-white rounded-xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col">
-                        <h2 class="text-sm font-bold text-[#20231d] mb-2">Product-wise Sales</h2>
+                    <div class="lg:col-span-3 bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col">
+                        <h2 class="font-headline text-sm font-bold text-on-surface mb-2">Product-wise Sales</h2>
                         <div class="relative h-44 w-full flex items-center justify-center my-auto">
                             <canvas id="chart-product-donut"></canvas>
                         </div>
-                        <!-- Custom Donut Legend -->
-                        <div id="donut-legend-list" class="space-y-1.5 mt-3 text-[11px] max-h-24 overflow-y-auto admin-scroll">
-                            <!-- Dynamic legend rendered by JS -->
+                        <!-- Donut Legend -->
+                        <div id="donut-legend-list" class="space-y-1.5 mt-3 text-[11px] max-h-24 overflow-y-auto admin-scroll font-label">
+                            <!-- Rendered dynamically -->
                         </div>
                     </div>
 
                     <!-- Recent Orders List (4 cols) -->
-                    <div class="lg:col-span-4 bg-white rounded-xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col">
+                    <div class="lg:col-span-4 bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col">
                         <div class="flex items-center justify-between mb-3">
-                            <h2 class="text-sm font-bold text-[#20231d]">Recent Orders</h2>
-                            <button type="button" onclick="switchTab('orders')" class="text-xs font-semibold text-[#3b5334] hover:text-[#98462f] transition-colors">
+                            <h2 class="font-headline text-sm font-bold text-on-surface">Recent Orders</h2>
+                            <button type="button" onclick="switchTab('orders')" class="text-xs font-semibold text-primary hover:text-primary-container transition-colors font-label">
                                 View All
                             </button>
                         </div>
                         <div class="overflow-x-auto admin-scroll flex-1">
                             <table class="w-full text-left text-xs border-collapse">
                                 <thead>
-                                    <tr class="text-[10px] text-[#717769] font-medium border-b border-[#f1ede6] pb-1.5">
+                                    <tr class="text-[10px] text-secondary font-medium border-b border-outline/30 pb-1.5 font-label uppercase">
                                         <th class="py-1.5 font-medium">Order ID</th>
                                         <th class="py-1.5 font-medium">Customer</th>
                                         <th class="py-1.5 font-medium">Amount</th>
                                         <th class="py-1.5 font-medium text-right">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody id="overview-orders-tbody" class="divide-y divide-[#f7f4ed]">
+                                <tbody id="overview-orders-tbody" class="divide-y divide-outline/20">
                                     <!-- Rendered dynamically -->
                                 </tbody>
                             </table>
@@ -363,24 +357,24 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
                     <!-- Top Selling Products (5 cols) -->
-                    <div class="lg:col-span-5 bg-white rounded-xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col">
+                    <div class="lg:col-span-5 bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col">
                         <div class="flex items-center justify-between mb-3">
-                            <h2 class="text-sm font-bold text-[#20231d]">Top Selling Products</h2>
-                            <button type="button" onclick="switchTab('products')" class="text-xs font-semibold text-[#3b5334] hover:text-[#98462f] transition-colors">
+                            <h2 class="font-headline text-sm font-bold text-on-surface">Top Selling Products</h2>
+                            <button type="button" onclick="switchTab('products')" class="text-xs font-semibold text-primary hover:text-primary-container transition-colors font-label">
                                 View All
                             </button>
                         </div>
                         <div class="overflow-x-auto admin-scroll">
                             <table class="w-full text-left text-xs border-collapse">
                                 <thead>
-                                    <tr class="text-[10px] text-[#717769] font-medium border-b border-[#f1ede6]">
+                                    <tr class="text-[10px] text-secondary font-medium border-b border-outline/30 font-label uppercase">
                                         <th class="py-2 pr-2 font-medium">#</th>
                                         <th class="py-2 px-2 font-medium">Product</th>
                                         <th class="py-2 px-2 font-medium">Total Sold</th>
                                         <th class="py-2 pl-2 font-medium text-right">Revenue</th>
                                     </tr>
                                 </thead>
-                                <tbody id="top-selling-tbody" class="divide-y divide-[#f7f4ed]">
+                                <tbody id="top-selling-tbody" class="divide-y divide-outline/20">
                                     <!-- Rendered dynamically -->
                                 </tbody>
                             </table>
@@ -388,23 +382,23 @@
                     </div>
 
                     <!-- Recent Customers (4 cols) -->
-                    <div class="lg:col-span-4 bg-white rounded-xl p-5 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col">
+                    <div class="lg:col-span-4 bg-surface-bright p-5 border border-outline/40 shadow-sm flex flex-col">
                         <div class="flex items-center justify-between mb-3">
-                            <h2 class="text-sm font-bold text-[#20231d]">Recent Customers</h2>
-                            <button type="button" onclick="switchTab('customers')" class="text-xs font-semibold text-[#3b5334] hover:text-[#98462f] transition-colors">
+                            <h2 class="font-headline text-sm font-bold text-on-surface">Recent Customers</h2>
+                            <button type="button" onclick="switchTab('customers')" class="text-xs font-semibold text-primary hover:text-primary-container transition-colors font-label">
                                 View All
                             </button>
                         </div>
                         <div class="overflow-x-auto admin-scroll">
                             <table class="w-full text-left text-xs border-collapse">
                                 <thead>
-                                    <tr class="text-[10px] text-[#717769] font-medium border-b border-[#f1ede6]">
+                                    <tr class="text-[10px] text-secondary font-medium border-b border-outline/30 font-label uppercase">
                                         <th class="py-2 pr-2 font-medium">Name</th>
                                         <th class="py-2 px-2 font-medium text-center">Orders</th>
                                         <th class="py-2 pl-2 font-medium text-right">Last Order</th>
                                     </tr>
                                 </thead>
-                                <tbody id="recent-customers-tbody" class="divide-y divide-[#f7f4ed]">
+                                <tbody id="recent-customers-tbody" class="divide-y divide-outline/20">
                                     <!-- Rendered dynamically -->
                                 </tbody>
                             </table>
@@ -415,35 +409,35 @@
                     <div class="lg:col-span-3 flex flex-col gap-4">
                         
                         <!-- Quick Actions Grid -->
-                        <div class="bg-white rounded-xl p-4 border border-[#ede8de] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-                            <h3 class="text-xs font-bold text-[#20231d] mb-3">Quick Actions</h3>
+                        <div class="bg-surface-bright p-4 border border-outline/40 shadow-sm">
+                            <h3 class="font-headline text-xs font-bold text-on-surface mb-3">Quick Actions</h3>
                             <div class="grid grid-cols-2 gap-2">
-                                <button type="button" onclick="editProductGlobal(null)" class="flex flex-col items-center justify-center p-2.5 rounded-lg border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#faf8f2] transition-colors text-center group">
-                                    <span class="material-symbols-outlined text-[20px] text-[#3b5334] group-hover:scale-110 transition-transform mb-1">add_circle</span>
-                                    <span class="text-[11px] font-medium text-[#2d3228]">Add Product</span>
+                                <button type="button" onclick="editProductGlobal(null)" class="flex flex-col items-center justify-center p-2.5 border border-outline/30 hover:border-primary hover:bg-surface-container-low transition-colors text-center group">
+                                    <span class="material-symbols-outlined text-[20px] text-primary group-hover:scale-105 transition-transform mb-1">add_circle</span>
+                                    <span class="text-[11px] font-semibold text-on-surface font-label">Add Product</span>
                                 </button>
-                                <button type="button" onclick="switchTab('orders')" class="flex flex-col items-center justify-center p-2.5 rounded-lg border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#faf8f2] transition-colors text-center group">
-                                    <span class="material-symbols-outlined text-[20px] text-[#3b5334] group-hover:scale-110 transition-transform mb-1">receipt_long</span>
-                                    <span class="text-[11px] font-medium text-[#2d3228]">Manage Orders</span>
+                                <button type="button" onclick="switchTab('orders')" class="flex flex-col items-center justify-center p-2.5 border border-outline/30 hover:border-primary hover:bg-surface-container-low transition-colors text-center group">
+                                    <span class="material-symbols-outlined text-[20px] text-primary group-hover:scale-105 transition-transform mb-1">receipt_long</span>
+                                    <span class="text-[11px] font-semibold text-on-surface font-label">Manage Orders</span>
                                 </button>
-                                <button type="button" onclick="switchTab('products')" class="flex flex-col items-center justify-center p-2.5 rounded-lg border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#faf8f2] transition-colors text-center group">
-                                    <span class="material-symbols-outlined text-[20px] text-[#3b5334] group-hover:scale-110 transition-transform mb-1">inventory</span>
-                                    <span class="text-[11px] font-medium text-[#2d3228]">Check Catalog</span>
+                                <button type="button" onclick="switchTab('products')" class="flex flex-col items-center justify-center p-2.5 border border-outline/30 hover:border-primary hover:bg-surface-container-low transition-colors text-center group">
+                                    <span class="material-symbols-outlined text-[20px] text-primary group-hover:scale-105 transition-transform mb-1">inventory</span>
+                                    <span class="text-[11px] font-semibold text-on-surface font-label">Check Catalog</span>
                                 </button>
-                                <button type="button" onclick="switchTab('analytics')" class="flex flex-col items-center justify-center p-2.5 rounded-lg border border-[#ede8de] hover:border-[#3b5334] hover:bg-[#faf8f2] transition-colors text-center group">
-                                    <span class="material-symbols-outlined text-[20px] text-[#3b5334] group-hover:scale-110 transition-transform mb-1">monitoring</span>
-                                    <span class="text-[11px] font-medium text-[#2d3228]">View Reports</span>
+                                <button type="button" onclick="switchTab('analytics')" class="flex flex-col items-center justify-center p-2.5 border border-outline/30 hover:border-primary hover:bg-surface-container-low transition-colors text-center group">
+                                    <span class="material-symbols-outlined text-[20px] text-primary group-hover:scale-105 transition-transform mb-1">trending_up</span>
+                                    <span class="text-[11px] font-semibold text-on-surface font-label">View Analytics</span>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Good Food Happy Customers Card (ChatGPT Mockup) -->
-                        <div class="relative overflow-hidden rounded-xl border border-[#ede8de] shadow-sm flex-1 min-h-[110px] group bg-[#162718]">
-                            <img src="/images/hero.webp" alt="Chav Mayechi" class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700 absolute inset-0" />
-                            <div class="relative z-10 p-4 flex flex-col justify-end h-full text-white">
-                                <span class="font-headline font-bold text-sm tracking-tight">Good Food</span>
-                                <span class="text-xs text-[#a9c2a6] font-medium -mt-0.5">Happy Customers</span>
-                                <span class="text-[10px] text-[#c0cfbe] italic mt-1.5">— Chav Mayechi</span>
+                        <!-- Brand Promo Card (Chav Mayechi Editorial Style) -->
+                        <div class="relative overflow-hidden border border-outline/40 shadow-sm flex-1 min-h-[110px] group bg-on-surface">
+                            <img src="/images/hero.webp" alt="Chav Mayechi" class="w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-700 absolute inset-0" />
+                            <div class="relative z-10 p-4 flex flex-col justify-end h-full text-surface">
+                                <span class="font-headline font-bold text-sm tracking-tight text-white">Good Food</span>
+                                <span class="text-xs text-primary-container font-medium -mt-0.5">Happy Customers</span>
+                                <span class="text-[10px] text-surface/80 font-headline italic mt-1.5">— Chav Mayechi</span>
                             </div>
                         </div>
                     </div>
@@ -454,28 +448,28 @@
             <div id="view-orders" class="hidden space-y-5">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h2 class="font-headline text-2xl font-bold text-[#20231d]">Customer Orders</h2>
-                        <p class="text-xs text-[#6c7263] mt-0.5">Review, fulfill, and update live order statuses.</p>
+                        <h2 class="font-headline text-2xl font-bold text-on-surface">Customer Orders</h2>
+                        <p class="text-xs text-secondary mt-0.5 font-light">Review, fulfill, and update live order statuses.</p>
                     </div>
                     <div class="relative w-full sm:w-72">
-                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#7c8375] text-[18px]">search</span>
-                        <input type="text" id="orders-search-input" placeholder="Search orders by customer or ID..." class="w-full pl-9 pr-4 py-2 bg-white border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px]">search</span>
+                        <input type="text" id="orders-search-input" placeholder="Search orders by customer or ID..." class="w-full pl-9 pr-4 py-2 bg-surface-bright border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none">
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl border border-[#ede8de] shadow-sm overflow-x-auto admin-scroll">
+                <div class="bg-surface-bright border border-outline/40 shadow-sm overflow-x-auto admin-scroll">
                     <table class="w-full text-left text-xs border-collapse min-w-[700px]">
-                        <thead class="bg-[#faf8f2] border-b border-[#ede8de]">
-                            <tr class="text-[11px] text-[#6b7364] font-semibold">
-                                <th class="py-3 px-4 font-medium">Order ID & Date</th>
-                                <th class="py-3 px-4 font-medium">Customer</th>
-                                <th class="py-3 px-4 font-medium">Items & Total</th>
-                                <th class="py-3 px-4 font-medium">Status</th>
-                                <th class="py-3 px-4 font-medium text-right">Actions</th>
+                        <thead class="bg-surface-container-low border-b border-outline/30">
+                            <tr class="text-[10px] text-secondary font-bold font-label uppercase tracking-wider">
+                                <th class="py-3 px-4">Order ID & Date</th>
+                                <th class="py-3 px-4">Customer</th>
+                                <th class="py-3 px-4">Items & Total</th>
+                                <th class="py-3 px-4">Status</th>
+                                <th class="py-3 px-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="full-orders-tbody" class="divide-y divide-[#f7f4ed]">
-                            <tr><td colspan="5" class="py-8 text-center text-[#7c8375] text-xs">Loading orders...</td></tr>
+                        <tbody id="full-orders-tbody" class="divide-y divide-outline/20">
+                            <tr><td colspan="5" class="py-8 text-center text-secondary text-xs">Loading orders...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -485,11 +479,11 @@
             <div id="view-products" class="hidden space-y-5">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h2 class="font-headline text-2xl font-bold text-[#20231d]">Product Catalog</h2>
-                        <p class="text-xs text-[#6c7263] mt-0.5">Manage live products, pricing, and categories.</p>
+                        <h2 class="font-headline text-2xl font-bold text-on-surface">Product Catalog</h2>
+                        <p class="text-xs text-secondary mt-0.5 font-light">Manage live products, pricing, and categories.</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="editProductGlobal(null)" class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#2e472a] hover:bg-[#233821] text-white text-xs font-semibold rounded-lg transition-colors shadow-sm">
+                        <button type="button" onclick="editProductGlobal(null)" class="btn-primary text-xs py-2 px-4">
                             <span class="material-symbols-outlined text-[16px]">add</span>
                             <span>Add New Product</span>
                         </button>
@@ -505,23 +499,23 @@
             <div id="view-manage-product" class="hidden space-y-5">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="font-headline text-2xl font-bold text-[#20231d]" id="manage-product-heading">Add New Product</h2>
-                        <p class="text-xs text-[#6c7263] mt-0.5">Fill in product information to publish or update.</p>
+                        <h2 class="font-headline text-2xl font-bold text-on-surface" id="manage-product-heading">Add New Product</h2>
+                        <p class="text-xs text-secondary mt-0.5 font-light">Fill in product information to publish or update.</p>
                     </div>
-                    <button type="button" onclick="switchTab('products')" class="text-xs font-semibold text-[#6c7263] hover:text-[#20231d] px-3 py-1.5 border border-[#ede8de] rounded-lg">
+                    <button type="button" onclick="switchTab('products')" class="btn-outline text-xs">
                         Back to Catalog
                     </button>
                 </div>
 
-                <form id="manage-product-form" class="bg-white rounded-xl border border-[#ede8de] p-6 shadow-sm max-w-3xl space-y-5">
+                <form id="manage-product-form" class="bg-surface-bright border border-outline/40 p-6 shadow-sm max-w-3xl space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-1 sm:col-span-2">
-                            <label class="text-xs font-semibold text-[#20231d]">Product Name</label>
-                            <input type="text" id="new-product-name" required placeholder="e.g. Dryfruit Laddu" class="w-full px-3 py-2 bg-[#fcfbfa] border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none">
+                            <label class="text-xs font-semibold text-on-surface font-label">Product Name</label>
+                            <input type="text" id="new-product-name" required placeholder="e.g. Dryfruit Laddu" class="w-full px-3 py-2 bg-surface-container-low border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none">
                         </div>
                         <div class="space-y-1">
-                            <label class="text-xs font-semibold text-[#20231d]">Category</label>
-                            <select id="new-product-category" required class="w-full px-3 py-2 bg-[#fcfbfa] border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none">
+                            <label class="text-xs font-semibold text-on-surface font-label">Category</label>
+                            <select id="new-product-category" required class="w-full px-3 py-2 bg-surface-container-low border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none">
                                 <option value="Laddu">Laddu</option>
                                 <option value="Papad">Papad</option>
                                 <option value="Flours">Flours</option>
@@ -530,32 +524,32 @@
                             </select>
                         </div>
                         <div class="space-y-1">
-                            <label class="text-xs font-semibold text-[#20231d]">Price (₹)</label>
-                            <input type="number" id="new-product-price" required min="1" placeholder="e.g. 500" class="w-full px-3 py-2 bg-[#fcfbfa] border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none">
+                            <label class="text-xs font-semibold text-on-surface font-label">Price (₹)</label>
+                            <input type="number" id="new-product-price" required min="1" placeholder="e.g. 500" class="w-full px-3 py-2 bg-surface-container-low border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none">
                         </div>
                         <div class="space-y-1">
-                            <label class="text-xs font-semibold text-[#20231d]">Unit / Weight</label>
-                            <input type="text" id="new-product-unit" required placeholder="e.g. /kg or /pack" class="w-full px-3 py-2 bg-[#fcfbfa] border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none">
+                            <label class="text-xs font-semibold text-on-surface font-label">Unit / Weight</label>
+                            <input type="text" id="new-product-unit" required placeholder="e.g. /kg or /pack" class="w-full px-3 py-2 bg-surface-container-low border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none">
                         </div>
                         <div class="space-y-1">
-                            <label class="text-xs font-semibold text-[#20231d]">Image URL</label>
-                            <input type="url" id="new-product-image-url" placeholder="https://... or /images/..." class="w-full px-3 py-2 bg-[#fcfbfa] border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none">
+                            <label class="text-xs font-semibold text-on-surface font-label">Image URL</label>
+                            <input type="url" id="new-product-image-url" placeholder="https://... or /images/..." class="w-full px-3 py-2 bg-surface-container-low border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none">
                         </div>
                         <div class="space-y-1 sm:col-span-2">
-                            <label class="text-xs font-semibold text-[#20231d]">Or Upload File</label>
-                            <input type="file" id="new-product-file" accept="image/*" class="w-full text-xs text-[#6c7263]">
+                            <label class="text-xs font-semibold text-on-surface font-label">Or Upload File</label>
+                            <input type="file" id="new-product-file" accept="image/*" class="w-full text-xs text-secondary">
                         </div>
                         <div class="space-y-1 sm:col-span-2">
-                            <label class="text-xs font-semibold text-[#20231d]">Description</label>
-                            <textarea id="new-product-desc" required rows="4" placeholder="Authentic Maharashtrian preparation details..." class="w-full px-3 py-2 bg-[#fcfbfa] border border-[#ede8de] rounded-lg text-xs focus:ring-1 focus:ring-[#3b5334] outline-none"></textarea>
+                            <label class="text-xs font-semibold text-on-surface font-label">Description</label>
+                            <textarea id="new-product-desc" required rows="4" placeholder="Authentic Maharashtrian preparation details..." class="w-full px-3 py-2 bg-surface-container-low border border-outline/40 text-xs focus:ring-1 focus:ring-primary outline-none"></textarea>
                         </div>
                     </div>
 
-                    <div class="flex justify-end gap-3 pt-3 border-t border-[#f1ede6]">
-                        <button type="button" onclick="switchTab('products')" class="px-4 py-2 border border-[#ede8de] rounded-lg text-xs font-semibold text-[#6c7263] hover:bg-[#f9f7f2]">
+                    <div class="flex justify-end gap-3 pt-3 border-t border-outline/20">
+                        <button type="button" onclick="switchTab('products')" class="btn-ghost text-xs">
                             Cancel
                         </button>
-                        <button type="submit" id="submit-product-btn" class="px-5 py-2 bg-[#2e472a] hover:bg-[#233821] text-white text-xs font-semibold rounded-lg transition-colors shadow-sm">
+                        <button type="submit" id="submit-product-btn" class="btn-primary text-xs py-2 px-5">
                             Save Product
                         </button>
                     </div>
@@ -565,43 +559,43 @@
             <!-- 5. CUSTOMERS VIEW -->
             <div id="view-customers" class="hidden space-y-5">
                 <div>
-                    <h2 class="font-headline text-2xl font-bold text-[#20231d]">Registered Customers</h2>
-                    <p class="text-xs text-[#6c7263] mt-0.5">View customer directory, accounts, and contact details.</p>
+                    <h2 class="font-headline text-2xl font-bold text-on-surface">Registered Customers</h2>
+                    <p class="text-xs text-secondary mt-0.5 font-light">View customer directory, accounts, and contact details.</p>
                 </div>
 
-                <div class="bg-white rounded-xl border border-[#ede8de] shadow-sm overflow-x-auto admin-scroll">
+                <div class="bg-surface-bright border border-outline/40 shadow-sm overflow-x-auto admin-scroll">
                     <table class="w-full text-left text-xs border-collapse min-w-[600px]">
-                        <thead class="bg-[#faf8f2] border-b border-[#ede8de]">
-                            <tr class="text-[11px] text-[#6b7364] font-semibold">
-                                <th class="py-3 px-4 font-medium">Customer</th>
-                                <th class="py-3 px-4 font-medium">Email</th>
-                                <th class="py-3 px-4 font-medium">Registered Date</th>
-                                <th class="py-3 px-4 font-medium text-right">Role</th>
+                        <thead class="bg-surface-container-low border-b border-outline/30">
+                            <tr class="text-[10px] text-secondary font-bold font-label uppercase tracking-wider">
+                                <th class="py-3 px-4">Customer</th>
+                                <th class="py-3 px-4">Email</th>
+                                <th class="py-3 px-4">Registered Date</th>
+                                <th class="py-3 px-4 text-right">Role</th>
                             </tr>
                         </thead>
-                        <tbody id="full-customers-tbody" class="divide-y divide-[#f7f4ed]">
-                            <tr><td colspan="4" class="py-8 text-center text-[#7c8375] text-xs">Loading customers...</td></tr>
+                        <tbody id="full-customers-tbody" class="divide-y divide-outline/20">
+                            <tr><td colspan="4" class="py-8 text-center text-secondary text-xs">Loading customers...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 6. ANALYTICS & REPORTS VIEW -->
+            <!-- 6. ANALYTICS VIEW (Single Comprehensive View) -->
             <div id="view-analytics" class="hidden space-y-6">
                 <div>
-                    <h2 class="font-headline text-2xl font-bold text-[#20231d]">Store Analytics & Reports</h2>
-                    <p class="text-xs text-[#6c7263] mt-0.5">Comprehensive performance charts and operational data.</p>
+                    <h2 class="font-headline text-2xl font-bold text-on-surface">Store Analytics & Reports</h2>
+                    <p class="text-xs text-secondary mt-0.5 font-light">Comprehensive performance charts and operational data.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-xl p-5 border border-[#ede8de] shadow-sm">
-                        <h3 class="text-sm font-bold text-[#20231d] mb-4">Orders Volume Trend</h3>
+                    <div class="bg-surface-bright p-5 border border-outline/40 shadow-sm">
+                        <h3 class="font-headline text-sm font-bold text-on-surface mb-4">Orders Volume Trend</h3>
                         <div class="relative h-64 w-full">
                             <canvas id="chart-volume-trend"></canvas>
                         </div>
                     </div>
-                    <div class="bg-white rounded-xl p-5 border border-[#ede8de] shadow-sm">
-                        <h3 class="text-sm font-bold text-[#20231d] mb-4">Fulfillment Status Breakdown</h3>
+                    <div class="bg-surface-bright p-5 border border-outline/40 shadow-sm">
+                        <h3 class="font-headline text-sm font-bold text-on-surface mb-4">Fulfillment Status Breakdown</h3>
                         <div class="relative h-64 w-full flex items-center justify-center">
                             <canvas id="chart-fulfillment-status"></canvas>
                         </div>
@@ -627,7 +621,7 @@
         let chartsInstances = {};
         let editProductId = null;
 
-        // Image map for known authentic products
+        // Image map for authentic products
         const PRODUCT_IMAGES = {
             'methi laddu': '/images/Methi_laddu.webp',
             'nachani laddu': '/images/Nachani_laddu.webp',
@@ -666,7 +660,7 @@
             return found?.image || '/images/placeholder.svg';
         }
 
-        // Tab Switching
+        // Clean Tab Switching (Only Unique Tabs)
         window.switchTab = function(tabName) {
             const views = ['dashboard', 'orders', 'products', 'manage-product', 'customers', 'analytics'];
             views.forEach(v => {
@@ -674,21 +668,16 @@
                 if (el) el.classList.add('hidden');
                 const nav = document.getElementById(`nav-${v}`);
                 if (nav) {
-                    nav.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#c0cfbe] hover:bg-[#203622] hover:text-white transition-colors";
+                    nav.className = "w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-medium text-secondary hover:bg-surface-container hover:text-on-surface border-l-4 border-transparent transition-colors";
                 }
             });
 
-            // Handle alias for reports or settings
-            let targetView = tabName;
-            if (tabName === 'reports') targetView = 'analytics';
-            if (tabName === 'settings') targetView = 'dashboard';
-
-            const activeEl = document.getElementById(`view-${targetView}`);
+            const activeEl = document.getElementById(`view-${tabName}`);
             if (activeEl) activeEl.classList.remove('hidden');
 
             const activeNav = document.getElementById(`nav-${tabName}`);
             if (activeNav) {
-                activeNav.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-semibold bg-[#2a452c] text-white transition-colors";
+                activeNav.className = "w-full flex items-center justify-between px-3 py-2.5 text-xs font-semibold border-l-4 border-primary bg-surface-container text-primary transition-colors";
             }
 
             // Close mobile sidebar
@@ -697,7 +686,7 @@
                 sidebar.classList.add('-translate-x-full');
             }
 
-            if (targetView === 'analytics') {
+            if (tabName === 'analytics') {
                 setTimeout(renderAnalyticsCharts, 100);
             }
         };
@@ -797,22 +786,22 @@
 
             const recent = allOrders.slice(0, 5);
             if (recent.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-[#7c8375]">No orders placed yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-secondary">No orders placed yet.</td></tr>`;
                 return;
             }
 
             recent.forEach(order => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#faf8f2] transition-colors";
+                tr.className = "hover:bg-surface-container-low transition-colors";
                 const shortId = '#' + (order.id ? order.id.slice(0, 7).toUpperCase() : 'CM1000');
                 const customer = order.name ? order.name.split(' ')[0] : 'Customer';
                 const amount = `₹ ${(order.totalAmount || 0).toLocaleString('en-IN')}`;
                 const badge = getStatusBadge(order.status || 'pending');
 
                 tr.innerHTML = `
-                    <td class="py-2.5 font-semibold text-[#20231d] font-mono text-[11px]">${shortId}</td>
-                    <td class="py-2.5 text-[#3b4334] max-w-[100px] truncate">${customer}</td>
-                    <td class="py-2.5 font-semibold text-[#20231d]">${amount}</td>
+                    <td class="py-2.5 font-semibold text-on-surface font-mono text-[11px]">${shortId}</td>
+                    <td class="py-2.5 text-on-surface max-w-[100px] truncate">${customer}</td>
+                    <td class="py-2.5 font-semibold text-on-surface">${amount}</td>
                     <td class="py-2.5 text-right">${badge}</td>
                 `;
                 tbody.appendChild(tr);
@@ -825,13 +814,13 @@
             tbody.innerHTML = '';
 
             if (ordersList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-[#7c8375]">No matching orders found.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-secondary">No matching orders found.</td></tr>`;
                 return;
             }
 
             ordersList.forEach(order => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#faf8f2] transition-colors";
+                tr.className = "hover:bg-surface-container-low transition-colors";
 
                 const shortId = '#' + (order.id ? order.id.slice(0, 7).toUpperCase() : 'CM1000');
                 let dateStr = 'Recent';
@@ -851,19 +840,19 @@
 
                 tr.innerHTML = `
                     <td class="py-3 px-4">
-                        <p class="font-semibold text-[#20231d] font-mono">${shortId}</p>
-                        <p class="text-[10px] text-[#717769] mt-0.5">${dateStr}</p>
+                        <p class="font-semibold text-on-surface font-mono">${shortId}</p>
+                        <p class="text-[10px] text-secondary mt-0.5">${dateStr}</p>
                     </td>
                     <td class="py-3 px-4">
-                        <p class="font-semibold text-[#20231d]">${order.name || 'Anonymous'}</p>
-                        <p class="text-[10px] text-[#717769]">${order.phone || ''}</p>
+                        <p class="font-semibold text-on-surface">${order.name || 'Anonymous'}</p>
+                        <p class="text-[10px] text-secondary">${order.phone || ''}</p>
                     </td>
                     <td class="py-3 px-4">
-                        <p class="text-[#20231d] max-w-[220px] truncate" title="${itemsText}">${itemsText}</p>
-                        <p class="font-semibold text-[#98462f] mt-0.5">${amount}</p>
+                        <p class="text-on-surface max-w-[220px] truncate" title="${itemsText}">${itemsText}</p>
+                        <p class="font-semibold text-primary mt-0.5">${amount}</p>
                     </td>
                     <td class="py-3 px-4">
-                        <select data-order-id="${order.id}" class="order-status-select text-[10px] font-semibold uppercase tracking-wider rounded-md px-2 py-1 border cursor-pointer ${getStatusSelectClass(order.status)}">
+                        <select data-order-id="${order.id}" class="order-status-select text-[10px] font-semibold uppercase tracking-wider px-2 py-1 border cursor-pointer ${getStatusSelectClass(order.status)}">
                             <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
                             <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
                             <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Delivered</option>
@@ -871,7 +860,7 @@
                         </select>
                     </td>
                     <td class="py-3 px-4 text-right">
-                        <button type="button" onclick="deleteOrderHandler('${order.id}')" class="w-7 h-7 rounded-md hover:bg-rose-50 text-[#b83333] inline-flex items-center justify-center transition-colors" title="Delete Order">
+                        <button type="button" onclick="deleteOrderHandler('${order.id}')" class="w-7 h-7 rounded hover:bg-rose-50 text-red-700 inline-flex items-center justify-center transition-colors" title="Delete Order">
                             <span class="material-symbols-outlined text-[16px]">delete</span>
                         </button>
                     </td>
@@ -910,7 +899,7 @@
             }
         };
 
-        // Render Sales Overview (Combined Bar & Line Chart)
+        // Render Sales Overview (Combined Bar & Line Chart matching Brand Theme)
         function renderSalesOverviewChart() {
             const ctx = document.getElementById('chart-sales-overview')?.getContext('2d');
             if (!ctx) return;
@@ -951,9 +940,9 @@
                             type: 'bar',
                             label: 'Earnings (₹)',
                             data: days.map(d => d.earnings),
-                            backgroundColor: '#5c724e',
-                            borderRadius: 4,
-                            barPercentage: 0.5,
+                            backgroundColor: '#98462f', // primary brand color
+                            borderRadius: 2,
+                            barPercentage: 0.45,
                             yAxisID: 'y'
                         },
                         {
@@ -981,13 +970,13 @@
                     scales: {
                         x: {
                             grid: { display: false },
-                            ticks: { font: { size: 10, family: 'Inter' }, color: '#7c8375' }
+                            ticks: { font: { size: 10, family: 'Inter' }, color: '#4a4a4a' }
                         },
                         y: {
                             type: 'linear',
                             position: 'left',
-                            grid: { color: '#f0ece3' },
-                            ticks: { font: { size: 10, family: 'Inter' }, color: '#7c8375' }
+                            grid: { color: '#eae8e3' },
+                            ticks: { font: { size: 10, family: 'Inter' }, color: '#4a4a4a' }
                         },
                         y1: {
                             type: 'linear',
@@ -1000,7 +989,7 @@
             });
         }
 
-        // Render Product-wise Sales Donut Chart
+        // Render Product-wise Sales Donut Chart (Warm Brand Palette)
         function renderProductDonutChart() {
             const ctx = document.getElementById('chart-product-donut')?.getContext('2d');
             const legendList = document.getElementById('donut-legend-list');
@@ -1046,7 +1035,8 @@
                 topCategories.push({ name: 'Other Delights', count: otherCount });
             }
 
-            const colors = ['#3d6b38', '#e8872e', '#9b51e0', '#e04f5f', '#4f80e0'];
+            // Warm brand colors: terracotta, amber, rich brown, dark charcoal, sage
+            const colors = ['#98462f', '#e8872e', '#782e19', '#1c1b1b', '#5c724e'];
 
             chartsInstances.donut = new Chart(ctx, {
                 type: 'doughnut',
@@ -1071,13 +1061,13 @@
             topCategories.forEach((cat, idx) => {
                 const pct = grandTotalQty > 0 ? Math.round((cat.count / grandTotalQty) * 100) : 0;
                 const row = document.createElement('div');
-                row.className = "flex items-center justify-between text-[#444a3e]";
+                row.className = "flex items-center justify-between text-secondary";
                 row.innerHTML = `
                     <div class="flex items-center gap-2 truncate">
                         <span class="w-2 h-2 rounded-full flex-shrink-0" style="background-color: ${colors[idx % colors.length]};"></span>
                         <span class="truncate">${cat.name}</span>
                     </div>
-                    <span class="font-semibold font-mono text-[10px] ml-2 text-[#20231d]">${pct}%</span>
+                    <span class="font-semibold font-mono text-[10px] ml-2 text-on-surface">${pct}%</span>
                 `;
                 legendList.appendChild(row);
             });
@@ -1126,20 +1116,20 @@
 
             sorted.slice(0, 5).forEach((p, idx) => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#faf8f2] transition-colors";
+                tr.className = "hover:bg-surface-container-low transition-colors";
                 const img = getProductImg(p.name);
                 const revText = `₹ ${(p.rev || 0).toLocaleString('en-IN')}`;
 
                 tr.innerHTML = `
-                    <td class="py-2.5 pr-2 font-mono text-[10px] text-[#7c8375]">${idx + 1}</td>
+                    <td class="py-2.5 pr-2 font-mono text-[10px] text-secondary">${idx + 1}</td>
                     <td class="py-2.5 px-2">
                         <div class="flex items-center gap-2.5">
-                            <img src="${img}" alt="${p.name}" class="w-7 h-7 rounded-md object-cover border border-[#ede8de] flex-shrink-0" onerror="this.src='/images/placeholder.svg'" />
-                            <span class="font-semibold text-[#20231d] truncate max-w-[120px]">${p.name}</span>
+                            <img src="${img}" alt="${p.name}" class="w-7 h-7 object-cover border border-outline/30 flex-shrink-0" onerror="this.src='/images/placeholder.svg'" />
+                            <span class="font-semibold text-on-surface truncate max-w-[120px] font-label">${p.name}</span>
                         </div>
                     </td>
-                    <td class="py-2.5 px-2 text-[#444a3e]">${p.qty} sold</td>
-                    <td class="py-2.5 pl-2 font-semibold text-[#20231d] text-right">${revText}</td>
+                    <td class="py-2.5 px-2 text-secondary font-label">${p.qty} sold</td>
+                    <td class="py-2.5 pl-2 font-semibold text-on-surface text-right font-label">${revText}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1152,27 +1142,26 @@
             tbody.innerHTML = '';
 
             if (allUsers.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-[#7c8375]">No customers recorded yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-secondary">No customers recorded yet.</td></tr>`;
                 return;
             }
 
             allUsers.slice(0, 5).forEach(u => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#faf8f2] transition-colors";
+                tr.className = "hover:bg-surface-container-low transition-colors";
                 
-                // Count orders for this user
                 const userOrdersCount = allOrders.filter(o => o.userId === u.id || o.name === u.name).length;
                 const regDate = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : 'Recent';
 
                 tr.innerHTML = `
                     <td class="py-2.5 pr-2">
                         <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[16px] text-[#7c8375]">person</span>
-                            <span class="font-medium text-[#20231d] truncate max-w-[110px]">${u.name || 'Customer'}</span>
+                            <span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+                            <span class="font-medium text-on-surface truncate max-w-[110px] font-label">${u.name || 'Customer'}</span>
                         </div>
                     </td>
-                    <td class="py-2.5 px-2 text-center text-[#444a3e]">${userOrdersCount}</td>
-                    <td class="py-2.5 pl-2 text-right text-[#7c8375] font-mono text-[10px]">${regDate}</td>
+                    <td class="py-2.5 px-2 text-center text-secondary font-label">${userOrdersCount}</td>
+                    <td class="py-2.5 pl-2 text-right text-secondary font-mono text-[10px]">${regDate}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1186,18 +1175,18 @@
 
             allUsers.forEach(u => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#faf8f2] transition-colors";
+                tr.className = "hover:bg-surface-container-low transition-colors";
                 const regDate = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Unknown';
 
                 tr.innerHTML = `
                     <td class="py-3 px-4">
-                        <p class="font-semibold text-[#20231d]">${u.name || 'Anonymous'}</p>
-                        <p class="text-[10px] text-[#717769] font-mono">#${(u.id || '').slice(0, 8)}</p>
+                        <p class="font-semibold text-on-surface font-label">${u.name || 'Anonymous'}</p>
+                        <p class="text-[10px] text-secondary font-mono">#${(u.id || '').slice(0, 8)}</p>
                     </td>
-                    <td class="py-3 px-4 text-[#444a3e]">${u.email || '—'}</td>
-                    <td class="py-3 px-4 text-[#717769]">${regDate}</td>
+                    <td class="py-3 px-4 text-secondary font-label">${u.email || '—'}</td>
+                    <td class="py-3 px-4 text-secondary font-label">${regDate}</td>
                     <td class="py-3 px-4 text-right">
-                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-emerald-100 text-emerald-800'}">
+                        <span class="inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-emerald-100 text-emerald-800'}">
                             ${u.role || 'user'}
                         </span>
                     </td>
@@ -1213,27 +1202,27 @@
             grid.innerHTML = '';
 
             if (allProducts.length === 0) {
-                grid.innerHTML = `<p class="col-span-full py-8 text-center text-[#7c8375]">No products found in catalog.</p>`;
+                grid.innerHTML = `<p class="col-span-full py-8 text-center text-secondary">No products found in catalog.</p>`;
                 return;
             }
 
             allProducts.forEach(p => {
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-xl p-4 border border-[#ede8de] shadow-sm flex items-center justify-between gap-3 group hover:border-[#3b5334] transition-colors";
+                card.className = "bg-surface-bright p-4 border border-outline/40 shadow-sm flex items-center justify-between gap-3 group hover:border-primary transition-colors";
                 card.innerHTML = `
                     <div class="flex items-center gap-3 min-w-0">
-                        <img src="${p.image}" alt="${p.name}" class="w-12 h-12 rounded-lg object-cover border border-[#ede8de] flex-shrink-0" onerror="this.src='/images/placeholder.svg'" />
+                        <img src="${p.image}" alt="${p.name}" class="w-12 h-12 object-cover border border-outline/30 flex-shrink-0" onerror="this.src='/images/placeholder.svg'" />
                         <div class="min-w-0">
-                            <h4 class="font-semibold text-xs text-[#20231d] truncate">${p.name}</h4>
-                            <p class="text-[11px] font-bold text-[#98462f] mt-0.5">${p.price} <span class="text-[10px] text-[#717769] font-normal">${p.unit || ''}</span></p>
-                            <span class="inline-block text-[9px] uppercase tracking-wider px-1.5 py-0.5 bg-[#f4efe4] text-[#555d4f] rounded mt-1">${p.category || 'Special'}</span>
+                            <h4 class="font-semibold text-xs text-on-surface truncate font-label">${p.name}</h4>
+                            <p class="text-[11px] font-bold text-primary mt-0.5 font-label">${p.price} <span class="text-[10px] text-secondary font-normal">${p.unit || ''}</span></p>
+                            <span class="inline-block text-[9px] uppercase tracking-wider px-1.5 py-0.5 bg-surface-container text-secondary mt-1 font-label">${p.category || 'Special'}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-1">
-                        <button type="button" onclick="editProductGlobal('${p.id}')" class="w-7 h-7 rounded-md hover:bg-[#f4efe6] text-[#4f5647] inline-flex items-center justify-center transition-colors" title="Edit Product">
+                        <button type="button" onclick="editProductGlobal('${p.id}')" class="w-7 h-7 hover:bg-surface-container text-secondary hover:text-primary inline-flex items-center justify-center transition-colors" title="Edit Product">
                             <span class="material-symbols-outlined text-[16px]">edit</span>
                         </button>
-                        <button type="button" onclick="deleteProductHandler('${p.id}')" class="w-7 h-7 rounded-md hover:bg-rose-50 text-[#b83333] inline-flex items-center justify-center transition-colors" title="Delete Product">
+                        <button type="button" onclick="deleteProductHandler('${p.id}')" class="w-7 h-7 hover:bg-rose-50 text-red-700 inline-flex items-center justify-center transition-colors" title="Delete Product">
                             <span class="material-symbols-outlined text-[16px]">delete</span>
                         </button>
                     </div>
@@ -1313,7 +1302,7 @@
                     showToast('Product successfully updated.');
                 } else {
                     productPayload.badge = 'Special';
-                    productPayload.badgeColor = 'bg-[#3b5334] text-white';
+                    productPayload.badgeColor = 'bg-primary text-on-primary';
                     await addProduct(productPayload);
                     showToast('New product added to catalog.');
                 }
@@ -1331,7 +1320,7 @@
             }
         });
 
-        // Analytics Additional Charts
+        // Analytics Charts
         function renderAnalyticsCharts() {
             const volCtx = document.getElementById('chart-volume-trend')?.getContext('2d');
             const statCtx = document.getElementById('chart-fulfillment-status')?.getContext('2d');
@@ -1344,8 +1333,8 @@
                         datasets: [{
                             label: 'Orders',
                             data: [3, 5, 2, 8, 6, 12, 9],
-                            borderColor: '#3d6b38',
-                            backgroundColor: 'rgba(61, 107, 56, 0.1)',
+                            borderColor: '#98462f',
+                            backgroundColor: 'rgba(152, 70, 47, 0.1)',
                             fill: true,
                             tension: 0.4
                         }]
@@ -1368,7 +1357,7 @@
                         labels: ['Delivered', 'Confirmed', 'Pending'],
                         datasets: [{
                             data: [delivered || 5, confirmed || 3, pending || 2],
-                            backgroundColor: ['#2e7d32', '#1976d2', '#f57c00']
+                            backgroundColor: ['#2e7d32', '#1976d2', '#e8872e']
                         }]
                     },
                     options: { responsive: true, maintainAspectRatio: false }
@@ -1376,19 +1365,19 @@
             }
         }
 
-        // Helpers
+        // Status Badge Helpers
         function getStatusBadge(status) {
             const base = "inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold";
             switch(status?.toLowerCase()) {
                 case 'delivered':
-                    return `<span class="${base} bg-emerald-50 text-emerald-700 border border-emerald-200">Delivered</span>`;
+                    return `<span class="${base} bg-emerald-50 text-emerald-800 border border-emerald-200">Delivered</span>`;
                 case 'confirmed':
-                    return `<span class="${base} bg-sky-50 text-sky-700 border border-sky-200">Confirmed</span>`;
+                    return `<span class="${base} bg-sky-50 text-sky-800 border border-sky-200">Confirmed</span>`;
                 case 'cancelled':
-                    return `<span class="${base} bg-rose-50 text-rose-700 border border-rose-200">Cancelled</span>`;
+                    return `<span class="${base} bg-rose-50 text-rose-800 border border-rose-200">Cancelled</span>`;
                 case 'pending':
                 default:
-                    return `<span class="${base} bg-amber-50 text-amber-700 border border-amber-200">Pending</span>`;
+                    return `<span class="${base} bg-amber-50 text-amber-800 border border-amber-200">Pending</span>`;
             }
         }
 
@@ -1402,9 +1391,8 @@
             }
         }
 
-        // Interactivity Setup
+        // Setup Event Listeners
         function setupInteractivity() {
-            // Profile & Notification Dropdowns
             const profileBtn = document.getElementById('admin-profile-btn');
             const profileDropdown = document.getElementById('admin-profile-dropdown');
             const notifBtn = document.getElementById('notif-btn');
@@ -1438,12 +1426,12 @@
             document.getElementById('admin-logout-btn')?.addEventListener('click', async () => {
                 const res = await logoutUser();
                 if (res.success) {
-                    showToast('Signed out of admin vault');
+                    showToast('Signed out of admin portal');
                     window.location.href = 'login.html';
                 }
             });
 
-            // Orders Search Filter
+            // Search filter for full orders table
             document.getElementById('orders-search-input')?.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase().trim();
                 const filtered = allOrders.filter(o => 
