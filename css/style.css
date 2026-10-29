@@ -222,3 +222,50 @@ body {
     opacity: 1;
   }
 }
+
+
+/* ===== Continuous Horizontal Product Marquee ===== */
+.product-marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 1rem 0;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.product-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: product-marquee-scroll 50s linear infinite;
+}
+
+.product-marquee-wrapper:hover .product-marquee-track,
+.product-marquee-wrapper:focus-within .product-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes product-marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-marquee-wrapper {
+    mask-image: none;
+    -webkit-mask-image: none;
+    overflow-x: auto;
+  }
+  .product-marquee-track {
+    animation: none;
+    width: auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 1rem;
+  }
+}
