@@ -39,11 +39,77 @@
                 <p class="text-secondary text-sm sm:text-base mt-2 font-light">Here's what's happening with your orders and purchases.</p>
             </div>
 
-            <!-- Dashboard Layout: Main Content + Right Sidebar -->
+            <!-- Dashboard Layout: Left Sidebar + Main Content -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-                <!-- LEFT: Main Content Area (9 cols on desktop) -->
-                <div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-8">
+                <!-- LEFT: Sidebar (3-4 cols on desktop) -->
+                <aside class="lg:col-span-4 xl:col-span-3 flex flex-col gap-6 order-2 lg:order-1">
+
+                    <!-- Quick Actions -->
+                    <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm">
+                        <h3 class="font-headline text-base font-bold text-on-surface mb-4">Quick Actions</h3>
+                        <div class="space-y-2">
+                            <a href="order.html" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
+                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">shopping_cart</span>
+                                </span>
+                                <span class="text-xs font-semibold text-on-surface font-label">Shop More</span>
+                            </a>
+
+                            <a href="#recent-orders-section" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
+                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">package_2</span>
+                                </span>
+                                <span class="text-xs font-semibold text-on-surface font-label">View All Orders</span>
+                            </a>
+
+                            <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20recent%20order." target="_blank" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
+                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">support_agent</span>
+                                </span>
+                                <span class="text-xs font-semibold text-on-surface font-label">Contact Support</span>
+                            </a>
+
+                            <!-- Admin link (hidden until admin role) -->
+                            <a href="admin.html" id="admin-link" class="hidden items-center gap-3 p-3 border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-all group">
+                                <span class="w-8 h-8 bg-primary text-on-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-lg">shield_person</span>
+                                </span>
+                                <span class="text-xs font-semibold text-primary font-label">Admin Panel</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Promo Banner -->
+                    <div class="relative overflow-hidden border border-outline/40 shadow-sm group">
+                        <img src="/images/hero.webp" alt="Authentic Food" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-5 text-white">
+                            <span class="font-label text-[10px] font-semibold text-primary/90 tracking-widest uppercase">Pure · Homemade</span>
+                            <h4 class="font-headline font-bold text-base leading-tight mt-0.5 mb-3">Maharashtrian Delights.</h4>
+                            <a href="order.html" class="btn-outline border-white/30 text-white hover:bg-white/20 hover:text-white text-[10px] px-3 py-1.5 w-fit">
+                                Explore Products →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Patron Gratitude -->
+                    <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm flex items-start gap-3">
+                        <span class="material-symbols-outlined text-xl text-primary mt-0.5">eco</span>
+                        <div>
+                            <p class="text-xs font-semibold text-on-surface">Thank you for supporting homemade food!</p>
+                            <p class="text-[11px] text-secondary font-headline italic mt-1">— Chav Mayechi</p>
+                        </div>
+                    </div>
+
+                    <!-- Logout -->
+                    <button id="dashboard-logout" type="button" class="w-full py-3 border border-outline/40 text-xs font-label font-medium text-secondary hover:text-primary hover:border-primary/40 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-base">logout</span>
+                        Sign Out
+                    </button>
+                </aside>
+
+                <!-- RIGHT: Main Content Area (8-9 cols on desktop) -->
+                <div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-8 order-1 lg:order-2">
 
                     <!-- 4 Metric Cards -->
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -201,71 +267,6 @@
                     </div>
                 </div>
 
-                <!-- RIGHT: Sidebar (3-4 cols on desktop) -->
-                <aside class="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
-
-                    <!-- Quick Actions -->
-                    <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm">
-                        <h3 class="font-headline text-base font-bold text-on-surface mb-4">Quick Actions</h3>
-                        <div class="space-y-2">
-                            <a href="order.html" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
-                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                                    <span class="material-symbols-outlined text-lg">shopping_cart</span>
-                                </span>
-                                <span class="text-xs font-semibold text-on-surface font-label">Shop More</span>
-                            </a>
-
-                            <a href="#recent-orders-section" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
-                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                                    <span class="material-symbols-outlined text-lg">package_2</span>
-                                </span>
-                                <span class="text-xs font-semibold text-on-surface font-label">View All Orders</span>
-                            </a>
-
-                            <a href="https://wa.me/918208519403?text=Hi!%20I%20need%20help%20with%20my%20recent%20order." target="_blank" class="flex items-center gap-3 p-3 border border-outline/30 hover:border-primary/40 hover:bg-surface-container-low transition-all group">
-                                <span class="w-8 h-8 bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                                    <span class="material-symbols-outlined text-lg">support_agent</span>
-                                </span>
-                                <span class="text-xs font-semibold text-on-surface font-label">Contact Support</span>
-                            </a>
-
-                            <!-- Admin link (hidden until admin role) -->
-                            <a href="admin.html" id="admin-link" class="hidden items-center gap-3 p-3 border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-all group">
-                                <span class="w-8 h-8 bg-primary text-on-primary flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-lg">shield_person</span>
-                                </span>
-                                <span class="text-xs font-semibold text-primary font-label">Admin Panel</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Promo Banner -->
-                    <div class="relative overflow-hidden border border-outline/40 shadow-sm group">
-                        <img src="/images/hero.webp" alt="Authentic Food" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-5 text-white">
-                            <span class="font-label text-[10px] font-semibold text-primary/90 tracking-widest uppercase">Pure · Homemade</span>
-                            <h4 class="font-headline font-bold text-base leading-tight mt-0.5 mb-3">Maharashtrian Delights.</h4>
-                            <a href="order.html" class="btn-outline border-white/30 text-white hover:bg-white/20 hover:text-white text-[10px] px-3 py-1.5 w-fit">
-                                Explore Products →
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Patron Gratitude -->
-                    <div class="bg-surface-bright border border-outline/40 p-5 shadow-sm flex items-start gap-3">
-                        <span class="material-symbols-outlined text-xl text-primary mt-0.5">eco</span>
-                        <div>
-                            <p class="text-xs font-semibold text-on-surface">Thank you for supporting homemade food!</p>
-                            <p class="text-[11px] text-secondary font-headline italic mt-1">— Chav Mayechi</p>
-                        </div>
-                    </div>
-
-                    <!-- Logout -->
-                    <button id="dashboard-logout" type="button" class="w-full py-3 border border-outline/40 text-xs font-label font-medium text-secondary hover:text-primary hover:border-primary/40 transition-colors flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-base">logout</span>
-                        Sign Out
-                    </button>
-                </aside>
             </div>
         </div>
     </main>
