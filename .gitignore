@@ -70,3 +70,7 @@ dist/
 
 # dataconnect generated files
 .dataconnect
+
+# IDE / Tooling / Media
+.kilo/
+*.mp4

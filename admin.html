@@ -601,7 +601,7 @@
     <!-- Scripts -->
     <script type="module">
         import { getAllOrders, updateOrderStatus, deleteOrder } from './js/orders-service.js';
-        import { getAllProducts, addProduct, deleteProduct, updateProduct, getProductById } from './js/products-service.js';
+        import { getAllProducts, addProduct, deleteProduct, updateProduct, getProductById, findProductImage } from './js/products-service.js';
         import { onAuthChange, getUserData, logoutUser, getAllUsers } from './js/auth-service.js';
         import { showToast } from './js/ui.js';
         import { storage } from './js/firebase-config.js';
@@ -612,45 +612,6 @@
         let allUsers = [];
         let chartsInstances = {};
         let editProductId = null;
-
-        // Image map for authentic products
-        const PRODUCT_IMAGES = {
-            'methi laddu': '/images/Methi_laddu.webp',
-            'nachani laddu': '/images/Nachani_laddu.webp',
-            'dryfruit laddu': '/images/Dryfruit.webp',
-            'khajur laddu': '/images/Khajur.webp',
-            'besan laddu': '/images/Besan.webp',
-            'rava laddu': '/images/Rava.webp',
-            'kothimbir papad': '/images/Kothimbir.webp',
-            'palak papad': '/images/Palak.webp',
-            'masala papad': '/images/Masala.webp',
-            'udit papad': '/images/Udit.webp',
-            'nachani pith': '/images/Nachani_pith.webp',
-            'modak pith': '/images/Modak_pith.webp',
-            'jowar kurmura': '/images/Jowar_kurmura.webp',
-            'nachani kurmura': '/images/Nachani_kurmura.webp',
-            'roasted bajra': '/images/Roasted_bajra.webp',
-            'roasted jowar': '/images/Roasted_jowar.webp',
-            'bhajka poha': '/images/Bhajka_poha.webp',
-            'white poha': '/images/Poha.webp',
-            'red poha': '/images/red_poha.webp',
-            'kadve vaal': '/images/Vaal.webp',
-            'gavran mataki': '/images/Mataki.webp',
-            'kombadi vade': '/images/Kombadi_vade.webp'
-        };
-
-        function getProductImg(name) {
-            if (!name) return '/images/placeholder.svg';
-            const lower = name.toLowerCase().trim();
-            const clean = lower.replace(/\(.*?\)/g, '').trim();
-            if (PRODUCT_IMAGES[clean]) return PRODUCT_IMAGES[clean];
-            if (PRODUCT_IMAGES[lower]) return PRODUCT_IMAGES[lower];
-            for (const [k, img] of Object.entries(PRODUCT_IMAGES)) {
-                if (clean.includes(k) || k.includes(clean)) return img;
-            }
-            const found = allProducts.find(p => p.name && p.name.toLowerCase().includes(clean));
-            return found?.image || '/images/placeholder.svg';
-        }
 
         // Clean Tab Switching (Only Unique Tabs)
         window.switchTab = function(tabName) {
@@ -1109,7 +1070,7 @@
             sorted.slice(0, 5).forEach((p, idx) => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-surface-container-low transition-colors";
-                const img = getProductImg(p.name);
+                const img = findProductImage(p.name, allProducts);
                 const revText = `₹ ${(p.rev || 0).toLocaleString('en-IN')}`;
 
                 tr.innerHTML = `
