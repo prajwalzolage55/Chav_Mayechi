@@ -42,6 +42,33 @@ body {
 }
 
 /* ===== Custom Components ===== */
+@layer components {
+  /* 1. Primary Solid Action Button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-on-primary px-6 sm:px-8 py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-on-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  /* 2. Secondary / Dark Solid Action Button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-on-surface text-surface px-6 sm:px-8 py-3.5 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-primary hover:text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-surface;
+  }
+
+  /* 3. Outlined / Compact Action Button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-1.5 border border-primary text-primary px-3 sm:px-4 py-2 text-xs font-semibold tracking-wide transition-colors duration-300 hover:bg-primary hover:text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  /* 4. Ghost / Text Action Button */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-on-surface font-semibold text-xs sm:text-sm tracking-wide transition-colors duration-300 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  /* 5. Standardized Icon Action Button */
+  .btn-icon {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-full text-on-surface hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+}
+
 .glass {
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);

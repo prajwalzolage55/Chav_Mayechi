@@ -18,7 +18,8 @@ export default defineConfig({
                 register: resolve(__dirname, 'register.html'),
                 policies: resolve(__dirname, 'policies.html'),
                 product: resolve(__dirname, 'product.html'),
-                about: resolve(__dirname, 'about.html')
+                about: resolve(__dirname, 'about.html'),
+                seedProducts: resolve(__dirname, 'seed-products.html')
             }
         }
     }

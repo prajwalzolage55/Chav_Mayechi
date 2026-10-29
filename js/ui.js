@@ -1,5 +1,4 @@
 import { onAuthChange, logoutUser, getUserData } from './auth-service.js';
-import { initChatbot } from './chatbot.js';
 import { getCartItems, getCartCount, getCartTotal, removeFromCart, updateQuantity, clearCart } from './cart-service.js';
 
 /**
@@ -8,9 +7,6 @@ import { getCartItems, getCartCount, getCartTotal, removeFromCart, updateQuantit
 export function initNavbar(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
-
-    // Auto-initialize chatbot on all pages with navbar
-    initChatbot();
 
     onAuthChange(async (user) => {
         let userData = null;
@@ -59,25 +55,25 @@ function renderNavbar(container, user, userData) {
 
                 <div class="hidden lg:flex items-center gap-4">
                     ${!user ? `
-                        <a href="register.html" class="bg-primary text-on-primary px-8 py-3 rounded-none font-medium hover:bg-on-surface transition-colors duration-300 active:scale-95 uppercase tracking-widest text-xs">Register</a>
+                        <a href="register.html" class="btn-primary">Register</a>
                     ` : ''}
-                    <button id="cart-toggle" class="relative text-on-surface hover:text-primary transition-colors p-2">
+                    <button id="cart-toggle" class="btn-icon relative" aria-label="View Cart">
                         <span class="material-symbols-outlined text-2xl">shopping_bag</span>
-                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 scale-0">0</span>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-primary text-on-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 scale-0">0</span>
                     </button>
-                    <a href="order.html" class="bg-on-surface text-surface px-8 py-3 rounded-none font-medium hover:opacity-80 transition-opacity duration-300 active:scale-95 uppercase tracking-widest text-xs">
+                    <a href="order.html" class="btn-secondary">
                         Order Now
                     </a>
                 </div>
 
                 <!-- Mobile: Cart + Toggle -->
                 <div class="lg:hidden flex items-center gap-2">
-                    <button id="cart-toggle-mobile" class="relative text-on-surface hover:text-primary transition-colors p-2">
+                    <button id="cart-toggle-mobile" class="btn-icon relative" aria-label="View Cart">
                         <span class="material-symbols-outlined text-2xl">shopping_bag</span>
-                        <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 scale-0">0</span>
+                        <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-primary text-on-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 scale-0">0</span>
                     </button>
-                    <button id="mobile-toggle" class="text-on-surface flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
-                        <span id="mobile-toggle-icon" class="material-symbols-outlined text-3xl font-light">menu</span>
+                    <button id="mobile-toggle" class="btn-icon" aria-label="Toggle navigation menu">
+                        <span id="mobile-toggle-icon" class="material-symbols-outlined text-2xl font-light">menu</span>
                     </button>
                 </div>
             </div>
@@ -93,9 +89,9 @@ function renderNavbar(container, user, userData) {
                     <button id="nav-logout-mobile" class="font-headline text-secondary hover:text-primary font-bold text-xl">Logout</button>
                  ` : `
                     <a href="login.html" class="font-headline text-xl text-on-surface">Login</a>
-                    <a href="register.html" class="bg-primary text-on-primary w-full max-w-[200px] text-center px-4 py-3 text-xs uppercase tracking-widest">Register</a>
+                    <a href="register.html" class="btn-primary w-full max-w-[200px]">Register</a>
                  `}
-                 <a href="order.html" class="bg-on-surface text-surface w-full max-w-[200px] text-center px-4 py-3 text-xs uppercase tracking-widest">Order Now</a>
+                 <a href="order.html" class="btn-secondary w-full max-w-[200px]">Order Now</a>
             </div>
         </nav>
 
@@ -107,7 +103,7 @@ function renderNavbar(container, user, userData) {
             <!-- Drawer Header -->
             <div class="flex items-center justify-between px-6 py-5 border-b border-outline/30">
                 <h2 class="font-headline text-xl font-bold text-on-surface">Your Cart</h2>
-                <button id="cart-close" class="text-on-surface-variant hover:text-on-surface transition-colors p-1">
+                <button id="cart-close" class="btn-icon" aria-label="Close cart">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
@@ -123,10 +119,10 @@ function renderNavbar(container, user, userData) {
                     <span class="font-label text-sm uppercase tracking-widest text-on-surface-variant">Total</span>
                     <span id="cart-total" class="font-headline text-2xl font-bold text-primary">₹0</span>
                 </div>
-                <a href="order.html" id="cart-checkout-btn" class="block w-full bg-on-surface text-surface text-center px-6 py-4 font-label text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
+                <a href="order.html" id="cart-checkout-btn" class="btn-secondary block w-full text-center">
                     Proceed to Checkout
                 </a>
-                <button id="cart-clear" class="w-full text-center text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors py-2">
+                <button id="cart-clear" class="btn-ghost w-full text-center text-xs tracking-wider text-on-surface-variant">
                     Clear Cart
                 </button>
             </div>
@@ -228,7 +224,7 @@ function renderNavbar(container, user, userData) {
                     <span class="material-symbols-outlined text-5xl text-on-surface-variant/30 mb-4">shopping_bag</span>
                     <p class="font-headline text-lg text-on-surface mb-2">Your cart is empty</p>
                     <p class="text-sm text-on-surface-variant mb-6">Add some delicious items to get started!</p>
-                    <a href="products.html" class="bg-primary text-on-primary px-8 py-3 font-label text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
+                    <a href="products.html" class="btn-primary font-label text-xs">
                         Browse Menu
                     </a>
                 </div>
@@ -347,85 +343,85 @@ export function initFooter(containerId) {
     if (!container) return;
 
     container.innerHTML = `
-        <footer class="w-full bg-[#1c1b1b] text-[#fbf9f4] relative overflow-hidden">
+        <footer class="w-full bg-[#1c1b1b] text-surface relative overflow-hidden">
             <!-- Decorative top border -->
-            <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-[#98462f] to-transparent"></div>
+            <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-primary to-transparent"></div>
 
             <!-- Main Footer Content -->
             <div class="max-w-screen-2xl mx-auto px-6 sm:px-8 md:px-12 pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-10 md:pb-12">
                 <!-- Top: Brand + Newsletter CTA -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-14 md:mb-20 pb-10 md:pb-14 border-b border-white/10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-14 md:mb-20 pb-10 md:pb-14 border-b border-surface/10">
                     <div>
                         <a href="index.html" class="flex items-center gap-3 mb-4">
                             <img src="/images/logo.webp" alt="Chav Mayechi Logo" class="w-10 h-10 sm:w-12 sm:h-12 object-contain brightness-200">
-                            <span class="font-headline text-2xl sm:text-3xl tracking-tighter text-[#fbf9f4]">Chav Mayechi</span>
+                            <span class="font-headline text-2xl sm:text-3xl tracking-tighter text-surface">Chav Mayechi</span>
                         </a>
-                        <p class="text-white/50 text-sm font-light max-w-sm leading-relaxed">
+                        <p class="text-surface/70 text-sm font-light max-w-sm leading-relaxed">
                             Handcrafted Maharashtrian delicacies made with heritage recipes, pure ingredients, and a mother's love.
                         </p>
                     </div>
                     <a href="https://wa.me/918208519403?text=Hi!%20I%20want%20to%20place%20an%20order%20from%20Chav%20Mayechi!" target="_blank" rel="noopener noreferrer"
-                       class="group flex items-center gap-3 bg-[#98462f] hover:bg-[#b5593b] text-white px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm uppercase tracking-[0.15em] font-bold transition-all duration-300 hover:shadow-lg hover:shadow-[#98462f]/20">
+                       class="btn-primary group">
                         <svg class="w-5 h-5 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.553 4.12 1.519 5.857L.055 23.456l5.733-1.505A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.813c-1.98 0-3.855-.53-5.508-1.468l-.394-.234-4.091 1.073 1.092-3.99-.256-.407A9.765 9.765 0 012.188 12c0-5.414 4.398-9.813 9.812-9.813S21.813 6.586 21.813 12s-4.399 9.813-9.813 9.813z"/></svg>
                         Order on WhatsApp
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
                     </a>
                 </div>
 
                 <!-- Middle: 4-Column Grid -->
                 <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-14 md:mb-20">
                     <div class="space-y-5">
-                        <h4 class="text-[#fbf9f4] font-bold text-[11px] uppercase tracking-[0.25em] font-label">Navigate</h4>
-                        <ul class="space-y-3 text-sm text-white/50 font-light">
-                            <li><a href="index.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Home</a></li>
-                            <li><a href="products.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Menu</a></li>
-                            <li><a href="order.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Order Now</a></li>
-                            <li><a href="about.html" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Our Story</a></li>
+                        <h3 class="text-surface font-bold text-xs uppercase tracking-widest font-label">Navigate</h3>
+                        <ul class="space-y-3 text-sm text-surface/70 font-light">
+                            <li><a href="index.html" class="hover:text-surface transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-primary transition-all duration-300"></span>Home</a></li>
+                            <li><a href="products.html" class="hover:text-surface transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-primary transition-all duration-300"></span>Menu</a></li>
+                            <li><a href="order.html" class="hover:text-surface transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-primary transition-all duration-300"></span>Order Now</a></li>
+                            <li><a href="about.html" class="hover:text-surface transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-primary transition-all duration-300"></span>Our Story</a></li>
                         </ul>
                     </div>
                     <div class="space-y-5">
-                        <h4 class="text-[#fbf9f4] font-bold text-[11px] uppercase tracking-[0.25em] font-label">Contact</h4>
-                        <ul class="space-y-3 text-sm text-white/50 font-light">
-                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[#98462f] text-base">call</span><a href="tel:+918208519403" class="hover:text-[#ffceb8] transition-colors">+91 82085 19403</a></li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[#98462f] text-base">mail</span><a href="mailto:chavmayechifoods@gmail.com" class="hover:text-[#ffceb8] transition-colors">chavmayechifoods@gmail.com</a></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-[#98462f] text-base mt-0.5">location_on</span><span>Maharashtra, India</span></li>
+                        <h3 class="text-surface font-bold text-xs uppercase tracking-widest font-label">Contact</h3>
+                        <ul class="space-y-3 text-sm text-surface/70 font-light">
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">call</span><a href="tel:+918208519403" class="hover:text-surface transition-colors">+91 82085 19403</a></li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">mail</span><a href="mailto:chavmayechifoods@gmail.com" class="hover:text-surface transition-colors">chavmayechifoods@gmail.com</a></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base mt-0.5">location_on</span><span>Maharashtra, India</span></li>
                         </ul>
                     </div>
                     <div class="space-y-5">
-                        <h4 class="text-[#fbf9f4] font-bold text-[11px] uppercase tracking-[0.25em] font-label">Follow Us</h4>
-                        <ul class="space-y-3 text-sm text-white/50 font-light">
-                            <li><a href="https://www.instagram.com/chavmaychi_foods?igsh=MXNmYXk0NTFhdnVibg==" target="_blank" rel="noopener noreferrer" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>Instagram</a></li>
-                            <li><a href="https://www.youtube.com/@Chavmayechifoods" target="_blank" rel="noopener noreferrer" class="hover:text-[#ffceb8] transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-[#98462f] transition-all duration-300"></span>YouTube</a></li>
+                        <h3 class="text-surface font-bold text-xs uppercase tracking-widest font-label">Follow Us</h3>
+                        <ul class="space-y-3 text-sm text-surface/70 font-light">
+                            <li><a href="https://www.instagram.com/chavmaychi_foods?igsh=MXNmYXk0NTFhdnVibg==" target="_blank" rel="noopener noreferrer" class="hover:text-surface transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-primary transition-all duration-300"></span>Instagram</a></li>
+                            <li><a href="https://www.youtube.com/@Chavmayechifoods" target="_blank" rel="noopener noreferrer" class="hover:text-surface transition-colors duration-300 flex items-center gap-2 group"><span class="w-0 group-hover:w-3 h-px bg-primary transition-all duration-300"></span>YouTube</a></li>
                         </ul>
                     </div>
                     <div class="space-y-5">
-                        <h4 class="text-[#fbf9f4] font-bold text-[11px] uppercase tracking-[0.25em] font-label">Our Promise</h4>
-                        <ul class="space-y-3 text-sm text-white/50 font-light">
-                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[#98462f] text-base">verified</span>100% Authentic</li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[#98462f] text-base">eco</span>Organic Sourced</li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[#98462f] text-base">favorite</span>Made with Love</li>
-                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[#98462f] text-base">local_shipping</span>Fresh Delivery</li>
+                        <h3 class="text-surface font-bold text-xs uppercase tracking-widest font-label">Our Promise</h3>
+                        <ul class="space-y-3 text-sm text-surface/70 font-light">
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">verified</span>100% Authentic</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">eco</span>Organic Sourced</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">favorite</span>Made with Love</li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">local_shipping</span>Fresh Delivery</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-                    <div class="text-[10px] tracking-[0.3em] uppercase text-white/30 font-label flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
+                <div class="pt-8 border-t border-surface/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+                    <div class="text-xs tracking-wider text-surface/70 font-label flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
                         <span>© ${new Date().getFullYear()} Chav Mayechi</span>
-                        <span class="px-2 py-1 border border-white/20 rounded-sm font-bold tracking-widest flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#98462f]"></span> FSSAI: 21521118000524
+                        <span class="px-2.5 py-1 border border-surface/20 rounded-sm font-medium tracking-wide flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true"></span> FSSAI Lic. No. 21521118000524
                         </span>
                     </div>
-                    <div class="flex gap-6 text-[10px] tracking-[0.2em] uppercase text-white/30 font-label">
-                        <a href="policies.html#privacy" class="hover:text-white/60 transition-colors">Privacy</a>
-                        <a href="policies.html#terms" class="hover:text-white/60 transition-colors">Terms</a>
-                        <a href="policies.html#shipping" class="hover:text-white/60 transition-colors">Shipping</a>
+                    <div class="flex gap-6 text-xs tracking-wider text-surface/70 font-label">
+                        <a href="policies.html#privacy" class="hover:text-surface transition-colors">Privacy</a>
+                        <a href="policies.html#terms" class="hover:text-surface transition-colors">Terms</a>
+                        <a href="policies.html#shipping" class="hover:text-surface transition-colors">Shipping</a>
                     </div>
                 </div>
             </div>
 
             <!-- Decorative radial glow -->
-            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#98462f]/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
         </footer>
     `;
 }
