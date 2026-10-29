@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chav-mayechi.web.app/sitemap.xml
+Sitemap: https://chavmayechifoods.netlify.app/sitemap.xml
